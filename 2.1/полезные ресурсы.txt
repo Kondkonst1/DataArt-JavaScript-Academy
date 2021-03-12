@@ -1,0 +1,14 @@
+https://drafts.csswg.org/ - CSS Working Group Editor Drafts
+https://www.w3.org/Style/CSS/current-work.en.html - CSS current work & how to participate
+https://caniuse.com/
+https://9elements.com/bem-cheat-sheet/
+https://tpverstak.ru/flex-cheatsheet/ - Flexbox CheatSheet
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+https://css-tricks.com/almanac/
+https://stateofcss.com/
+https://risingstars.js.org/2020/en
+https://www.smashingmagazine.com/2021/01/front-end-performance-2021-free-pdf-checklist/
+https://csslayout.io/
+https://codepen.io/2020/popular/pens/0
+https://neumorphism.io/#e0e0e0
+https://brumm.af/shadows

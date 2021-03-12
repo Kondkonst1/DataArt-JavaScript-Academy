@@ -1,0 +1,30 @@
+.article-block {
+    display: flex;
+    justify-content: space-between;
+    
+
+     &__item {
+        width: 30%;
+        color: $black;
+        background: $white;
+        display: flex;
+        flex-direction: column;
+    } 
+    &__item-img{
+        width: 100%;
+    }
+    &__item-title{
+        padding: 10px 10px;
+        text-align: center;
+    }
+    &__item-text{
+        padding: 0 10px 10px ;
+    }
+}
+
+
+@media (max-width:920px){
+    .article-block{
+        display: none;
+    }
+}

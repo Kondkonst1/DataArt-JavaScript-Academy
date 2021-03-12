@@ -1,0 +1,18 @@
+{
+  "name": "2.1",
+  "version": "1.0.0",
+  "description": "Task link - https://conf.dataart.com/display/JSA/CSS+1+-+Igor+Oziyan",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel index.html",
+    "prod": "parcel build index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {}
+}

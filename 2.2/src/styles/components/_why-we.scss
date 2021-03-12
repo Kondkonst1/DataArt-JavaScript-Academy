@@ -1,0 +1,13 @@
+.WhyWe {
+  color: $white;
+
+  &__title {
+    font-size: 26px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  &__text {
+    font-size: 14px;
+  }
+}
