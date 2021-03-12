@@ -1,0 +1,169 @@
+.footer {
+
+  width: $maxWidthContainer;
+  margin: 0 auto;
+  color: $white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  .container-footer {
+    max-width: $maxWidthContainer;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  &-row {
+    display: flex;
+  }
+
+  &__item-text {
+    color: $lightGray;
+    font-size: 1em;
+    font-weight: 400;
+    font-family: "Roboto";
+    line-height: 2em;
+    margin: 20px 0;
+  }
+
+
+  &__item:not(:last-child) {
+    padding-right: 100px;
+  }
+
+  &__item {
+    &>h1 {
+      font-size: 1.5em;
+      font-weight: 600;
+      font-family: "Lato";
+      margin-bottom: 38px;
+    }
+
+    li,
+    p {
+      font-size: 1em;
+      font-weight: 400;
+      font-family: "Roboto";
+      line-height: 2.45em;
+    }
+
+    p>span {
+      font-weight: 500;
+    }
+    li {
+      list-style: none;
+    }
+    
+  }
+
+  &__item-bottom {
+    display: flex;
+    height: 80px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 76px;
+
+    font-size: 1em;
+    font-weight: 300;
+    font-family: "Roboto";
+  }
+
+
+  &__copy {
+    color: $black;
+    text-align: center;
+  }
+
+  &__item-privacy a {
+    color: $white;
+    text-decoration: none;
+  }
+
+  .footer__item ul li:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  &__item ul li a {
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+    color: $white;
+  }
+
+  &__item ul li a:hover {
+    padding-left: 8px;
+  }
+
+  &__item &__item-social a {
+    display: inline-block;
+    height: 44px;
+    width: 44px;
+    color: $white;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 0 15px 15px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    transition: all 0.5s ease;
+  }
+}
+
+
+.footer__item .footer__item-social a:hover {
+  color: $secondary;
+  background-color: $white;
+}
+
+
+
+.first {
+  max-width: 35%;
+
+  @media(max-width: $breakpoint-m) {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: $breakpoint-m) {
+  .footer {
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+  }
+
+  .footer__item-bottom {
+    flex-wrap: wrap;
+    justify-content: center;
+
+    &__item {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+
+
+/*responsive*/
+@media(max-width: $breakpoint-m) {
+  .footer {
+    padding: 0 5%;
+  }
+
+  .footer-row {
+    flex-wrap: wrap;
+    padding-top: 50px;
+  }
+
+  .footer__item {
+    width: 50%;
+    margin-bottom: 30px;
+  }
+}
+
+@media(max-width: 574px) {
+  .footer__item {
+    width: 100%;
+  }
+}

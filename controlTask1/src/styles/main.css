@@ -1,0 +1,130 @@
+* {
+  padding: 0;
+  margin: 0;
+  
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+
+          
+}
+
+
+.topContainer {
+  height: 940px;
+  position: relative;
+  background-color: $secondary;
+}
+
+@use "../variables.scss";
+.Header__container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  background: #fff;
+  height: 50px;
+}
+
+.Header__navigation {
+  list-style: none;
+  line-height: 50px;
+}
+
+.Header__navigation-item {
+  display: inline-block;
+  margin-left: 15px;
+  color: #909090;
+}
+
+.Header__navigation-item a {
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.curveBackground {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+.curveBackground__item {
+  width: 100%;
+}
+
+.mainContainer {
+  background: #4179be;
+  padding: 0 10%;
+  padding-bottom: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+}
+
+.Content {
+  width: 70%;
+  padding-top: 50px;
+}
+
+.WhyWe {
+  color: #fff;
+}
+
+.WhyWe__title {
+  font-size: 26px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.WhyWe__text {
+  font-size: 14px;
+}
+
+.Proposals {
+  padding-top: 50px;
+}
+
+.Proposals__item {
+  height: 150px;
+  margin-bottom: 20px;
+  color: #000;
+  background: #fff;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.Proposals__item:last-child {
+  margin-bottom: 0;
+}
+
+.Proposals__item-img {
+  height: 100%;
+  width: 150px;
+  min-width: 150px;
+  float: left;
+  margin-right: 30px;
+}
+
+.Proposals__item-title {
+  font-size: 26px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.Proposals__item-text {
+  font-size: 14px;
+}
+
+.Footer {
+  background: #fff;
+  padding: 20px;
+}
+
+.Footer__copy {
+  color: #000;
+  text-align: center;
+}
+/*# sourceMappingURL=main.css.map */

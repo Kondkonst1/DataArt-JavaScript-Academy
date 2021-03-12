@@ -1,0 +1,33 @@
+@mixin curveBackground {
+  width: 100%;
+  height: 100%;
+  background-color:$secondary;
+  position: absolute;
+  z-index: -1;
+
+}
+
+.curveBackgroundTop{
+  border-bottom-left-radius: 60px;
+  transform: skew(3deg,-7deg);
+  margin: -7%;
+  margin-left: 20px;
+  @include curveBackground;
+
+}
+.curveBackgroundBottom{
+border-top-right-radius: 60px;
+transform: skew(3deg, -4deg);
+margin: 4%; 
+margin-left: -25px;
+@include curveBackground;
+}
+
+@media(max-width: $breakpoint-l) {
+
+  .curveBackgroundTop, .curveBackgroundBottom{
+    margin: 0;
+    transform: none;
+    
+  }
+}
