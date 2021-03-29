@@ -52,11 +52,11 @@ const drawBaseChange = async () => {
     app.appendChild(wrapperBase);
     wrapperBase.innerHTML = '<h1>Курсы валют</h1><p>Выберите базовую валюту</p>';
     const updateData = await getCourse(requestParam);
-    const currencys = Object.keys(updateData.rates).map(item => {
+    const currencies = Object.keys(updateData.rates).map(item => {
         return `<option>${item}</option>`
     });
 
-    bases.innerHTML = currencys.join('');
+    bases.innerHTML = currencies.join('');
     bases.value = requestParam.currency;
     wrapperBase.appendChild(bases);
     wrapperTable.classList.add('tableWrapper');
