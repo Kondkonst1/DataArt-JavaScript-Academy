@@ -3,7 +3,8 @@
   padding-top: 98px;
 }
 .wrapper-site{
-  min-width: $maxWidth;
+  max-width: 100%;
+  min-width: $minWidth;
 }
 @media (max-width: $breakpoint-l) {
   .content {
