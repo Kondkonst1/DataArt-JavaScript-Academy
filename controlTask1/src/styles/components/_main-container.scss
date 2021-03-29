@@ -5,3 +5,8 @@
   display: flex;
   justify-content: center;
 }
+@media (max-width: $breakpoint-s) {
+.main-container{
+  width:$minWidth;
+}
+}

@@ -1,33 +1,28 @@
 @mixin curve-background {
   width: 100%;
   height: 100%;
-  background-color:$secondary;
+  background-color: $secondary;
   position: absolute;
   z-index: -1;
-
 }
-
-.curve-background-top{
+.curve-background-top {
   border-bottom-left-radius: 60px;
-  transform: skew(3deg,-7deg);
+  transform: skew(3deg, -7deg);
   margin: -7%;
   margin-left: 20px;
   @include curve-background;
-
 }
-.curve-background-bottom{
-border-top-right-radius: 60px;
-transform: skew(3deg, -4deg);
-margin: 4%; 
-margin-left: -25px;
-@include curve-background;
+.curve-background-bottom {
+  border-top-right-radius: 60px;
+  transform: skew(3deg, -4deg);
+  margin: 4%;
+  margin-left: -25px;
+  @include curve-background;
 }
-
 @media(max-width: $breakpoint-l) {
-
-  .curve-background-top, .curve-background-bottom{
+  .curve-background-top,
+  .curve-background-bottom {
     margin: 0;
     transform: none;
-    
   }
 }

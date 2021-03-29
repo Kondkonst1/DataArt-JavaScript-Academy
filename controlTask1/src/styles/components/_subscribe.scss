@@ -1,5 +1,4 @@
 .subscribe {
-
   display: flex;
   justify-content: space-between;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
@@ -12,39 +11,30 @@
   position: relative;
   z-index: 1;
 
-
   &__item {
-
-    
     background: $white;
     padding: 60px 50px;
     background-color: transparent;
-
     &-controls {
       display: flex;
     }
   }
-
   &__item-content {
     padding: 20px;
   }
-
   &__item-img {
     height: 100px;
     width: 100%;
     min-width: 100%;
   }
-
   &__item-title {
-    color:$lightBlack;
-
+    color: $lightBlack;
     font-size: 3em;
     font-family: "Lato";
     font-weight: 700;
     text-align: center;
     margin-bottom: 27px;
   }
-
   &__item-text {
     font-size: 1em;
     width: 400px;
@@ -52,7 +42,6 @@
     color: #666666;
     line-height: 2em;
   }
-
   &__item-email {
     width: 337px;
     height: 76px;
@@ -64,16 +53,13 @@
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.04);
     border-style: none;
   }
-
   &__item-button {
-
     width: 81px;
     height: 76px;
     border-radius: 0px 5px 5px 0px;
     border-style: none;
     cursor: pointer;
     background: $primary url("/src/img/subscribe_but.svg") no-repeat center;
-
   }
 
   &__item-button:focus,
@@ -82,11 +68,26 @@
   }
 }
 
-
 @media (max-width: $breakpoint-m) {
   .subscribe {
     flex-wrap: wrap;
     margin-bottom: 0;
-
+    justify-content: center;
+   &__item-text{
+     width: 100%;
+   }
+    &__item-email {
+      width:100%;
+    }
+  }
+}
+@media (max-width: $breakpoint-l) {
+  .subscribe {
+    &__item{
+      max-width: 385px;
+    }
+     &__item-email {
+      width:100%;
+    }
   }
 }

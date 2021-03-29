@@ -1,9 +1,10 @@
 .content {
   width: $maxWidthContainer;
   padding-top: 98px;
-  
 }
-
+.wrapper-site{
+  min-width: $maxWidth;
+}
 @media (max-width: $breakpoint-l) {
   .content {
     width: 100%;

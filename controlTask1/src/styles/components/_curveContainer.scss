@@ -1,3 +1,4 @@
+@use "../variables.scss";
 .curve-container {
   height: 940px;
   max-width: 1920px;
@@ -9,3 +10,9 @@
   height: 780px;
  @extend .curve-container;
 }
+@media (max-width: $breakpoint-xs) {
+  .curve-container {
+   width: 480px;
+  }
+}
+
