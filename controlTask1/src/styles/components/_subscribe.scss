@@ -6,8 +6,7 @@
   border: solid $white 15px;
   align-items: center;
   background: $lightBlue;
-  margin-bottom: -250px;
-  margin-top: 250px;
+  margin-bottom: 135px;
   position: relative;
   z-index: 1;
 
@@ -68,10 +67,11 @@
   }
 }
 
-@media (max-width: $breakpoint-m) {
+@media (max-width: $breakpoint-l) {
   .subscribe {
+    margin-top: 10px;
+    margin-bottom: 10px;
     flex-wrap: wrap;
-    margin-bottom: 0;
     justify-content: center;
    &__item-text{
      width: 100%;

@@ -1,12 +1,7 @@
-.mainContainer {
+.main-container {
   background: $white;
   padding: 0 10%;
   padding-bottom: 50px;
   display: flex;
   justify-content: center;
-}
-@media (max-width: $breakpoint-l) {
-.main-container{
-  width: 480px;
-}
 }

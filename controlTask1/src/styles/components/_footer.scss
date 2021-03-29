@@ -2,7 +2,6 @@
   width: $maxWidthContainer;
   margin: 0 auto;
   color: $white;
-  position: absolute;
   bottom: 0;
   right: 0;
   left: 0;
@@ -87,7 +86,7 @@
     background-color: rgba(255, 255, 255, 0.3);
     margin: 0 15px 15px 0;
     text-align: center;
-    line-height: 40px;
+    line-height: 45px;
     border-radius: 50%;
     transition: all 0.5s ease;
   }
@@ -117,9 +116,10 @@
   }
 }
 
-@media(max-width: $breakpoint-m) {
+@media(max-width: $breakpoint-l) {
   .footer {
     padding: 0 5%;
+    width: 100%;
   }
   .footer-row {
     flex-wrap: wrap;
