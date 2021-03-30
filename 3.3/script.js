@@ -4,6 +4,7 @@ class Unit {
     constructor(name, surname) {
         this._name = name;
         this._surname = surname;
+        // this.getTeam = this.getTeam.bind(this); //жесткая привязка контекста
     }
    get fullName  ()  {
        return `${this._name} ${this._surname}`;
