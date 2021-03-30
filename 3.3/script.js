@@ -2,43 +2,37 @@
 
 class Unit {
     constructor(name, surname) {
-        this.name = name;
-        this.surname = surname;
+        this._name = name;
+        this._surname = surname;
     }
-    getFullName = () => {
-       return `This is ${this.name} ${this.surname}`;
+   get fullName  ()  {
+       return `${this._name} ${this._surname}`;
+    }
+    set fullName(newValue){
+        const [name, surname] = newValue.split(" ");
+        this._name = name;
+        this._surname = surname;
     }
 }
-class Developer extends Unit {
-    constructor(name, surname) {
-        super(name, surname);
-    }
-};
-
-class Tester extends Unit {
-    constructor(name, surname) {
-        super(name, surname);
-    }
-};
+class Developer extends Unit {};
+class Tester extends Unit {};
 
 class Project {
     developers=[];
     testers = [];
 
-    addTester = (tester) => {
+    addTester  (tester)  {
         this.testers.push(tester);
     }
-    addDeveloper = (dev) => {
+    addDeveloper (dev)  {
         this.developers.push(dev);
     }
-    getTeam = () => {
+    getTeam () {
         return {
-            developers: this.developers.map(unit => unit.getFullName()),
-            testers: this.testers.map(unit => unit.getFullName())
+            developers: this.developers.map(unit => unit.fullName),
+            testers: this.testers.map(unit => unit.fullName)
         }
     }
-
-  
 }
 
 const customPrj = new Project();
