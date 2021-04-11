@@ -15,7 +15,7 @@ class ToDoApp{
         };
         this.todoList.push(newToDo);
         this.todoList.forEach((item, i) => {
-           const oneTodoItem = ` 
+         let oneTodoItem = ` 
             <div class = "todo-list__deal">
                 <div id='item_${i}' class="todo-list__deal-link">
                     <a href="${item.todo}" target="_blank" data-logged="true">${item.todo}</a>
@@ -23,14 +23,16 @@ class ToDoApp{
                 <button class="todo-list__del" data-logged="true">Удалить</button>
             </div>
         `;
-            this.todoListBlock.innerHTML+=oneTodoItem;  
+            this.todoListBlock.innerHTML+=oneTodoItem; 
             const delButton = document.querySelector('.todo-list__del');
             delButton.addEventListener('click', (e)=>this.deleleItem(e));
-            })
+            }) 
+            
     };
 
 deleleItem = (e) => {
    e.target.parentElement.remove();
+   e.stopPropagation();
 
 }
 
