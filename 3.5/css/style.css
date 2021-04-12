@@ -11,9 +11,7 @@ body {
     flex-direction: column;
     align-items: center;
   }
-  
-
-  .todo-list {
+   .todo-list {
     max-width: 400px;
     display: block;
     margin: 0 auto 40px;
@@ -48,21 +46,25 @@ body {
        }
   .todo-list__deal {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
       padding: 1em;
-      list-style-type: none; 
-      border: solid 1px black;
+      border: solid 1px #fff;
       margin: 10px auto;
-      border-radius: 5px;
+      border-radius: 10px;
     }
     .todo-list__deal a{
       display: block;
       height: 100%;
+      width: 100%;
+      text-decoration: none;
+      color: #fff;
     }
     .todo-list__deal-link{
+      width: 100%;
       max-width: 200px;
       display: flex;
+      word-wrap: break-word;
     }
     .todo-list__del{
       width: 150px;
