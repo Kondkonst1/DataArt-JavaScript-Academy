@@ -67,16 +67,17 @@ class ClickTracker {
     init = () => {
         this.buttonShowLog.addEventListener("click", this.showLog);
         document.addEventListener("click", (ev) => {
-            if (ev.target.dataset.logged === "true") {
+            if (ev.target.dataset.logged) {
                 this.writeLog(ev);
             }
         });
     };
 
     getPath = (ev) => {
-        return ev.map((item) => (item.className ? item.className : item.nodeName))
-            .reverse()
-            .join(" => ")
+        return ev.map(elem => (elem.tagName !== undefined ? elem.tagName : null))
+        .filter(item => item !== null)
+        .reverse()
+        .join(" => ");
     }
 
     writeLog = (ev) => {
@@ -97,7 +98,7 @@ class ClickTracker {
         const allItems = this.getLog();
         this.logContainer.innerHTML = this.renderLog(allItems);
     };
-    
+
     renderLog = (logItems) => {
         return ` <table>
         <tr>
@@ -111,7 +112,7 @@ class ClickTracker {
             return `
                 <tr>
                     <td>${item.tag.toLowerCase()}</td>
-                    <td>${item.innerText}</td>
+                    <td class="inner-text">${item.innerText}</td>
                     <td>${item.time}</td>
                     <td>${item.path}</td>
                 </tr>
