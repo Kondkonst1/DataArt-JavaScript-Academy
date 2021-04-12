@@ -4,21 +4,25 @@ class ToDoApp {
     messageText = document.querySelector(".todo-list__input");
     todoListBlock = document.querySelector(".todo-list__items");
     todoList = [];
-    showAddedItem = (newToDo) => {
-        const deal = document.createElement("div");
-        deal.classList.add("todo-list__deal");
-        const oneTodoItem = ` 
+    createOneToDo = (newToDo) => {
+        return ` 
         <div class="todo-list__deal-link">
         <a href="${newToDo.todo}" target="_blank" data-logged="true">${newToDo.todo}</a>
         </div>
         <button class="todo-list__del" data-logged="true">Удалить</button>
          `;
-        deal.insertAdjacentHTML("beforeEnd", oneTodoItem);
+    }
+
+    showAddedItem = (newToDo) => {
+        const deal = document.createElement("div");
+        deal.classList.add("todo-list__deal");
+        deal.insertAdjacentHTML("beforeEnd", this.createOneToDo(newToDo));
         this.todoListBlock.appendChild(deal);
         const delButton = deal.querySelector(".todo-list__del");
         this.deleleItem(delButton);
         this.messageText.value = "";
     }
+
     addToDoItem = () => {
         if (this.messageText.value !== "") {
             const newToDo = {
@@ -31,7 +35,7 @@ class ToDoApp {
             alert("Введите ссылку");
         }
     };
-       
+
     deleleItem = (el) => {
         el.addEventListener("click", (event) => {
             el.parentElement.remove();
@@ -54,10 +58,12 @@ class ClickTracker {
     buttonShowLog = document.querySelector(".click-info__button");
     logContainer = document.querySelector(".click-info__wrapper");
     logArray = [];
+
     getTime = () => {
         const now = new Date();
         return now.toLocaleString();
     };
+
     init = () => {
         this.buttonShowLog.addEventListener("click", this.showLog);
         document.addEventListener("click", (ev) => {
@@ -67,29 +73,31 @@ class ClickTracker {
         });
     };
 
+    getPath = (ev) => {
+        return ev.map((item) => (item.className ? item.className : item.nodeName))
+            .reverse()
+            .join(" => ")
+    }
+
     writeLog = (ev) => {
-        this.putLogItem({
+        this.logArray.push({
             tag: ev.target.tagName,
             innerText: ev.target.innerText,
             time: this.getTime(),
-            path: ev.path
-                .map((item) => (item.className ? item.className : item.nodeName))
-                .reverse()
-                .join(" => "),
+            path: this.getPath(ev.path)
         });
     };
 
-    putLogItem = (item) => {
-        this.logArray.push(item);
-    };
     getLog = () => {
         return this.logArray;
     };
+
     showLog = () => {
         this.logContainer.innerHTML = "";
         const allItems = this.getLog();
         this.logContainer.innerHTML = this.renderLog(allItems);
     };
+    
     renderLog = (logItems) => {
         return ` <table>
         <tr>
