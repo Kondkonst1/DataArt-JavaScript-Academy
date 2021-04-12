@@ -74,10 +74,11 @@ class ClickTracker {
     };
 
     getPath = (ev) => {
-        return ev.map(elem => (elem.tagName !== undefined ? elem.tagName : null))
-        .filter(item => item !== null)
+        return ev.map(elem => (elem.className !== undefined ?  `${elem.nodeName}  .${elem.className}` : elem.nodeName))
+        .filter(item => item !== "")
         .reverse()
-        .join(" => ");
+        .join(" => ")
+        .toLowerCase();
     }
 
     writeLog = (ev) => {
