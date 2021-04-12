@@ -1,86 +1,85 @@
 body {
-    background-color: #aaa;
-    font-family: sans-serif;
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box; 
-  }
-  
-  .container {
-    padding-top: 50px; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-   .todo-list {
-    max-width: 400px;
-    display: block;
-    margin: 0 auto 40px;
-    background-color: #1BA39C;
-    padding: 30px;
-    border-radius: 10px;
-    -webkit-box-shadow: 0 2px 10px 0 #074b83;
-    box-shadow: 0 2px 10px 0 #074b83; }
-  
-  h1 {
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 20px;
-    color: #fff;
-    font-size: 30px; }
-  
-  .todo-list__create {
-    text-align: center; }
-  
-  input[type=text] {
-    width: 376px;
-    padding: 10px; }
-  
-  button {
-    margin-top: 10px;
-    width: 400px;
-    padding: 10px;
-    cursor: pointer; }
-  
-  .todo-list__items {
-    padding-left: 0;
-       }
-  .todo-list__deal {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1em;
-      border: solid 1px #fff;
-      margin: 10px auto;
-      border-radius: 10px;
-    }
-    .todo-list__deal a{
-      display: block;
-      height: 100%;
-      width: 100%;
-      text-decoration: none;
-      color: #fff;
-    }
-    .todo-list__deal-link{
-      width: 100%;
-      max-width: 200px;
-      display: flex;
-      word-wrap: break-word;
-    }
-    .todo-list__del{
-      width: 150px;
-
-    }
-  .click-info{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  table{
-    width: 1020px;
-    border: solid black 2px;
-  }
-  td, th{
-    text-align: center;
-    border: gray solid 1px;
-    border-collapse: collapse;
-  }
+  background-color: #aaa;
+  font-family: sans-serif;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.container {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.todo-list {
+  max-width: 400px;
+  display: block;
+  margin: 0 auto 40px;
+  background-color: #1BA39C;
+  padding: 30px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 2px 10px 0 #074b83;
+  box-shadow: 0 2px 10px 0 #074b83;
+}
+h1 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 30px;
+}
+.todo-list__create {
+  text-align: center;
+}
+input[type=text] {
+  width: 376px;
+  padding: 10px;
+}
+button {
+  margin-top: 10px;
+  width: 400px;
+  padding: 10px;
+  cursor: pointer;
+}
+.todo-list__items {
+  padding-left: 0;
+}
+.todo-list__deal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  border: solid 1px #fff;
+  margin: 10px auto;
+  border-radius: 10px;
+}
+.todo-list__deal a {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: #fff;
+}
+.todo-list__deal-link {
+  width: 100%;
+  max-width: 200px;
+  display: flex;
+  word-wrap: break-word;
+}
+.todo-list__del {
+  width: 150px;
+}
+.click-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+table {
+  width: 1020px;
+  border: solid black 2px;
+}
+td,
+th {
+  text-align: center;
+  border: gray solid 1px;
+  border-collapse: collapse;
+}
