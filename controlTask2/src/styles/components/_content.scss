@@ -1,0 +1,15 @@
+div{
+  border:solid 1px black;
+}
+.wrapper{
+  max-width: $maxWidthContainer;
+  margin: 0 auto;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.content {
+display: flex;
+height: 100vh;
+
+}

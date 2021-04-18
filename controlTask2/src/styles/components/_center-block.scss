@@ -1,0 +1,15 @@
+.center-block{
+    display: flex;
+    flex-grow: 1;
+    padding: 30px;
+    justify-content: center;
+    &__desc{ 
+        width: 500px;
+        span{
+            color: gray;
+            font-size: 2em;
+           
+        }
+
+    }
+}

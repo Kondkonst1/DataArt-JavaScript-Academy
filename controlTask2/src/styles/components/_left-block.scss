@@ -1,0 +1,29 @@
+.left-block {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+
+    justify-content: space-between;
+}
+
+.block-search {
+    height: 100px;
+}
+
+.block-results {
+    overflow-y: scroll;
+    flex-grow: 1;
+    background-color: azure;
+}
+
+
+.select-book {
+    background-color: #cccccc;
+  }
+
+.block-nav-wrap {
+    height: 100px;
+    &__nav {
+
+    }
+}

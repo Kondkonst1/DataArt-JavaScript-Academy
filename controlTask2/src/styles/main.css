@@ -1,0 +1,106 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:regular,300,500&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Lato:600,700,900&display=swap);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css);
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+div {
+  border: solid 1px black;
+}
+
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+}
+
+.left-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 300px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.block-search {
+  height: 100px;
+}
+
+.block-results {
+  overflow-y: scroll;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  background-color: azure;
+}
+
+.select-book {
+  background-color: #cccccc;
+}
+
+.block-nav-wrap {
+  height: 100px;
+}
+
+.center-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  padding: 30px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.center-block__desc {
+  width: 500px;
+}
+
+.center-block__desc span {
+  color: gray;
+  font-size: 2em;
+}
+
+.right-block {
+  min-width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.right-block__header {
+  height: 100px;
+}
+
+.right-block__book-list {
+  background-color: #ebabea;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+/*# sourceMappingURL=main.css.map */

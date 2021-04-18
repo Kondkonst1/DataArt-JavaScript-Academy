@@ -1,0 +1,13 @@
+.right-block{
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    &__header{
+        height: 100px;
+    }
+    &__book-list{
+        background-color: #ebabea;
+        flex-grow: 1;
+
+    }
+}

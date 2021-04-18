@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="This is application for saving book list">
+  <meta name="keywords" content="Book, List, Autor">
+  <title>My book library</title>
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <script src="./src/script/index.js" type="module"></script>
+</head>
+
+<body>
+  <main class="wrapper">
+    <section class="content">
+      <div class="left-block">
+        <div class="block-search">
+          <input id="block-search__input-search" type="text" placeholder="Enter name" value="Adventures of Huckleberry Finn">
+          <button id="block-search__button-search">Go</button>
+        </div>
+        <div class="block-results">results</div>
+        <div class="block-nav-wrap">
+        <div class="block-nav-wrap__nav">nav</div>
+        </div>
+      </div>
+      <div class="center-block">
+        <div class="center-block__desc">
+          <span>Description....</span>
+        </div>
+      </div>
+      <div class="right-block">
+        <div class="right-block__header">
+          <h1>To read list...</h1>
+        </div>
+        <div class="right-block__book-list"></div>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
