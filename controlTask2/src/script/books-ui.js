@@ -6,6 +6,8 @@ const ENTER_KEY = 13;
 export class BooksUI {
     searchResultHolder;
     bookInfoHolder;
+    bookListHolder;
+    bookCountHolder;
     addBtn;
     searchInput;
     searchButton;
@@ -17,6 +19,7 @@ export class BooksUI {
         //console.log(storage.loadBooks());
         this.controller = controller;
         this.template = template;
+        this.bookCountHolder = document.querySelector(".block-nav-wrap__nav");
 
         this.searchInput = document.getElementById("block-search__input-search");
         this.searchInput.addEventListener("keypress", (keyPressed) => {
@@ -31,7 +34,7 @@ export class BooksUI {
         })
         this.savedList = document.querySelector(".right-block__book-list");
         
-
+        this.bookListHolder = document.querySelector(".right-block__book-list");
         this.searchButton = document.getElementById("block-search__button-search");
         this.searchResultHolder = document.querySelector(".block-results");
         this.bookInfoHolder = document.querySelector(".center-block__desc");
@@ -46,6 +49,13 @@ export class BooksUI {
         this.searchButton.addEventListener("click", () => {
             this.loaderData();
         });
+
+        this.bookListHolder.addEventListener("click", (event) => {
+            console.log(event.target);
+            if (event.target.classList.contains("right-block__but-remove")) {
+                event.target.parentElement.remove();
+            }
+        })
 
         this.searchResultHolder.addEventListener("click", (event) => {
             const targetDiv = event.target;
@@ -63,7 +73,6 @@ export class BooksUI {
                 if (selectedBook.classList.contains("select-book")) {
                     selectedBook.classList.remove("select-book");
                 }
-
             }
             targetDiv.classList.add("select-book");
             this.selectedBook = selectedBook;
@@ -79,7 +88,8 @@ export class BooksUI {
         }
         const page = await this.controller.getSearchResult(querry);
         this.currentPage = page.docs;
-           this.searchResultHolder.innerHTML = this.template.getSearchData(this.currentPage);
+        this.searchResultHolder.innerHTML = this.template.getSearchData(this.currentPage);
+        this.bookCountHolder.innerHTML = this.template.getInfoCount(page);
     };
 
     showDescription = () => {

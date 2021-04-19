@@ -24,6 +24,20 @@ export class Template {
         <div>Publish year: ${selectedBook.publish_year.join(", ")}</div>
       `;
     }
+    getInfoCount = (page) => {
+        return `
+        <div> 
+        <span>Found:${page.numFound} </span> 
+        <span>Start:${page.start} </span>
+        <span>Page size: ${page.docs.length} </span>
+        </div>
+        <div>
+        <button>Prev results</button>
+        <button>Next results</button>
+        </div>
+        `;
+        
+    }
 
     addOneBook = (book) => {
         return    `
@@ -32,8 +46,8 @@ export class Template {
             ${book.subtitle ? `<div> Subtitle: ${book.subtitle} </div>` : ``}
             <div> Author: ${book.author}</div>
             <div class="right-block__control">
-            <button>Mark as read</button>
-            <button>Remove</button>
+            <button class="right-block__but-read">Mark as read</button>
+            <button class="right-block__but-remove" >Remove</button>
             </div>
         </div>
         `
@@ -51,8 +65,8 @@ export class Template {
                 <div>${item.author}</div>
                 <div>${item.read}</div>
                 <div class="right-block__control">
-                <button>Mark as read</button>
-                <button>Remove</button>
+                <button class="right-block__but-read">Mark as read</button>
+                 <button class="right-block__but-remove" >Remove</button>
                 </div>
             </div>
             `)

@@ -16,6 +16,14 @@ export class Storage {
         return this.myBooksArray;
     }
 
+    removeBook = (id) =>{
+        
+
+
+        localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray))
+
+    }
+
     saveBooks = (book) => {
         this.myBooksArray.push(book);
         localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray))
