@@ -1,5 +1,5 @@
 .right-block{
-    min-width: 300px;
+    width:300px;
     display: flex;
     flex-direction: column;
     &__header{
@@ -8,9 +8,13 @@
     &__book-list{
         background-color: #a1a1a1;
         flex-grow: 1;
+        overflow-y: scroll;
         &--read{
             color: green;
         }
+    }
+    &__control{
+        display: flex;
     }
 }
 .hidden{

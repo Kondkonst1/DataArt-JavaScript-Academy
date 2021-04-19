@@ -8,10 +8,6 @@
           box-sizing: border-box;
 }
 
-div {
-  border: solid 1px black;
-}
-
 .wrapper {
   max-width: 1440px;
   margin: 0 auto;
@@ -60,6 +56,11 @@ div {
   height: 100px;
 }
 
+.book-info {
+  border: solid 1px black;
+  word-wrap: break-word;
+}
+
 .center-block {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -83,7 +84,7 @@ div {
 }
 
 .right-block {
-  min-width: 300px;
+  width: 300px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -102,10 +103,17 @@ div {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+  overflow-y: scroll;
 }
 
 .right-block__book-list--read {
   color: green;
+}
+
+.right-block__control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .hidden {

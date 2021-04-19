@@ -5,6 +5,10 @@ export class Storage {
     }
     myBooksArray = [];
 
+    getSavedBooks = () =>{
+        return this.myBooksArray;
+    }
+    
     loadBooks = () => {
         if (localStorage.getItem(this.nameStorage)) {
             this.myBooksArray = JSON.parse(localStorage.getItem(this.nameStorage));

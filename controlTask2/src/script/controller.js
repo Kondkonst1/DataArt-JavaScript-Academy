@@ -1,5 +1,4 @@
 'use strict'
-import { BooksUI } from "./books-ui.js";
 import {Template} from "./template.js"; 
 export class Controller {
   constructor(storage, api) {
@@ -15,6 +14,5 @@ export class Controller {
   addBook = (book) => {
     console.log(book);
     this.storage.saveBooks(book);
-    this.booksUI.addToList(book);
   }
 };
