@@ -98,9 +98,17 @@ div {
 }
 
 .right-block__book-list {
-  background-color: #ebabea;
+  background-color: #a1a1a1;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+}
+
+.right-block__book-list--read {
+  color: green;
+}
+
+.hidden {
+  display: none;
 }
 /*# sourceMappingURL=main.css.map */

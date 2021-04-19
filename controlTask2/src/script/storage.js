@@ -1,10 +1,14 @@
 'use strict'
 export class Storage{
+    constructor(nameStorage){
+        this.nameStorage = nameStorage;
+
+    }
     myBooksArray = [];
 
     loadBooks = () =>{
-        if(localStorage.getItem('listBooks')){
-           this.myBooksArray = JSON.parse(localStorage.getItem('listBooks')); 
+        if(localStorage.getItem(this.nameStorage)){
+           this.myBooksArray = JSON.parse(localStorage.getItem(this.nameStorage)); 
         }
         return this.myBooksArray;
     }
@@ -12,7 +16,7 @@ export class Storage{
     saveBooks = (book) => {
         
        this.myBooksArray.push(book);
-        localStorage.setItem('listBooks', JSON.stringify(this.myBooksArray))
+        localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray))
     }
 
   

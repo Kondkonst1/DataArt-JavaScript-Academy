@@ -1,9 +1,12 @@
 'use strict'
 export class Api {
-    async search(q, pageNum) {
+   BASE_URL="https://openlibrary.org/search.json?q=";
+
+      async  search(q, pageNum = 1) {
         console.log('запрос...');
-        const url = `https://openlibrary.org/search.json?q=${q}&page=1`;
+        const url = `${this.BASE_URL}${q}&page=${pageNum}`;
         const result = await fetch(url);
-        return await result.json();
+        const page = await  result.json();
+        return page;
     }
 }

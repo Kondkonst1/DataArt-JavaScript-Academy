@@ -6,8 +6,15 @@
         height: 100px;
     }
     &__book-list{
-        background-color: #ebabea;
+        background-color: #a1a1a1;
         flex-grow: 1;
+        &--read{
+
+            color: green;
+        }
 
     }
+}
+.hidden{
+    display: none;
 }
