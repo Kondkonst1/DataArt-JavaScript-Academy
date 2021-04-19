@@ -1,24 +1,20 @@
 'use strict'
 import { BooksUI } from "./books-ui.js";
 import {Template} from "./template.js"; 
-
 export class Controller {
   constructor(storage, api) {
     this.storage = storage;
     this.api = api;
   }
 
- 
-   getSearchResult(querry) {
-      this.api.search(querry)
-      .then((page) => {
-          console.log(page);
-      return page;
-    });
-  }
+   async getSearchResult(querry) {
+      const result = await this.api.search(querry);
+      return result;
+    }
 
   addBook = (book) => {
-    this.storage.saveBook(book);
+    console.log(book);
+    this.storage.saveBooks(book);
     this.booksUI.addToList(book);
-  };
+  }
 };

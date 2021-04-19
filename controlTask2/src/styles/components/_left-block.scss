@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     width: 300px;
-
     justify-content: space-between;
 }
 
@@ -16,7 +15,6 @@
     background-color: azure;
 }
 
-
 .select-book {
     background-color: #cccccc;
   }
@@ -24,6 +22,5 @@
 .block-nav-wrap {
     height: 100px;
     &__nav {
-
     }
 }

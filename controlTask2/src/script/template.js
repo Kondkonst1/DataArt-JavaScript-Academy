@@ -1,15 +1,14 @@
 'use strict'
 export class Template {
     getSearchData = (page) => {
-        page.docs.forEach(item => {
+        page.forEach(item => {
             item.id = item.key.split("/").pop();
         });
         this.currentPage = page.docs;
-        const bookSearchResults = page.docs.reduce((acc, item) => {
-            return (acc +`<div id="${item.id}" class="book-info">${item.title}</div>`);
+        const bookSearchResults = page.reduce((acc, item) => {
+            return (acc + `<div id="${item.id}" class="book-info">${item.title}</div>`);
         }, "");
         return bookSearchResults;
-        
     }
 
     getInfoAboutBook = (selectedBook) => {
@@ -23,7 +22,6 @@ export class Template {
     }
 
     setStorageData = (books) => {
-
         const savedBookList = books.reduce((acc, item) => {
         return (acc+ 
             `
@@ -36,9 +34,7 @@ export class Template {
                 <div>Mark as read</div>
                 <div>Remove</div>
                 </div>
-            
             </div>
-
             `)
         }, "");
         return savedBookList;

@@ -1,24 +1,19 @@
 'use strict'
-export class Storage{
-    constructor(nameStorage){
+export class Storage {
+    constructor(nameStorage) {
         this.nameStorage = nameStorage;
-
     }
     myBooksArray = [];
 
-    loadBooks = () =>{
-        if(localStorage.getItem(this.nameStorage)){
-           this.myBooksArray = JSON.parse(localStorage.getItem(this.nameStorage)); 
+    loadBooks = () => {
+        if (localStorage.getItem(this.nameStorage)) {
+            this.myBooksArray = JSON.parse(localStorage.getItem(this.nameStorage));
         }
         return this.myBooksArray;
     }
- 
+
     saveBooks = (book) => {
-        
-       this.myBooksArray.push(book);
+        this.myBooksArray.push(book);
         localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray))
     }
-
-  
 }
-
