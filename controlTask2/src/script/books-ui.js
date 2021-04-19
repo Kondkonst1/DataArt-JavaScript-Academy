@@ -31,7 +31,7 @@ export class BooksUI {
     this.addBtn.addEventListener("click", () => {
       storage.saveBooks(this.currentBook);
     });
-    
+
     this.searchButton.addEventListener("click", () => { this.loaderData()});
     this.searchResultHolder.addEventListener("click", (event) => {
       const targetDiv = event.target;
@@ -45,6 +45,7 @@ export class BooksUI {
           `#${this.selectedBook.id}`
         );
         selectedBook.classList.remove("select-book");
+
       }
       targetDiv.classList.add("select-book");
       this.selectedBook = selectedBook;
@@ -59,6 +60,7 @@ export class BooksUI {
       return;
     }
     const page =  await this.controller.getSearchResult(querry);
+    ////
     this.currentPage = page.docs;
     this.searchResultHolder.innerHTML = this.template.getSearchData(this.currentPage);
   };
