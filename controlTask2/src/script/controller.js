@@ -6,8 +6,8 @@ export class Controller {
     this.api = api;
   }
 
-   async getSearchResult(querry) {
-      const result = await this.api.search(querry);
+   async getSearchResult(querry, numPage) {
+      const result = await this.api.search(querry, numPage);
       return result;
     }
 

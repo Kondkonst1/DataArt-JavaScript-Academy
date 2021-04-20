@@ -32,8 +32,8 @@ export class Template {
         <span>Page size: ${page.docs.length} </span>
         </div>
         <div>
-        <button>Prev results</button>
-        <button>Next results</button>
+        <button id="prev-btn" ${page.start > 0 ? "" : "disabled"}> Prev results</button>
+        <button id="next-btn" ${((page.numFound-page.start) < 100) ? "disabled" : ""}>Next results</button>
         </div>
         `;
         
