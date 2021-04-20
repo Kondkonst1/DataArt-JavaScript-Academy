@@ -56,6 +56,10 @@
   height: 100px;
 }
 
+.block-nav-wrap__nav {
+  height: 100%;
+}
+
 .book-info {
   border: solid 1px black;
   word-wrap: break-word;

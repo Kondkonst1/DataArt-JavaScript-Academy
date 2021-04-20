@@ -53,9 +53,8 @@ export class BooksUI {
     });
 
     this.bookListHolder.addEventListener("click", (event) => {
-      console.log(event.target);
-      if (event.target.classList.contains("right-block__but-remove")) {
-        event.target.parentElement.remove();
+        if (event.target.classList.contains("right-block__but-remove")) {
+        event.target.parentElement.parentElement.remove();
       }
     });
 
@@ -63,7 +62,6 @@ export class BooksUI {
       const targetDiv = event.target;
       const id = targetDiv.id;
       const selectedBook = this.currentPage.docs.find((item) => item.id === id);
-      console.log(selectedBook);
       if (!selectedBook) {
         return;
       }
@@ -83,13 +81,10 @@ export class BooksUI {
 
     this.controlBlock.addEventListener("click", (ev) => {
       if (ev.target.id === "next-btn") {
-        console.log("next");
       this.getNextPage();
       }
       if(ev.target.id === "prev-btn"){
-        console.log("prev");
         this.getPrevPage();
-
       }
     });
   }
@@ -98,7 +93,6 @@ export class BooksUI {
     if (!query) {
       return;
     }
-    console.log(numPage);
     const page = await this.controller.getSearchResult(query, numPage);
     this.currentPage = page;
  
@@ -138,5 +132,10 @@ export class BooksUI {
       id: book.id,
     };
     this.currentBook = myBook;
+  };
+
+  renderBookList = () => {
+    this.savedList.insertAdjacentHTML("beforeEnd", 
+    this.template.setStorageData(this.controller.getLocalStorageData()));
   };
 }

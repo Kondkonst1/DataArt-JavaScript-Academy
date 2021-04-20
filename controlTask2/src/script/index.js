@@ -9,7 +9,8 @@ const nameLocalStorage = "listBooks";
 const storage = new Storage(nameLocalStorage);
 const controller = new Controller(storage, new Api());
 const booksUI = new BooksUI(new Template(), controller);
-//разнести
+
+window.addEventListener("load", () => booksUI.renderBookList())
  
 
 
