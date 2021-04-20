@@ -15,6 +15,9 @@ export class Controller {
     console.log(book);
     this.storage.saveBooks(book);
   }
+  removeBook = () => {
+    
+  }
 
   getLocalStorageData = () => {
     return this.storage.loadBooks();

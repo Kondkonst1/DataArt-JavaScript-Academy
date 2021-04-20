@@ -15,12 +15,17 @@ export class BooksUI {
   currentQuery;
   currentBook;
   savedList;
+  preloader;
+  smallSpinner;
 
   constructor(template, controller) {
     //console.log(storage.loadBooks());
     this.controller = controller;
     this.template = template;
 
+    this.smallSpinner = document.createElement("div");
+    this.smallSpinner.classList.add("hidden");
+    this.preloader = document.createElement("div");
     this.controlBlock = document.querySelector(".block-nav-wrap");
     this.bookCountHolder = document.querySelector(".block-nav-wrap__nav");
     this.searchInput = document.getElementById("block-search__input-search");
@@ -49,6 +54,7 @@ export class BooksUI {
     });
 
     this.searchButton.addEventListener("click", () => {
+      this.runLoader();
       this.loaderData(this.searchInput.value);
     });
 
@@ -94,17 +100,27 @@ export class BooksUI {
       return;
     }
     const page = await this.controller.getSearchResult(query, numPage);
+    this.preloader.classList.add("hidden");
     this.currentPage = page;
- 
     this.searchResultHolder.innerHTML = this.template.getSearchData(this.currentPage.docs);
     this.bookCountHolder.innerHTML = this.template.getInfoCount(this.currentPage);
     this.currentQuery = query;
+    this.smallSpinner.classList.add("hidden");
   }
 
-  getNextPage() {
+    runLoader = ()=>{
+    this.preloader.innerHTML=`<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>`;
+    this.smallSpinner.innerHTML = `<div class="lds-dual-ring hidden"></div>`;
+    this.searchResultHolder.appendChild(this.preloader);
+    this.controlBlock.appendChild(this.smallSpinner);
+  }
+
+  getNextPage = () => {
+    this.smallSpinner.classList.remove("hidden");
     this.loaderData(this.currentQuery, (this.currentPage.start / 100 + 1) + 1);
   }
-  getPrevPage() {
+  getPrevPage = () => {
+    this.smallSpinner.classList.remove("hidden");
     this.loaderData(this.currentQuery, (this.currentPage.start / 100 + 1) - 1);
   }
 

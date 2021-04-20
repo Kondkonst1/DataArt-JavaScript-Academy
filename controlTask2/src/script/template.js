@@ -34,7 +34,7 @@ export class Template {
         <div>
         <button id="prev-btn" ${page.start > 0 ? "" : "disabled"}> Prev results</button>
         <button id="next-btn" ${((page.numFound-page.start) < 100) ? "disabled" : ""}>Next results</button>
-        </div>
+         </div>
         `;
         
     }
