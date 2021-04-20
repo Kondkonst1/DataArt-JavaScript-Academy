@@ -12,11 +12,17 @@ export class Storage {
     loadBooks = () => {
         if (localStorage.getItem(this.nameStorage)) {
             this.myBooksArray = JSON.parse(localStorage.getItem(this.nameStorage));
+            return this.myBooksArray;
         }
-        return this.myBooksArray;
+        else return [];
+        
     }
 
-    removeBook = (id) =>{
+    markAsRead = (id) => {
+
+    }
+
+    removeBook = (id) => {
         
 
 

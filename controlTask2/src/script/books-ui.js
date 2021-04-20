@@ -54,6 +54,7 @@ export class BooksUI {
     });
 
     this.searchButton.addEventListener("click", () => {
+      this.searchResultHolder.innerHTML = "";
       this.runLoader();
       this.loaderData(this.searchInput.value);
     });
@@ -99,6 +100,7 @@ export class BooksUI {
     if (!query) {
       return;
     }
+    try{
     const page = await this.controller.getSearchResult(query, numPage);
     this.preloader.classList.add("hidden");
     this.currentPage = page;
@@ -106,6 +108,10 @@ export class BooksUI {
     this.bookCountHolder.innerHTML = this.template.getInfoCount(this.currentPage);
     this.currentQuery = query;
     this.smallSpinner.classList.add("hidden");
+    }
+    catch(error){
+      console.log(error);
+    }
   }
 
     runLoader = ()=>{

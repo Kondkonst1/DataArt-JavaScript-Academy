@@ -5,12 +5,12 @@ export class Template {
         page.forEach(item => {
             item.id = item.key.split("/").pop();
         });
-            const bookSearchResults = page.reduce((acc, item) => {
+        const bookSearchResults = page.reduce((acc, item) => {
             return (acc + `<div id="${item.id}" class="book-info">
            ${item.title} (${item.language})
-            ${item.subtitle ? `<div> Subtitle: ${item.subtitle} </div>` : ``}
-            </div>
-            `);
+            ${item.subtitle 
+                ? `<div> Subtitle: ${item.subtitle} </div>`
+                : ``}</div>`);
         }, "");
         return bookSearchResults;
     }

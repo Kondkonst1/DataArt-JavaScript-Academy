@@ -1,7 +1,7 @@
 'use strict'
 export class Api {
-   BASE_URL="https://openlibrary.org/search.json?q=";
 
+     BASE_URL="https://openlibrary.org/search.json?q=";
       async  search(q, pageNum) {
         console.log('запрос...');
         const url = `${this.BASE_URL}${q}&page=${pageNum}`;
