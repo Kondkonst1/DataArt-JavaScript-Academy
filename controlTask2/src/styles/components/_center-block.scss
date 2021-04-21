@@ -11,3 +11,27 @@
         }
     }
 }
+
+@media (max-width: $breakpoint-s) {
+    .center-block {
+        background-color: #555;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 400px;
+        height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        background: black;
+        color: white;
+        z-index: 10;
+        transition: transform ease-out 0.25s;
+        transform: translateX(-100%);
+    }
+
+    input[type="checkbox"]:checked~.center-block {
+        background-color: white;
+        transform: translateX(0);
+    }
+
+}

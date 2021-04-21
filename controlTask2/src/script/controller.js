@@ -10,6 +10,10 @@ export class Controller {
       const result = await this.api.search(querry, numPage);
       return result;
     }
+    async getDescription(id){
+      const desc = await this.api.getDescription(id);
+      return desc;
+    }
 
   addBook = (book) => {
     this.storage.addBooks(book);

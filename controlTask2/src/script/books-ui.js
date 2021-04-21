@@ -69,6 +69,7 @@ export class BooksUI {
 
     this.searchResultHolder.addEventListener("click", (event) => {
       const targetDiv = event.target;
+   
       const id = targetDiv.id;
       const selectedBook = this.currentPage.docs.find((item) => item.id === id);
       if (!selectedBook) {
@@ -82,12 +83,16 @@ export class BooksUI {
           newSelectedBook &&
           newSelectedBook.classList.contains("select-book")
         ) {
-          newSelectedBook.classList.remove("select-book");
+         // console.log(newSelectedBook);
+               newSelectedBook.classList.remove("select-book");
         }
       }
+
       targetDiv.classList.add("select-book");
       this.selectedBook = selectedBook;
       this.setCurrentBook(this.selectedBook);
+     
+      
       this.showDescription();
     });
 
@@ -137,10 +142,13 @@ export class BooksUI {
     );
   };
 
-  showDescription = () => {
+  async showDescription () {
+    
+    const description = await this.controller.getDescription(this.selectedBook.id);
     this.bookInfoHolder.innerHTML = this.template.getInfoAboutBook(
-      this.selectedBook
+      this.selectedBook, description
     );
+
     this.bookInfoHolder.appendChild(this.addBtn);
   };
 

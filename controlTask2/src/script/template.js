@@ -6,11 +6,16 @@ export class Template {
             item.id = item.key.split("/").pop();
         });
         const bookSearchResults = page.reduce((acc, item) => {
-            return (acc + `<div id="${item.id}" class="book-info">
-           ${item.title} ${item.language ? `(${item.language})`: ``}
+            return (acc + `<div id="${item.id+item.edition_count}" class="book-info tab">
+            <input type="checkbox" id="${item.id}" name="tab-group">
+            <label for="${item.id}" class="tab-title">  ${item.title} 
+            ${item.language ? `${item.language}`: ``}
             ${item.subtitle 
-                ? `<div> Subtitle: ${item.subtitle} </div>`
-                : ``}</div>`);
+                ? `Subtitle: ${item.subtitle}`
+                : ``}</label>
+            
+              
+                </div>`);
         }, "");
         return bookSearchResults;
     }
@@ -28,16 +33,26 @@ export class Template {
         <div></div>
         </div></div>`;
     }
-    getInfoAboutBook = (selectedBook) => {
+    getInfoAboutBook = (selectedBook, description) => {
         return `
         <h2>${selectedBook.title}</h2>
-        ${selectedBook.language ?`<div>Languages available: ${selectedBook.language.join(", ")}`:``}</div>
+        <div class="image">
+        ${selectedBook.cover_i 
+        ? `<img src="http://covers.openlibrary.org/b/id/${selectedBook.cover_i}-M.jpg">`
+        : `<img src="https://clck.ru/URSbL" height="200px">`}
+        </div>
+        ${description
+        ? `<div>${description.description}</div>`
+        : ``}
+        
+        ${selectedBook.language
+        ?`<div>Languages available: ${selectedBook.language.join(", ")}`:
+        ``}</div>
         <div>Full text available: ${selectedBook.has_fulltext}</div>
         <div> first_publish_year ${selectedBook.first_publish_year}</div>
-        ${selectedBook.publish_year ?` <div>Publish year: ${selectedBook.publish_year.join(", ")}`:``}</div>
-
-        
-      `;
+        ${selectedBook.publish_year 
+        ?` <div>Publish year: ${selectedBook.publish_year.join(", ")}`
+        :``}</div>`;
     }
     getInfoCount = (page) => {
         return `

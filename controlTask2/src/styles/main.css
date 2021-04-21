@@ -115,6 +115,34 @@
   font-size: 2em;
 }
 
+@media (max-width: 640px) {
+  .center-block {
+    background-color: #555;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 400px;
+    height: 100%;
+    padding: 20px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    background: black;
+    color: white;
+    z-index: 10;
+    -webkit-transition: -webkit-transform ease-out 0.25s;
+    transition: -webkit-transform ease-out 0.25s;
+    transition: transform ease-out 0.25s;
+    transition: transform ease-out 0.25s, -webkit-transform ease-out 0.25s;
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  input[type="checkbox"]:checked ~ .center-block {
+    background-color: white;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
 .right-block {
   width: 300px;
   display: -webkit-box;
@@ -153,10 +181,6 @@
   border-radius: 3px;
   padding: 5px;
   margin: 5px;
-}
-
-.hidden {
-  display: none;
 }
 
 .lds-roller {
@@ -332,61 +356,55 @@
 }
 
 .tab {
-  font: 0.8rem/1.2 Arial, sans-serif;
-  /* Параметры шрифта */
-  border: 1px solid #e9eaec;
+  border: 1px solid #fff;
   /* Параметры рамки */
+  border: solid 1px black;
+  word-wrap: break-word;
+  margin: 5px;
   border-radius: 3px;
-  /* Скругляем уголки */
-  color: #848994;
-  /* Цвет текста */
-  margin-bottom: 10px;
-  /* Расстояние между пунктами */
+  padding: 5px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  width: 95%;
 }
 
 .tab-title {
   padding: 10px;
-  /* Поля вокруг текста */
   display: block;
-  /* Блочный элемент */
-  text-transform: uppercase;
-  /* Все буквы заглавные */
   font-weight: bold;
-  /* Жирное начертание */
   cursor: pointer;
-  /* Вид курсора */
 }
 
 .tab-title::after {
   content: '+';
-  /* Выводим плюс */
   float: right;
-  /* Размещаем по правому краю */
 }
 
 .tab-content {
   padding: 10px 20px;
-  /* Поля вокруг текста */
 }
 
 .tab :checked + .tab-title {
   background-color: #50a2de;
-  /* Цвет фона */
   border-radius: 3px 3px 0 0;
-  /* Скругляем уголки */
   color: #fff;
-  /* Цвет текста */
 }
 
 .tab :checked + .tab-title::after {
   content: '−';
-  /* Выводим минус */
 }
 
 .tab :checked ~ .tab-content {
   display: block;
-  /* Показываем содержимое */
   -webkit-transition: all 1s linear;
   transition: all 1s linear;
+}
+
+.hidden {
+  display: none;
+  opacity: 0;
 }
 /*# sourceMappingURL=main.css.map */
