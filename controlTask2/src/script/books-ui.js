@@ -11,6 +11,7 @@ export class BooksUI {
   bookCountHolder;
   addBtn;
   controlBlock;
+  libInfo;
 
   searchInput;
   searchButton;
@@ -31,12 +32,13 @@ export class BooksUI {
     this.preloader = document.querySelector(".block-loader");
     this.controlBlock = document.querySelector(".block-nav-wrap");
     this.bookCountHolder = document.querySelector(".block-nav-wrap__nav");
-    this.searchInput = document.getElementById("block-search__input-search");
+    this.searchInput = document.querySelector("#block-search__input-search");
     this.savedList = document.querySelector(".right-block__book-list");
     this.bookListHolder = document.querySelector(".right-block__book-list");
-    this.searchButton = document.getElementById("block-search__button-search");
+    this.searchButton = document.querySelector("#block-search__button-search");
     this.searchResultHolder = document.querySelector(".block-results");
     this.bookInfoHolder = document.querySelector(".center-block__desc");
+    this.libInfo = document.querySelector(".right-block__lib-info");
     this.addBtn = document.createElement("BUTTON");
     this.addBtn.innerHTML = "Add book to Read List";
 
@@ -93,10 +95,10 @@ export class BooksUI {
 
     this.controlBlock.addEventListener("click", (ev) => {
       if (ev.target.id === "next-btn") {
-        this.movePage(this.NEXT);
+        this.movePage(NEXT);
       }
       if (ev.target.id === "prev-btn") {
-        this.movePage(this.PREV);
+        this.movePage(PREV);
       }
     });
   }
@@ -166,11 +168,14 @@ export class BooksUI {
   };
  
   renderBookList = () => {
+   
     this.savedList.innerHTML="";
     this.savedList.insertAdjacentHTML(
       "beforeEnd",
       this.template.showDataFromStorage(this.controller.getLocalStorageData())
     );
+    this.libInfo.innerHTML = this.template.showInfoLib(this.controller.getInfoLib());
+
   };
   initUI = () => {
     this.renderBookList();
