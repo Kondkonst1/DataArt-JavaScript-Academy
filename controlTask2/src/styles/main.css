@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Roboto:regular,300,500&display=swap);
 @import url(https://fonts.googleapis.com/css?family=Lato:600,700,900&display=swap);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css);
@@ -324,5 +325,68 @@
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
   }
+}
+
+.tab input, .tab-content {
+  display: none;
+}
+
+.tab {
+  font: 0.8rem/1.2 Arial, sans-serif;
+  /* Параметры шрифта */
+  border: 1px solid #e9eaec;
+  /* Параметры рамки */
+  border-radius: 3px;
+  /* Скругляем уголки */
+  color: #848994;
+  /* Цвет текста */
+  margin-bottom: 10px;
+  /* Расстояние между пунктами */
+}
+
+.tab-title {
+  padding: 10px;
+  /* Поля вокруг текста */
+  display: block;
+  /* Блочный элемент */
+  text-transform: uppercase;
+  /* Все буквы заглавные */
+  font-weight: bold;
+  /* Жирное начертание */
+  cursor: pointer;
+  /* Вид курсора */
+}
+
+.tab-title::after {
+  content: '+';
+  /* Выводим плюс */
+  float: right;
+  /* Размещаем по правому краю */
+}
+
+.tab-content {
+  padding: 10px 20px;
+  /* Поля вокруг текста */
+}
+
+.tab :checked + .tab-title {
+  background-color: #50a2de;
+  /* Цвет фона */
+  border-radius: 3px 3px 0 0;
+  /* Скругляем уголки */
+  color: #fff;
+  /* Цвет текста */
+}
+
+.tab :checked + .tab-title::after {
+  content: '−';
+  /* Выводим минус */
+}
+
+.tab :checked ~ .tab-content {
+  display: block;
+  /* Показываем содержимое */
+  -webkit-transition: all 1s linear;
+  transition: all 1s linear;
 }
 /*# sourceMappingURL=main.css.map */

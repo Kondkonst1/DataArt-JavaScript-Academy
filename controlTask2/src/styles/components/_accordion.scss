@@ -1,0 +1,119 @@
+
+//  #book-container {
+//     width: 205px;
+//     margin: 5px;
+//     height: 85px;
+//    }
+
+//    #book-container input {
+//     display: none;
+//    }
+
+// #book-container div {
+
+//     padding: 5px;
+//     margin: 10px auto;
+//     color: #000000;
+//     background: #447350;
+//     border: solid 1px #57627F;
+//     border-radius: 8px;
+  
+//     -moz-transition: background-color 0.3s 0s ease;
+//     -o-transition: background-color 0.3s 0s ease;
+//     -webkit-transition: background-color 0.3s 0s ease;
+//    }
+   
+
+   
+//    #book-container div :hover{
+//     background: #37523e;
+//     color: #fff;
+//    }
+   
+
+ 
+//    #book-container label {
+//        text-align: center;
+//     display: block;
+//     font-size: 13px;
+//     color: #000000;
+//     background: #447350;
+//     border: solid 1px #3e3e3e;
+//     border-radius: 8px;
+//     height: 45px;
+  
+//     -moz-transition: background-color 0.3s 0s ease;
+//     -o-transition: background-color 0.3s 0s ease;
+//     -webkit-transition: background-color 0.3s 0s ease;
+//    }
+   
+//    #book-container label:hover
+//    {
+//    background: #37523e;
+//    color: #fff;
+//    }
+   
+   
+//    #book-container input:checked+label,
+//    #book-container input:checked+label:hover {
+//     background:#2b3a2f;
+//     color: #ffffff;
+//    }
+   
+//     #book-container article {
+//     margin-top: -1px;
+//     overflow: hidden;
+//     height: 0px;
+//     position: relative;
+//     z-index: 10;
+//     -webkit-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+//     -moz-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+//     -o-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+//     -ms-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+//     transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+//    }
+   
+//    #book-container input:checked~article {
+//     -webkit-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+//     -moz-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+//     -o-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+//     -ms-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+//     transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+//      height: 110px;
+//    }
+
+
+.tab input, .tab-content { display: none; }
+.tab {
+ font: 0.8rem/1.2 Arial, sans-serif; /* Параметры шрифта */
+ border: 1px solid #e9eaec; /* Параметры рамки */
+ border-radius: 3px; /* Скругляем уголки */
+ color: #848994; /* Цвет текста */
+ margin-bottom: 10px; /* Расстояние между пунктами */
+}
+.tab-title {
+ padding: 10px; /* Поля вокруг текста */
+ display: block; /* Блочный элемент */
+ text-transform: uppercase; /* Все буквы заглавные */
+ font-weight: bold; /* Жирное начертание */
+ cursor: pointer; /* Вид курсора */
+}
+.tab-title::after {
+ content: '+'; /* Выводим плюс */
+ float: right; /* Размещаем по правому краю */
+}
+.tab-content {
+ padding: 10px 20px; /* Поля вокруг текста */
+}
+.tab :checked + .tab-title {
+ background-color: #50a2de; /* Цвет фона */
+ border-radius: 3px 3px 0 0; /* Скругляем уголки */
+ color: #fff; /* Цвет текста */
+}
+.tab :checked + .tab-title::after {
+ content: '−'; /* Выводим минус */
+}
+.tab :checked ~ .tab-content {
+ display: block; /* Показываем содержимое */
+ transition: all 1s linear;
+}
