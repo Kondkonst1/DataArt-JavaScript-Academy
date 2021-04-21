@@ -1,65 +1,62 @@
-'use strict'
+"use strict";
 export class Storage {
-    constructor(nameStorage) {
-        this.nameStorage = nameStorage;
-    }
-    myBooksArray = [];
-    libInfo = {};
+  constructor(nameStorage) {
+    this.nameStorage = nameStorage;
+  }
+  myBooksArray = [];
+  libInfo = {};
 
-    getSavedBooks = () =>{
-        return this.myBooksArray;
-    }
+  getSavedBooks = () => {
+    return this.myBooksArray;
+  };
 
-    getBooksId = () => {
-        const idArray = this.myBooksArray.map((item) => {
-            return item.id;
-        })
-        return idArray;
-    }
-    
-    loadBooks = () => {
-      if (localStorage.getItem(this.nameStorage)) {
-        this.myBooksArray = JSON.parse(localStorage.getItem(this.nameStorage));
-        return this.myBooksArray;
-      } else return [];
-    };
+  getBooksId = () => {
+    const idArray = this.myBooksArray.map((item) => {
+      return item.id;
+    });
+    return idArray;
+  };
 
-    markAsRead = (id) => {
-      this.myBooksArray.forEach((item) => {
-        id === item.id ? (item.read = true) : "";
-      });
+  loadBooks = () => {
+    if (localStorage.getItem(this.nameStorage)) {
+      this.myBooksArray = JSON.parse(localStorage.getItem(this.nameStorage));
+      return this.myBooksArray;
+    } else return [];
+  };
+
+  markAsRead = (id) => {
+    this.myBooksArray.forEach((item) => {
+      id === item.id ? (item.read = true) : "";
+    });
+    localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray));
+  };
+
+  showHelp = (mas) => {
+    mas.forEach((element) => {
+      console.log(element);
+    });
+  };
+
+  removeBook = (id) => {
+    this.myBooksArray = this.myBooksArray.filter((item) => {
+      return item.id !== id;
+    });
+    localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray));
+  };
+
+  getInfoLib = () => {
+    this.libInfo.all = this.loadBooks().length;
+    this.libInfo.readed = this.loadBooks().filter((item) => item.read).length;
+    return this.libInfo;
+  };
+
+  addBooks = (book) => {
+    if (!this.getBooksId().includes(book.id)) {
+      this.myBooksArray = [...this.myBooksArray, book];
       localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray));
-    };
-
-    showHelp = (mas) =>{
-        mas.forEach(element => {
-           console.log(element); 
-        });
+    } else {
+        //errorMessageForm
+      alert(`${book.title} уже добавлена в список`);
     }
-
-    removeBook = (id) => {
-       
-        this.myBooksArray = this.myBooksArray.filter((item)=>{
-            return item.id !== id;
-        })
-      
-        localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray))
-
-    }
-
-    getInfoLib = () => {
-        this.libInfo.all =  this.loadBooks().length;
-        this.libInfo.readed = this.loadBooks().filter(item=>item.read).length;
-        return this.libInfo;
-    }
-    addBooks = (book) => {
-    
-        if(!this.getBooksId().includes(book.id)){
-          
-            this.myBooksArray = [...this.myBooksArray, book];
-            localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray))
-        }
-        else { alert(`${book.title} уже добавлена в список`)}
-     
-    }
+  };
 }

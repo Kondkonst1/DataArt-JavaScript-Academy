@@ -19,17 +19,13 @@ export class BooksUI {
   currentQuery;
   currentBook;
   savedList;
-  preloader;
   smallSpinner;
 
   constructor(template, controller) {
-    //console.log(storage.loadBooks());
     this.controller = controller;
     this.template = template;
 
-    this.smallSpinner = document.createElement("div");
-    this.smallSpinner.classList.add("hidden");
-    this.preloader = document.querySelector(".block-loader");
+
     this.controlBlock = document.querySelector(".block-nav-wrap");
     this.bookCountHolder = document.querySelector(".block-nav-wrap__nav");
     this.searchInput = document.querySelector("#block-search__input-search");
@@ -42,31 +38,30 @@ export class BooksUI {
     this.addBtn = document.createElement("BUTTON");
     this.addBtn.innerHTML = "Add book to Read List";
 
+    this.smallSpinner = document.createElement("div");
+    this.smallSpinner.classList.add("hidden");
+
     this.searchInput.addEventListener("keypress", (keyPressed) => {
-    if (keyPressed.code === ENTER_KEY) {
-      this.loadSearchResult(this.searchInput.value);
-    }
-  });
+      if (keyPressed.code === ENTER_KEY) {
+        this.loadSearchResult(this.searchInput.value);
+      }
+    });
 
     this.addBtn.addEventListener("click", () => {
       controller.addBook(this.currentBook);
       this.renderBookList();
-      // this.addToList();
     });
 
     this.searchButton.addEventListener("click", () => {
-      this.searchResultHolder.innerHTML = "";
-      this.preloader.classList.remove("hidden");
       this.loadSearchResult(this.searchInput.value);
     });
 
     this.bookListHolder.addEventListener("click", (event) => {
-      const id=event.target.parentElement.parentElement.id;
+      const id = event.target.parentElement.parentElement.id;
       if (event.target.classList.contains("right-block__but-remove")) {
         this.controller.removeBook(id);
         this.renderBookList();
-      }
-      else if (event.target.classList.contains("right-block__but-read")){
+      } else if (event.target.classList.contains("right-block__but-read")) {
         this.controller.markAsRead(id);
         this.renderBookList();
       }
@@ -80,11 +75,14 @@ export class BooksUI {
         return;
       }
       if (this.selectedBook) {
-        const selectedBook = this.searchResultHolder.querySelector(
+        const newSelectedBook = this.searchResultHolder.querySelector(
           `#${this.selectedBook.id}`
         );
-        if (selectedBook.classList.contains("select-book")) {
-          selectedBook.classList.remove("select-book");
+        if (
+          newSelectedBook &&
+          newSelectedBook.classList.contains("select-book")
+        ) {
+          newSelectedBook.classList.remove("select-book");
         }
       }
       targetDiv.classList.add("select-book");
@@ -108,8 +106,9 @@ export class BooksUI {
       return;
     }
     try {
+      this.searchResultHolder.innerHTML = this.template.getLoader();
       const page = await this.controller.getSearchResult(query, numPage);
-      this.preloader.classList.add("hidden");
+
       this.currentPage = page;
       this.searchResultHolder.innerHTML = this.template.getSearchData(
         this.currentPage.docs
@@ -125,19 +124,16 @@ export class BooksUI {
   }
 
   runLoader = () => {
-    this.preloader.innerHTML = `<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>`;
     this.smallSpinner.innerHTML = `<div class="lds-dual-ring hidden"></div>`;
-    this.searchResultHolder.appendChild(this.preloader);
     this.controlBlock.appendChild(this.smallSpinner);
   };
 
   movePage = (wherePointer) => {
     this.searchResultHolder.innerHTML = "";
-    this.preloader.classList.remove("hidden");
     this.smallSpinner.classList.remove("hidden");
     this.loadSearchResult(
       this.currentQuery,
-      this.currentPage.start / this.PAGE_COUNT + 1 + wherePointer
+      this.currentPage.start / PAGE_COUNT + 1 + wherePointer
     );
   };
 
@@ -166,17 +162,18 @@ export class BooksUI {
     };
     this.currentBook = myBook;
   };
- 
+
   renderBookList = () => {
-   
-    this.savedList.innerHTML="";
+    this.savedList.innerHTML = "";
     this.savedList.insertAdjacentHTML(
       "beforeEnd",
       this.template.showDataFromStorage(this.controller.getLocalStorageData())
     );
-    this.libInfo.innerHTML = this.template.showInfoLib(this.controller.getInfoLib());
-
+    this.libInfo.innerHTML = this.template.showInfoLib(
+      this.controller.getInfoLib()
+    );
   };
+
   initUI = () => {
     this.renderBookList();
     this.runLoader();
