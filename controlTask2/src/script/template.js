@@ -7,7 +7,7 @@ export class Template {
         });
         const bookSearchResults = page.reduce((acc, item) => {
             return (acc + `<div id="${item.id}" class="book-info">
-           ${item.title} (${item.language})
+           ${item.title} ${item.language ? `( ${item.language})`: ``}
             ${item.subtitle 
                 ? `<div> Subtitle: ${item.subtitle} </div>`
                 : ``}</div>`);
@@ -31,7 +31,7 @@ export class Template {
     getInfoAboutBook = (selectedBook) => {
         return `
         <h2>${selectedBook.title}</h2>
-        <div>Languages available: ${selectedBook.language.join(", ")}</div>
+        <div>Languages available: ${selectedBook.language ?` ${selectedBook.language.join(", ")}`:``}</div>
         <div>Full text available: ${selectedBook.has_fulltext}</div>
         <div> first_publish_year ${selectedBook.first_publish_year}</div>
         <div>Publish year: ${selectedBook.publish_year.join(", ")}</div>
