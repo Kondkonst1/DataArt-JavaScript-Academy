@@ -15,6 +15,19 @@ export class Template {
         return bookSearchResults;
     }
 
+    getLoader = () =>{
+        return `<div class="block-loader">
+        <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        </div></div>`;
+    }
     getInfoAboutBook = (selectedBook) => {
         return `
         <h2>${selectedBook.title}</h2>
@@ -36,7 +49,6 @@ export class Template {
         <button id="next-btn" ${((page.numFound-page.start) < 100) ? "disabled" : ""}>Next results</button>
          </div>
         `;
-        
     }
 
     showInfoLib = (info) => {
@@ -60,11 +72,9 @@ export class Template {
     }
 
     //сделать деструтуризацию для полей объекта
-    // users.sort((a, b) => a.name > b.name ? 1 : -1);
     showDataFromStorage = (books) => {
         // const {} = books;
-      
-         const savedBookList = books.sort(item=>item.read ? 1 : -1).reduce((acc, item) => {
+        const savedBookList = books.sort(item=>item.read ? 1 : -1).reduce((acc, item) => {
         return (acc+ 
             `
             <div id="${item.id}" class="right-block__info-item">
@@ -79,7 +89,6 @@ export class Template {
             </div>
             `)
         }, "");
-   
         return savedBookList;
     }
 }
