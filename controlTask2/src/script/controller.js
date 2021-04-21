@@ -18,6 +18,9 @@ export class Controller {
     this.storage.removeBook(id);
   }
 
+  getInfoLib = () => {
+     return this.storage.getInfoLib();
+  }
   // getAllBookID = () =>{
   //   return this.storage.getBooksId();
   // }

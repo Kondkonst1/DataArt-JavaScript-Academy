@@ -39,6 +39,12 @@ export class Template {
         
     }
 
+    showInfoLib = (info) => {
+        return `
+        <div>Всего: ${info.all} Прочитано: ${info.readed} </div>
+        `;
+    }
+
     addOneBook = (book) => {
         return    `
         <div id="${book.id}">

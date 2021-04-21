@@ -4,6 +4,7 @@ export class Storage {
         this.nameStorage = nameStorage;
     }
     myBooksArray = [];
+    libInfo = {};
 
     getSavedBooks = () =>{
         return this.myBooksArray;
@@ -19,7 +20,6 @@ export class Storage {
     loadBooks = () => {
       if (localStorage.getItem(this.nameStorage)) {
         this.myBooksArray = JSON.parse(localStorage.getItem(this.nameStorage));
-
         return this.myBooksArray;
       } else return [];
     };
@@ -47,6 +47,11 @@ export class Storage {
 
     }
 
+    getInfoLib = () => {
+        this.libInfo.all =  this.loadBooks().length;
+        this.libInfo.readed = this.loadBooks().filter(item=>item.read).length;
+        return this.libInfo;
+    }
     addBooks = (book) => {
     
         if(!this.getBooksId().includes(book.id)){
