@@ -1,6 +1,9 @@
 "use strict";
 import { Controller } from "./controller.js";
-const ENTER_KEY = 13;
+const ENTER_KEY = "Enter";
+const NEXT = 1;
+const PREV = -1;
+const PAGE_COUNT = 100;
 export class BooksUI {
   searchResultHolder;
   bookInfoHolder;
@@ -25,22 +28,11 @@ export class BooksUI {
 
     this.smallSpinner = document.createElement("div");
     this.smallSpinner.classList.add("hidden");
-    this.preloader = document.createElement("div");
+    this.preloader = document.querySelector(".block-loader");
     this.controlBlock = document.querySelector(".block-nav-wrap");
     this.bookCountHolder = document.querySelector(".block-nav-wrap__nav");
     this.searchInput = document.getElementById("block-search__input-search");
-    this.searchInput.addEventListener("keypress", (keyPressed) => {
-      /*
-            /////////////////////////////////
-            поправить keyCode
-            /////////////////////////////////
-            */
-      if (keyPressed.keyCode === ENTER_KEY) {
-        this.loaderData(this.searchInput.value);
-      }
-    });
     this.savedList = document.querySelector(".right-block__book-list");
-
     this.bookListHolder = document.querySelector(".right-block__book-list");
     this.searchButton = document.getElementById("block-search__button-search");
     this.searchResultHolder = document.querySelector(".block-results");
@@ -48,20 +40,33 @@ export class BooksUI {
     this.addBtn = document.createElement("BUTTON");
     this.addBtn.innerHTML = "Add book to Read List";
 
+    this.searchInput.addEventListener("keypress", (keyPressed) => {
+    if (keyPressed.code === ENTER_KEY) {
+      this.loadSearchResult(this.searchInput.value);
+    }
+  });
+
     this.addBtn.addEventListener("click", () => {
       controller.addBook(this.currentBook);
-      this.addToList();
+      this.renderBookList();
+      // this.addToList();
     });
 
     this.searchButton.addEventListener("click", () => {
       this.searchResultHolder.innerHTML = "";
-      this.runLoader();
-      this.loaderData(this.searchInput.value);
+      this.preloader.classList.remove("hidden");
+      this.loadSearchResult(this.searchInput.value);
     });
 
     this.bookListHolder.addEventListener("click", (event) => {
-        if (event.target.classList.contains("right-block__but-remove")) {
-        event.target.parentElement.parentElement.remove();
+      const id=event.target.parentElement.parentElement.id;
+      if (event.target.classList.contains("right-block__but-remove")) {
+        this.controller.removeBook(id);
+        this.renderBookList();
+      }
+      else if (event.target.classList.contains("right-block__but-read")){
+        this.controller.markAsRead(id);
+        this.renderBookList();
       }
     });
 
@@ -88,47 +93,51 @@ export class BooksUI {
 
     this.controlBlock.addEventListener("click", (ev) => {
       if (ev.target.id === "next-btn") {
-      this.getNextPage();
+        this.movePage(this.NEXT);
       }
-      if(ev.target.id === "prev-btn"){
-        this.getPrevPage();
+      if (ev.target.id === "prev-btn") {
+        this.movePage(this.PREV);
       }
     });
   }
 
-  async loaderData(query, numPage = 1) {
+  async loadSearchResult(query, numPage = 1) {
     if (!query) {
       return;
     }
-    try{
-    const page = await this.controller.getSearchResult(query, numPage);
-    this.preloader.classList.add("hidden");
-    this.currentPage = page;
-    this.searchResultHolder.innerHTML = this.template.getSearchData(this.currentPage.docs);
-    this.bookCountHolder.innerHTML = this.template.getInfoCount(this.currentPage);
-    this.currentQuery = query;
-    this.smallSpinner.classList.add("hidden");
-    }
-    catch(error){
+    try {
+      const page = await this.controller.getSearchResult(query, numPage);
+      this.preloader.classList.add("hidden");
+      this.currentPage = page;
+      this.searchResultHolder.innerHTML = this.template.getSearchData(
+        this.currentPage.docs
+      );
+      this.bookCountHolder.innerHTML = this.template.getInfoCount(
+        this.currentPage
+      );
+      this.currentQuery = query;
+      this.smallSpinner.classList.add("hidden");
+    } catch (error) {
       console.log(error);
     }
   }
 
-    runLoader = ()=>{
-    this.preloader.innerHTML=`<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>`;
+  runLoader = () => {
+    this.preloader.innerHTML = `<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>`;
     this.smallSpinner.innerHTML = `<div class="lds-dual-ring hidden"></div>`;
     this.searchResultHolder.appendChild(this.preloader);
     this.controlBlock.appendChild(this.smallSpinner);
-  }
+  };
 
-  getNextPage = () => {
+  movePage = (wherePointer) => {
+    this.searchResultHolder.innerHTML = "";
+    this.preloader.classList.remove("hidden");
     this.smallSpinner.classList.remove("hidden");
-    this.loaderData(this.currentQuery, (this.currentPage.start / 100 + 1) + 1);
-  }
-  getPrevPage = () => {
-    this.smallSpinner.classList.remove("hidden");
-    this.loaderData(this.currentQuery, (this.currentPage.start / 100 + 1) - 1);
-  }
+    this.loadSearchResult(
+      this.currentQuery,
+      this.currentPage.start / this.PAGE_COUNT + 1 + wherePointer
+    );
+  };
 
   showDescription = () => {
     this.bookInfoHolder.innerHTML = this.template.getInfoAboutBook(
@@ -137,12 +146,12 @@ export class BooksUI {
     this.bookInfoHolder.appendChild(this.addBtn);
   };
 
-  addToList = () => {
-    this.savedList.insertAdjacentHTML(
-      "beforeEnd",
-      this.template.addOneBook(this.currentBook)
-    );
-  };
+  // addToList = () => {
+  //   this.savedList.insertAdjacentHTML(
+  //     "beforeEnd",
+  //     this.template.addOneBook(this.currentBook)
+  //   );
+  // };
 
   setCurrentBook = (book) => {
     const myBook = {
@@ -155,9 +164,16 @@ export class BooksUI {
     };
     this.currentBook = myBook;
   };
-
+ 
   renderBookList = () => {
-    this.savedList.insertAdjacentHTML("beforeEnd", 
-    this.template.setStorageData(this.controller.getLocalStorageData()));
+    this.savedList.innerHTML="";
+    this.savedList.insertAdjacentHTML(
+      "beforeEnd",
+      this.template.showDataFromStorage(this.controller.getLocalStorageData())
+    );
+  };
+  initUI = () => {
+    this.renderBookList();
+    this.runLoader();
   };
 }

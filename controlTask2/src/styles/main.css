@@ -47,6 +47,13 @@
           flex-grow: 1;
   background-color: #447350;
   color: honeydew;
+  margin: 10px;
+  height: 100%;
+}
+
+.block-loader {
+  width: 80px;
+  height: 80px;
 }
 
 .select-book {
@@ -67,6 +74,9 @@
 .book-info {
   border: solid 1px black;
   word-wrap: break-word;
+  margin: 5px;
+  border-radius: 3px;
+  padding: 5px;
 }
 
 .center-block {
@@ -122,6 +132,13 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.right-block__info-item {
+  border: solid 1px black;
+  border-radius: 3px;
+  padding: 5px;
+  margin: 5px;
 }
 
 .hidden {

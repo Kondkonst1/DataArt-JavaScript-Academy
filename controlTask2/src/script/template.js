@@ -53,24 +53,27 @@ export class Template {
         `
     }
 
-
-    setStorageData = (books) => {
+    //сделать деструтуризацию для полей объекта
+    // users.sort((a, b) => a.name > b.name ? 1 : -1);
+    showDataFromStorage = (books) => {
         // const {} = books;
-        const savedBookList = books.reduce((acc, item) => {
+      
+         const savedBookList = books.sort(item=>item.read ? 1 : -1).reduce((acc, item) => {
         return (acc+ 
             `
-            <div id="${item.id}">
-                <div>${item.title}</div>
-                <div>${item.subtitle}</div>
-                <div>${item.author}</div>
-                <div>${item.read}</div>
+            <div id="${item.id}" class="right-block__info-item">
+                <div>Title: ${item.title}</div>
+                ${item.subtitle ? ` <div>Subtitle: ${item.subtitle}</div>`: ``}
+                ${item.author ? ` <div>Author: ${item.author}</div>`: ``}
                 <div class="right-block__control">
-                <button class="right-block__but-read">Mark as read</button>
-                 <button class="right-block__but-remove" >Remove</button>
+                ${item.read ? ``:`<button class="right-block__but-read">Mark as read</button>
+                                  <button class="right-block__but-remove" >Remove</button>`}
+           
                 </div>
             </div>
             `)
         }, "");
+   
         return savedBookList;
     }
 }

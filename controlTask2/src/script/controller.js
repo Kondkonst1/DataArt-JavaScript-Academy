@@ -12,15 +12,22 @@ export class Controller {
     }
 
   addBook = (book) => {
-    console.log(book);
-    this.storage.saveBooks(book);
+    this.storage.addBooks(book);
   }
-  removeBook = () => {
-    
+  removeBook = (id) => {
+    this.storage.removeBook(id);
+  }
+
+  // getAllBookID = () =>{
+  //   return this.storage.getBooksId();
+  // }
+
+  markAsRead = (id) =>{
+    this.storage.markAsRead(id);
   }
 
   getLocalStorageData = () => {
-    return this.storage.loadBooks();
+   return this.storage.loadBooks();
   }
   
 };

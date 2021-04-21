@@ -9,12 +9,21 @@
         background-color: #a1a1a1;
         flex-grow: 1;
         overflow-y: scroll;
+        
         &--read{
             color: green;
         }
     }
+    
     &__control{
         display: flex;
+    }
+    &__info-item{
+        border: solid 1px black;
+        border-radius: 3px;
+        padding: 5px;
+        margin: 5px;
+
     }
 }
 .hidden{
