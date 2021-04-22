@@ -2,6 +2,7 @@
     width:300px;
     display: flex;
     flex-direction: column;
+    min-width: 240px;
     &__header{
         height: 100px;
     }
