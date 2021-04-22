@@ -11,29 +11,42 @@
 .block-search {
     height: 50px;
     display: flex;
-    &__input-search{
-        width:290px;
+
+    &__input-search {
+        border: none;
+        width: 290px;
         margin: 10px;
-        
+        border-radius: 24px;
+        background: #fff;
+
+        &:hover {
+            box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+            border-color: rgba(223, 225, 229, 0);
+        }
+
+        &:focus {
+            outline: none;
+        }
     }
+
     &__button-search {
         margin: 10px;
         background-color: $primary;
         border-radius: 28px;
-        color:#fff;
+        color: #fff;
         font-size: 1em;
         border-style: hidden;
         cursor: pointer;
         user-select: none;
         transition: box-shadow 0.3s ease 0s;
         width: 50%;
-    
-      &:focus {
+
+        &:focus {
             outline: 0
-     }
-    
+        }
+
         &:hover {
-            box-shadow:    0 41px 11px -25px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 41px 11px -25px rgba(0, 0, 0, 0.08);
         }
     }
 }
@@ -52,27 +65,27 @@
     height: 100%;
 }
 
-.block-loader{
+.block-loader {
     width: 80px;
     height: 80px;
 }
 
 .select-book {
     background-color: #585858;
-  }
+}
 
 .block-nav-wrap {
 
     display: flex;
+
     &__nav {
         height: 100%;
     }
 }
 
-.book-info{
-   
-   
-    &:hover{
+.book-info {
+
+    &:hover {
         background-color: #ffffff1c;
     }
 }
@@ -80,12 +93,12 @@
 
 @media (max-width: $breakpoint-s) {
 
-.left-block{
-    height: 100%;
-}
+    .left-block {
+        height: 100%;
+    }
 
-.block-results {
-    height: 440px;
-}
+    .block-results {
+        height: 440px;
+    }
 
 }
