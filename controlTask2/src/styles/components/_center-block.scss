@@ -1,18 +1,30 @@
-.center-block{
+.center-block {
     display: flex;
     flex-grow: 1;
     padding: 30px;
     justify-content: center;
     overflow: auto;
     min-width: $breakpoint-xs;
-    &__desc{ 
+
+    &__image{
+    margin-bottom: 20px;
+    &>img {
+        max-width: 360px; 
+        @include img-shadow;
+       
+    }
+}
+
+    &__desc {
         width: 400px;
         padding: 0 20px 0 20px;
-        span{
+
+        span {
             color: gray;
             font-size: 2em;
             padding: 15px;
         }
+
     }
 }
 #menu__toggle{
@@ -38,10 +50,12 @@ position: absolute;
         color: white;
         z-index: 10;
         transition: transform ease-out 0.25s;
-        transform: translateX(-100%);
+        
         &__image{
             margin-left: auto;
             margin-right: auto;
+          
+          
         }
         &__desc{ 
             width: 100%;

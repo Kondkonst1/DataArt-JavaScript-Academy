@@ -11,14 +11,15 @@
 .block-search {
     height: 50px;
     display: flex;
-
+   
     &__input-search {
+        padding: 0 15px;
         border: none;
         width: 290px;
         margin: 10px;
         border-radius: 24px;
         background: #fff;
-
+            
         &:hover {
             box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
             border-color: rgba(223, 225, 229, 0);
@@ -30,24 +31,7 @@
     }
 
     &__button-search {
-        margin: 10px;
-        background-color: $primary;
-        border-radius: 28px;
-        color: #fff;
-        font-size: 1em;
-        border-style: hidden;
-        cursor: pointer;
-        user-select: none;
-        transition: box-shadow 0.3s ease 0s;
-        width: 50%;
-
-        &:focus {
-            outline: 0
-        }
-
-        &:hover {
-            box-shadow: 0 41px 11px -25px rgba(0, 0, 0, 0.08);
-        }
+       @include button;
     }
 }
 
@@ -61,8 +45,28 @@
     flex-direction: column;
     align-items: center;
     background-color: #6e6e6e3d;
+   
+
     color: honeydew;
     height: 100%;
+    &__desc{
+        width: 75%;
+        
+        padding: 20px;
+    }
+    &__search-inner{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
+
+        &__image {
+          
+           &>img{
+            @include img-shadow;
+               height: 125px;
+           }
+        }
 }
 
 .block-loader {
@@ -80,6 +84,12 @@
 
     &__nav {
         height: 100%;
+    }
+  
+    &__next-btn,  &__prev-btn {
+        @include button;
+       
+
     }
 }
 

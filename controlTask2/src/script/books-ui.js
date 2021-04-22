@@ -1,9 +1,12 @@
 "use strict";
-import { Controller } from "./controller.js";
+import {
+  Controller
+} from "./controller.js";
 const ENTER_KEY = "Enter";
 const NEXT = 1;
 const PREV = -1;
 const PAGE_COUNT = 100;
+
 export class BooksUI {
   searchResultHolder;
   bookInfoHolder;
@@ -13,7 +16,7 @@ export class BooksUI {
   addBtn;
   controlBlock;
   libInfo;
-  menuClose;
+  sideBarCloseBut;
   searchInput;
   searchButton;
   currentPage = [];
@@ -27,7 +30,7 @@ export class BooksUI {
     this.controller = controller;
     this.template = template;
 
-    this.menuClose = document.querySelector(".menu__close");
+    this.sideBarCloseBut = document.querySelector(".menu__close");
     this.controlBlock = document.querySelector(".block-nav-wrap");
     this.bookCountHolder = document.querySelector(".block-nav-wrap__nav");
     this.searchInput = document.querySelector(".block-search__input-search");
@@ -87,8 +90,7 @@ export class BooksUI {
           newSelectedBook &&
           newSelectedBook.classList.contains("select-book")
         ) {
-         // console.log(newSelectedBook);
-               newSelectedBook.classList.remove("select-book");
+          newSelectedBook.classList.remove("select-book");
         }
       }
 
@@ -96,23 +98,26 @@ export class BooksUI {
       this.selectedBook = selectedBook;
       this.setCurrentBook(this.selectedBook);
       this.showDescription();
-      this.moveDescription(0);
+      this.moveDescription();
     });
-    this.menuClose.addEventListener("click", ()=>{this.moveDescription("-100%")});
+    this.sideBarCloseBut.addEventListener("click", () => {
+      this.moveDescription();
+    });
 
     this.controlBlock.addEventListener("click", (ev) => {
-      if (ev.target.id === "next-btn") {
+      if (ev.target.classList.contains("block-nav-wrap__next-btn")) {
         this.movePage(NEXT);
       }
-      if (ev.target.id === "prev-btn") {
+      if (ev.target.classList.contains("block-nav-wrap__prev-btn")) {
         this.movePage(PREV);
       }
     });
   }
-
-  moveDescription = (pos) => {
-     this.centerBlock.style.transform = `translateX(${pos})`;
+  moveDescription = () => {
+    this.centerBlock.classList.toggle("transform-left");
+    this.centerBlock.classList.toggle("transform-right");
   }
+
   async loadSearchResult(query, numPage = 1) {
     if (!query) {
       return;
@@ -149,8 +154,8 @@ export class BooksUI {
     );
   };
 
-  async showDescription () {
-    
+  async showDescription() {
+
     const description = await this.controller.getDescription(this.selectedBook.id);
     this.bookInfoHolder.innerHTML = this.template.getInfoAboutBook(
       this.selectedBook, description
