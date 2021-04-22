@@ -30,10 +30,10 @@ export class BooksUI {
     this.menuClose = document.querySelector(".menu__close");
     this.controlBlock = document.querySelector(".block-nav-wrap");
     this.bookCountHolder = document.querySelector(".block-nav-wrap__nav");
-    this.searchInput = document.querySelector("#block-search__input-search");
+    this.searchInput = document.querySelector(".block-search__input-search");
     this.savedList = document.querySelector(".right-block__book-list");
     this.bookListHolder = document.querySelector(".right-block__book-list");
-    this.searchButton = document.querySelector("#block-search__button-search");
+    this.searchButton = document.querySelector(".block-search__button-search");
     this.searchResultHolder = document.querySelector(".block-results");
     this.centerBlock = document.querySelector(".center-block");
     this.bookInfoHolder = document.querySelector(".center-block__desc");

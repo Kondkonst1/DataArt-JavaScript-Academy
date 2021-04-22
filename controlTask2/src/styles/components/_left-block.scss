@@ -10,7 +10,35 @@
 
 .block-search {
     height: 50px;
+    display: flex;
+    &__input-search{
+        width:290px;
+        margin: 10px;
+        
+    }
+    &__button-search {
+        margin: 10px;
+        background-color: $primary;
+        border-radius: 28px;
+        color:#fff;
+        font-size: 1em;
+        border-style: hidden;
+        cursor: pointer;
+        user-select: none;
+        transition: box-shadow 0.3s ease 0s;
+        width: 50%;
+    
+      &:focus {
+            outline: 0
+     }
+    
+        &:hover {
+            box-shadow:    0 41px 11px -25px rgba(0, 0, 0, 0.08);
+        }
+    }
 }
+
+
 
 .block-results {
     overflow-y: scroll;
@@ -19,12 +47,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #404040;
+    background-color: #6e6e6e3d;
     color: honeydew;
     height: 100%;
 }
-
-
 
 .block-loader{
     width: 80px;
@@ -44,14 +70,11 @@
 }
 
 .book-info{
-    border:solid 1px black;
-    word-wrap: break-word;
-    margin: 5px;
-    border-radius: 3px;
-    padding: 5px;
-    cursor: pointer;
-    user-select: none;   
-    width: 95%
+   
+   
+    &:hover{
+        background-color: #ffffff1c;
+    }
 }
 
 
@@ -61,5 +84,8 @@
     height: 100%;
 }
 
+.block-results {
+    height: 440px;
 }
-   
+
+}

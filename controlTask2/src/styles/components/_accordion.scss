@@ -1,7 +1,7 @@
 .tab input, .tab-content { display: none; }
 .tab {
- border: 1px solid #fff; 
- border:solid 1px black;
+
+ border-bottom: solid 1px #bcbcbc;
  word-wrap: break-word;
  margin: 5px;
  border-radius: 3px;
@@ -22,17 +22,13 @@
 }
 .tab :checked + .tab-title {
  background-color: #5e645f; 
- border-radius: 3px 3px 0 0; 
- color: #fff; 
+
 }
 
 .tab :checked ~ .tab-content {
  display: block; 
 }
-.tab :checked ~ .center-block {
-    background-color: white;
-    
-}
+
 .hidden{
     display: none;
     opacity: 0;
