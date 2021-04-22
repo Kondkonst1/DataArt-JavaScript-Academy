@@ -1,6 +1,6 @@
 .tab input, .tab-content { display: none; }
 .tab {
- border: 1px solid #fff; /* Параметры рамки */
+ border: 1px solid #fff; 
  border:solid 1px black;
  word-wrap: break-word;
  margin: 5px;
@@ -16,24 +16,22 @@
  font-weight: bold; 
  cursor: pointer; 
 }
-.tab-title::after {
- content: '+'; 
- float: right; 
-}
+
 .tab-content {
  padding: 10px 20px; 
 }
 .tab :checked + .tab-title {
- background-color: #50a2de; 
+ background-color: #5e645f; 
  border-radius: 3px 3px 0 0; 
  color: #fff; 
 }
-.tab :checked + .tab-title::after {
- content: '−'; 
-}
+
 .tab :checked ~ .tab-content {
  display: block; 
- transition: all 1s linear;
+}
+.tab :checked ~ .center-block {
+    background-color: white;
+    
 }
 .hidden{
     display: none;

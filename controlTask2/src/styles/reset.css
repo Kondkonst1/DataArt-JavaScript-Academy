@@ -3,5 +3,6 @@
   margin: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  word-wrap: break-word;
 }
 /*# sourceMappingURL=reset.css.map */

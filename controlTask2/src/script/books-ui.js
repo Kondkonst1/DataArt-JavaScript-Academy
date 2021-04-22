@@ -9,10 +9,11 @@ export class BooksUI {
   bookInfoHolder;
   bookListHolder;
   bookCountHolder;
+  centerBlock;
   addBtn;
   controlBlock;
   libInfo;
-
+  menuClose;
   searchInput;
   searchButton;
   currentPage = [];
@@ -25,7 +26,7 @@ export class BooksUI {
     this.controller = controller;
     this.template = template;
 
-
+    this.menuClose = document.querySelector(".menu__close");
     this.controlBlock = document.querySelector(".block-nav-wrap");
     this.bookCountHolder = document.querySelector(".block-nav-wrap__nav");
     this.searchInput = document.querySelector("#block-search__input-search");
@@ -33,6 +34,7 @@ export class BooksUI {
     this.bookListHolder = document.querySelector(".right-block__book-list");
     this.searchButton = document.querySelector("#block-search__button-search");
     this.searchResultHolder = document.querySelector(".block-results");
+    this.centerBlock = document.querySelector(".center-block");
     this.bookInfoHolder = document.querySelector(".center-block__desc");
     this.libInfo = document.querySelector(".right-block__lib-info");
     this.addBtn = document.createElement("BUTTON");
@@ -69,7 +71,7 @@ export class BooksUI {
 
     this.searchResultHolder.addEventListener("click", (event) => {
       const targetDiv = event.target;
-   
+   console.log(targetDiv);
       const id = targetDiv.id;
       const selectedBook = this.currentPage.docs.find((item) => item.id === id);
       if (!selectedBook) {
@@ -91,10 +93,10 @@ export class BooksUI {
       targetDiv.classList.add("select-book");
       this.selectedBook = selectedBook;
       this.setCurrentBook(this.selectedBook);
-     
-      
       this.showDescription();
+      this.moveDescription(0);
     });
+    this.menuClose.addEventListener("click", ()=>{this.moveDescription("-100%")});
 
     this.controlBlock.addEventListener("click", (ev) => {
       if (ev.target.id === "next-btn") {
@@ -106,6 +108,10 @@ export class BooksUI {
     });
   }
 
+  moveDescription = (pos) => {
+    console.log("translate");
+    this.centerBlock.style.transform = `translateX(${pos})`;
+  }
   async loadSearchResult(query, numPage = 1) {
     if (!query) {
       return;

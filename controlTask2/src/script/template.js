@@ -7,14 +7,13 @@ export class Template {
         });
         const bookSearchResults = page.reduce((acc, item) => {
             return (acc + `<div id="${item.id+item.edition_count}" class="book-info tab">
-            <input type="checkbox" id="${item.id}" name="tab-group">
-            <label for="${item.id}" class="tab-title">  ${item.title} 
+            <input type="checkbox" id="${item.id}" name="tab-group" class="input-book">
+            <label for="${item.id}" class="tab-title"> 
+            ${item.title} 
             ${item.language ? `${item.language}`: ``}
             ${item.subtitle 
                 ? `Subtitle: ${item.subtitle}`
                 : ``}</label>
-            
-              
                 </div>`);
         }, "");
         return bookSearchResults;
@@ -35,13 +34,13 @@ export class Template {
     }
     getInfoAboutBook = (selectedBook, description) => {
         return `
-        <h2>${selectedBook.title}</h2>
-        <div class="image">
+        <h2 class = "center-block__title">${selectedBook.title}</h2>
+        <div class="center-block__image">
         ${selectedBook.cover_i 
         ? `<img src="http://covers.openlibrary.org/b/id/${selectedBook.cover_i}-M.jpg">`
         : `<img src="https://clck.ru/URSbL" height="200px">`}
         </div>
-        ${description
+        ${description.description
         ? `<div>${description.description}</div>`
         : ``}
         
@@ -52,7 +51,9 @@ export class Template {
         <div> first_publish_year ${selectedBook.first_publish_year}</div>
         ${selectedBook.publish_year 
         ?` <div>Publish year: ${selectedBook.publish_year.join(", ")}`
-        :``}</div>`;
+        :``}</div>
+      
+        `;
     }
     getInfoCount = (page) => {
         return `

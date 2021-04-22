@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Roboto:regular,300,500&display=swap);
 @import url(https://fonts.googleapis.com/css?family=Lato:600,700,900&display=swap);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css);
@@ -7,12 +6,13 @@
   margin: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  word-wrap: break-word;
 }
 
 .wrapper {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 100px;
+  padding: 0 100px 0 100px;
 }
 
 .content {
@@ -20,6 +20,27 @@
   display: -ms-flexbox;
   display: flex;
   height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: .65em;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(217, 217, 217, 0.75);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(170, 170, 170, 0.6);
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);
+          box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    padding: 0;
+  }
 }
 
 .left-block {
@@ -31,9 +52,11 @@
       -ms-flex-direction: column;
           flex-direction: column;
   width: 300px;
+  min-width: 250px;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  margin-right: 15px;
 }
 
 .block-search {
@@ -104,29 +127,41 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  overflow: auto;
 }
 
 .center-block__desc {
-  width: 500px;
+  width: 400px;
+  padding: 0 20px 0 20px;
 }
 
 .center-block__desc span {
   color: gray;
   font-size: 2em;
+  padding: 15px;
+}
+
+#menu__toggle {
+  display: none;
+}
+
+.menu__close {
+  display: block;
+  position: absolute;
 }
 
 @media (max-width: 640px) {
   .center-block {
-    background-color: #555;
+    overflow-y: scroll;
     position: absolute;
     left: 0;
     top: 0;
-    width: 400px;
+    width: 100%;
     height: 100%;
-    padding: 20px;
+    padding: 45px;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
-    background: black;
+    background: #6b6b6b;
     color: white;
     z-index: 10;
     -webkit-transition: -webkit-transform ease-out 0.25s;
@@ -136,10 +171,40 @@
     -webkit-transform: translateX(-100%);
             transform: translateX(-100%);
   }
-  input[type="checkbox"]:checked ~ .center-block {
-    background-color: white;
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
+  .center-block__image {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .center-block__desc {
+    width: 100%;
+    word-wrap: break-word;
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+  }
+  .center-block__title {
+    text-align: center;
+    margin: 10px;
+  }
+  .menu__close {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    cursor: pointer;
+    text-align: center;
+  }
+  .menu__close:after {
+    content: '\2715';
+    text-decoration: none;
+    font-size: 3em;
   }
 }
 
@@ -152,6 +217,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  min-width: 240px;
 }
 
 .right-block__header {
@@ -357,7 +423,6 @@
 
 .tab {
   border: 1px solid #fff;
-  /* Параметры рамки */
   border: solid 1px black;
   word-wrap: break-word;
   margin: 5px;
@@ -378,29 +443,22 @@
   cursor: pointer;
 }
 
-.tab-title::after {
-  content: '+';
-  float: right;
-}
-
 .tab-content {
   padding: 10px 20px;
 }
 
 .tab :checked + .tab-title {
-  background-color: #50a2de;
+  background-color: #5e645f;
   border-radius: 3px 3px 0 0;
   color: #fff;
 }
 
-.tab :checked + .tab-title::after {
-  content: '−';
-}
-
 .tab :checked ~ .tab-content {
   display: block;
-  -webkit-transition: all 1s linear;
-  transition: all 1s linear;
+}
+
+.tab :checked ~ .center-block {
+  background-color: white;
 }
 
 .hidden {
