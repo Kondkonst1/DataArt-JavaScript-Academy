@@ -21,6 +21,7 @@ export class BooksUI {
   currentBook;
   savedList;
   smallSpinner;
+  wrapper;
 
   constructor(template, controller) {
     this.controller = controller;
@@ -39,6 +40,8 @@ export class BooksUI {
     this.libInfo = document.querySelector(".right-block__lib-info");
     this.addBtn = document.createElement("BUTTON");
     this.addBtn.innerHTML = "Add book to Read List";
+    this.wrapper = document.querySelector(".wrapper");
+
 
     this.smallSpinner = document.createElement("div");
     this.smallSpinner.classList.add("hidden");
@@ -71,7 +74,6 @@ export class BooksUI {
 
     this.searchResultHolder.addEventListener("click", (event) => {
       const targetDiv = event.target;
-   console.log(targetDiv);
       const id = targetDiv.id;
       const selectedBook = this.currentPage.docs.find((item) => item.id === id);
       if (!selectedBook) {
@@ -109,8 +111,7 @@ export class BooksUI {
   }
 
   moveDescription = (pos) => {
-    console.log("translate");
-    this.centerBlock.style.transform = `translateX(${pos})`;
+     this.centerBlock.style.transform = `translateX(${pos})`;
   }
   async loadSearchResult(query, numPage = 1) {
     if (!query) {

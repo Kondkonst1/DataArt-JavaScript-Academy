@@ -43,7 +43,7 @@ export class Template {
         ${description.description
         ? `<div>${description.description}</div>`
         : ``}
-        
+        <div class="center-block__about">
         ${selectedBook.language
         ?`<div>Languages available: ${selectedBook.language.join(", ")}`:
         ``}</div>
@@ -51,7 +51,7 @@ export class Template {
         <div> first_publish_year ${selectedBook.first_publish_year}</div>
         ${selectedBook.publish_year 
         ?` <div>Publish year: ${selectedBook.publish_year.join(", ")}`
-        :``}</div>
+        :``}</div></div>
       
         `;
     }

@@ -4,12 +4,10 @@
     padding: 30px;
     justify-content: center;
     overflow: auto;
+    min-width: $breakpoint-xs;
     &__desc{ 
         width: 400px;
-       
         padding: 0 20px 0 20px;
-   
-
         span{
             color: gray;
             font-size: 2em;
@@ -24,17 +22,19 @@
 display: block;
 position: absolute;
 }
-@media (max-width: $breakpoint-s) {
+
+@media (max-width: $breakpoint-m) {
     .center-block {
         overflow-y: scroll;
         position: absolute;
         left: 0;
         top: 0;
         width: 100%;
+    
         height: 100%;
         padding: 45px;
         box-sizing: border-box;
-        background: rgb(107, 107, 107);
+        background: rgba(0, 0, 0, 0.9);
         color: white;
         z-index: 10;
         transition: transform ease-out 0.25s;
@@ -55,6 +55,9 @@ position: absolute;
             text-align: center;
             margin: 10px;
         }
+        &__about{
+             text-align: center;
+        }
     }
     .menu__close{
         position: sticky;
@@ -66,5 +69,16 @@ position: absolute;
         content: '\2715';
         text-decoration: none;
         font-size: 3em;
+    }
+}
+@media (max-width: $breakpoint-xs) {
+    .center-block {
+    max-width: 375px;
+    }
+}
+
+@media (min-width: $breakpoint-m){
+    .center-block{
+        transform: translateX(0);
     }
 }
