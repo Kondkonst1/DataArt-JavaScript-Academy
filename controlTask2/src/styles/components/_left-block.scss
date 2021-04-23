@@ -79,6 +79,9 @@
 
     &__nav {
         height: 100%;
+        color: white;
+        text-align: center;
+        margin: 20px;
     }
     &__next-btn,  &__prev-btn {
         @include button;
@@ -92,13 +95,10 @@
 }
 
 @media (max-width: $breakpoint-s) {
-
     .left-block {
-        height: 100%;
+        height: calc(100% - 100px);
     }
-
     .block-results {
-        height: 440px;
+        height: calc(100% - 85px);
     }
-
 }

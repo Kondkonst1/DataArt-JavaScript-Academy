@@ -33,11 +33,23 @@
 
     }
 }
+.right-block__button-up {
+    display: none;
+}
 
 @media (max-width: $breakpoint-s){
 .right-block{
 /* position: fixed;
 bottom: -310px; */
-background-color: darkgrey;
+height: 100px;
+background-color: #34b2ffad;
+overflow: hidden;
+
+}
+.right-block__button-up {
+    text-align: center;
+    display: block;
+    height: 50px;
+    background-color: #1c527b;
 }
 }
