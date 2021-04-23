@@ -1,6 +1,7 @@
 html,
 body {
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 body {
   background: linear-gradient(135deg, #0c030e 0%, #5f96e4 100%);
@@ -9,7 +10,7 @@ body {
 .wrapper {
   max-width: $maxWidthContainer;
   margin: 0 auto;
-  padding: 0 100px 0 100px;
+  padding: 0 50px;
 
 }
 
@@ -57,7 +58,6 @@ transform: translateX(-100%);
 
   .wrapper {
     max-width: $minWidth;
-    margin: 15px;
-    width: 100%;
+    margin:0 auto;
   }
 }

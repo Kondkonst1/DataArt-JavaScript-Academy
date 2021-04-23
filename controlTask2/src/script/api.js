@@ -17,11 +17,11 @@ export class Api {
     }
 
      getDescription = async (id) => {
-      // console.log(`запрос описания...${id}`);
       try{
       const url = `${DESC_URL}${id}.json`;
       const result = await fetch(url);
       const desc= await  result.json();
+  
       return desc;
       }
       catch(error){

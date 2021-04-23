@@ -45,10 +45,8 @@ export class BooksUI {
     this.libInfo = document.querySelector(".right-block__lib-info");
     this.addButton = document.createElement("BUTTON");
     this.addButton.classList.add("center-block__button-add");
-    this.addButton.innerHTML = "Add book to Read List";
     this.upInfoButton = document.querySelector(".right-block__button-up");
     this.wrapper = document.querySelector(".wrapper");
-
     this.smallSpinner = document.createElement("div");
     this.smallSpinner.classList.add("hidden");
 
@@ -61,6 +59,8 @@ export class BooksUI {
     this.addButton.addEventListener("click", () => {
       this.storage.addBooks(this.currentBook);
       this.renderBookList();
+      this.addButton.disabled = true;
+      this.addButton.innerHTML = "This Book is on your List";
     });
 
     this.searchButton.addEventListener("click", () => {
@@ -78,42 +78,18 @@ export class BooksUI {
     });
 
     this.searchResultHolder.addEventListener("click", (event) => {
-      const targetDiv = event.target;
-      const id = targetDiv.id;
+      const targetBook = event.target;
+      const id = targetBook.id;
       const selectedBook = this.currentPages.docs.find((item) => item.id === id);
       if (!selectedBook) {
         return;
       }
-
-      if(event.target != this)
-      this.checked = false; 
-
-      if (this.selectedBook) {
-        const newSelectedBook = this.searchResultHolder.querySelector(
-          `#${this.selectedBook.id}`
-        );
-        if (newSelectedBook){
-          newSelectedBook.classList.toggle("select-book")
-         }
-        }
-        
-
-        if(event.target != this){
-        this.checked = false; 
-        }
-      //targetDiv.classList.add("select-book");
       this.selectedBook = selectedBook;
-
-      console.log(targetDiv);
+      this.uncheck(this.selectedBook.id);
       this.setCurrentBook(this.selectedBook);
-      this.showDescription();
+      this.showDescription(this.selectedBook.id);
       this.moveDescription();
-      
-      // if (!this.storage.getBooksId().includes(this.selectedBook.id)) {
-      // this.addBtn.disable = true;
-      // this.addBooks.innerHTML = "Уже добавлена";
-      // }
-
+     
     });
 
      this.sideBarCloseButton.addEventListener("click", () => {
@@ -121,9 +97,7 @@ export class BooksUI {
     });
 
     this.upInfoButton.addEventListener("click", (ev)=>{
-
-      ev.target.classList.toggle("right-block__down");
-      this.rightBlock.classList.toggle("right-block__up");
+          this.rightBlock.classList.toggle("right-block__up");
     });
 
     this.controlBlock.addEventListener("click", (ev) => {
@@ -135,6 +109,15 @@ export class BooksUI {
       }
     });
   }
+ uncheck = (id) => {
+
+   const uncheck = document.querySelectorAll('.input-book');
+   uncheck.forEach((item) => {
+     if (item.id !== id) {
+       item.checked = false;
+     }
+   })
+ }
 
   moveDescription = () => {
     this.centerBlock.classList.toggle("transform-left");
@@ -177,13 +160,22 @@ export class BooksUI {
     );
   };
 
-    showDescription = async () => {
+    showDescription = async (id) => {
     const description = await this.storage.getDescription(this.selectedBook.id);
-    this.bookInfoHolder.innerHTML = this.template.getInfoAboutBook(
-      this.selectedBook, description
-    );
+    this.bookInfoHolder.innerHTML = this.template.getInfoAboutBook(this.selectedBook, description);
+    this.checkAdd(id);
     this.bookInfoHolder.appendChild(this.addButton);
   };
+
+  checkAdd = (id) =>{
+    if (this.storage.getBooksId().includes(id)) {
+      this.addButton.disabled = true;
+      this.addButton.innerHTML = "This Book is on your List";
+    }else {
+      this.addButton.disabled = false;
+      this.addButton.innerHTML = "Add book to Read List";
+    }
+  }
 
   // addToList = () => {
   //   this.savedList.insertAdjacentHTML(

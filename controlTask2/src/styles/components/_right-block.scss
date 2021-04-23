@@ -2,7 +2,7 @@
     width: 300px;
     display: flex;
     flex-direction: column;
-    min-width: 240px;
+    min-width: 255px;
     height: calc(100% - 30px);
     @include transparent-block;
 
@@ -14,6 +14,7 @@
     &__book-list {
         background-color: #ffffff1c;
         flex-grow: 1;
+        width: 100%;
         overflow-y: scroll;
 
         &--read {
@@ -28,6 +29,7 @@
 
     &__control {
         display: flex;
+        justify-content: center;
     }
 
     &__info-item {
@@ -50,10 +52,9 @@
 
 .right-block__button-up {
     display: none;
-}
-
-.right-block__down {
-    content: "^";
+    font-size: 2em;
+    height: 100%;
+    width: 100%;
 }
 
 @media (min-width: $breakpoint-s) {
@@ -64,16 +65,17 @@
 
 @media (max-width: $breakpoint-s) {
     .right-block {
-        height: 90px;
+        text-align: center;
+        height: 115px;
+        width: 100%;
         background-color: #2f426a;
         overflow: hidden;
-  
     }
 
     .right-block__button-up {
         text-align: center;
         display: block;
-        height: 20px;
+
         background-color: #1c527b;
         cursor: pointer;
     }
@@ -82,8 +84,12 @@
 .right-block__up {
     overflow-y: scroll;
     position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     height: auto;
-    max-height: 95%;
-    max-width: 95%;
-    transition: all ease-out 0.25s;
+    max-height: 90%;
+    width: 90%;
+    transition: all ease-out 0.5s;
+    transition-duration: .25s;
 }

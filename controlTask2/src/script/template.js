@@ -1,14 +1,14 @@
 "use strict";
 const BOOK_COUNT = 100;
 export class Template {
-   
-    // https://clck.ru/URSbL
+
+    //https://clck.ru/USy2T
     getSearchData = (page) => {
-          page.forEach(item => {
+        page.forEach(item => {
             item.id = item.key.split("/").pop();
         });
-          const bookSearchResults = page.reduce((acc, item) => {
-            
+        const bookSearchResults = page.reduce((acc, item) => {
+
             return (acc + `<div id="${item.id+item.edition_count}" class="book-info tab">
             <input type="checkbox" id="${item.id}" name="tab-group" class="input-book">
             <label for="${item.id}" class="tab-title"> 
@@ -35,7 +35,7 @@ export class Template {
         return bookSearchResults;
     }
 
-    getLoader = () =>{
+    getLoader = () => {
         return `<div class="block-loader">
         <div class="lds-roller">
         <div></div>
@@ -49,9 +49,9 @@ export class Template {
         </div></div>`;
     }
     getInfoAboutBook = (selectedBook, description) => {
-    
-        try{
-        return `
+
+        try {
+            return `
         <h2 class = "center-block__title">${selectedBook.title}</h2>
         <div class="center-block__image">
         ${selectedBook.cover_i ||selectedBook.cover_i
@@ -59,7 +59,9 @@ export class Template {
         : `<img src="https://clck.ru/USy2T" height="200px">`}
         </div>
         ${description.description
-        ? `<div class="center-block__full-desc">${description.description}</div>`
+        ? `<div class="center-block__full-desc">${typeof description.description === "object" 
+        ? `${description.description.value}`
+        : `${description.description}`}</div>`
         : ``}
         <div class="center-block__about">
         ${selectedBook.language
@@ -73,8 +75,7 @@ export class Template {
         ?` <div>Publish year: ${selectedBook.publish_year.join(", ")}`
         :``}</div></div>
         `;
-        }
-        catch(error){
+        } catch (error) {
             console.log(error);
         }
     }
@@ -86,8 +87,10 @@ export class Template {
         <span>Page size: ${page.docs.length} </span>
         </div>
         <div>
-        <button class="block-nav-wrap__prev-btn" ${page.start > 0 ? "" : "disabled"}> Prev results</button>
-        <button class="block-nav-wrap__next-btn" ${((page.numFound-page.start) < BOOK_COUNT) ? "disabled" : ""}>Next results</button>
+        <button class="block-nav-wrap__prev-btn" ${page.start > 0 
+            ? "" : "disabled"}> Prev results</button>
+        <button class="block-nav-wrap__next-btn" ${((page.numFound-page.start) < BOOK_COUNT)
+             ? "disabled" : ""}>Next results</button>
          </div>
         `;
     }
@@ -99,7 +102,7 @@ export class Template {
     }
 
     addOneBook = (book) => {
-        return    `
+        return `
         <div id="${book.id}">
             <div>Title: ${book.title}</div>
             ${book.subtitle ? `<div> Subtitle: ${book.subtitle} </div>` : ``}
@@ -115,9 +118,9 @@ export class Template {
     //сделать деструтуризацию для полей объекта
     showDataFromStorage = (books) => {
         // const {} = books;
-        const savedBookList = books.sort(item=>item.read ? 1 : -1).reduce((acc, item) => {
-        return (acc+ 
-            `
+        const savedBookList = books.sort(item => item.read ? 1 : -1).reduce((acc, item) => {
+            return (acc +
+                `
             <div ${item.read ? `class="right-block__info-item--read"`:``} id="${item.id}" class="right-block__info-item">
                 <div>Title: ${item.title}</div>
                 ${item.subtitle ? ` <div>Subtitle: ${item.subtitle}</div>`: ``}
