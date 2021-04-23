@@ -1,71 +1,88 @@
-.right-block{
-    width:300px;
+.right-block {
+    width: 300px;
     display: flex;
     flex-direction: column;
     min-width: 240px;
     height: calc(100% - 30px);
-
     @include transparent-block;
-    &__header{
+
+    &__header {
         padding: 15px;
         height: 100px;
     }
-    &__book-list{
-         background-color: #ffffff1c;
+
+    &__book-list {
+        background-color: #ffffff1c;
         flex-grow: 1;
         overflow-y: scroll;
-        
-        &--read{
+
+        &--read {
             color: green;
         }
     }
-    &__but-read, &__but-remove{
+
+    &__but-read,
+    &__but-remove {
         @include button;
     }
-    
-    &__control{
+
+    &__control {
         display: flex;
     }
-    &__info-item{
+
+    &__info-item {
         border: solid 1px #2b4271;
         border-radius: 3px;
         padding: 5px;
-        margin: 5px; 
-        &--read{
-            @extend  .right-block__info-item;
+        margin: 5px;
+
+        &--read {
+            @extend .right-block__info-item;
             border: solid 1px green;
             background-color: #315446;
-            &::after{
+
+            &::after {
                 content: "✓";
             }
         }
-
     }
 }
+
 .right-block__button-up {
     display: none;
 }
-// .right-block__up{
-// content: "v";
-// }
-// .right-block__down{
-// content: "^";
-// }
 
-@media (max-width: $breakpoint-s){
-.right-block{
-/* position: fixed;
-bottom: -310px; */
-height: 90px;
-background-color: #34b2ffad;
-overflow: hidden;
+.right-block__down {
+    content: "^";
+}
 
+@media (min-width: $breakpoint-s) {
+    .right-block {
+        position: relative;
+    }
 }
-.right-block__button-up {
-    text-align: center;
-    display: block;
-    height: 50px;
-    background-color: #1c527b;
-    cursor: pointer;
+
+@media (max-width: $breakpoint-s) {
+    .right-block {
+        height: 90px;
+        background-color: #2f426a;
+        overflow: hidden;
+    }
+
+    .right-block__button-up {
+        text-align: center;
+        display: block;
+        height: 20px;
+        background-color: #1c527b;
+        cursor: pointer;
+    }
 }
+
+.right-block__up {
+    overflow-y: scroll;
+    position: fixed;
+    height: auto;
+    max-height: 95%;
+    max-width: 95%;
+    transition: all ease-out 0.25s;
 }

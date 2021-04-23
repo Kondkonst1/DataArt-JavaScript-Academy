@@ -53,7 +53,7 @@ export class Template {
         return `
         <h2 class = "center-block__title">${selectedBook.title}</h2>
         <div class="center-block__image">
-        ${selectedBook.cover_i 
+        ${selectedBook.cover_i ||selectedBook.cover_i
         ? `<img src="http://covers.openlibrary.org/b/id/${selectedBook.cover_i}-L.jpg">`
         : `<img src="https://clck.ru/USy2T" height="200px">`}
         </div>

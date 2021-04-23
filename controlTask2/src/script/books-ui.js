@@ -121,8 +121,9 @@ export class BooksUI {
     });
 
     this.upInfoButton.addEventListener("click", (ev)=>{
-      ev.target.innerHTML="v";
-      //this.rightBlock.style.transform = "translateY(-100%)";
+
+      ev.target.classList.toggle("right-block__down");
+      this.rightBlock.classList.toggle("right-block__up");
     });
 
     this.controlBlock.addEventListener("click", (ev) => {
