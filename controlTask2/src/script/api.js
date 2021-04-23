@@ -4,7 +4,7 @@ const  BASE_URL="https://openlibrary.org/search.json?q=";
 const  DESC_URL = "https://openlibrary.org/works/";
 export class Api {
 
-        async  search(q, pageNum) {
+        search = async (q, pageNum) => {
         try{
         const url = `${BASE_URL}${q}&page=${pageNum}`;
         const result = await fetch(url);
@@ -16,7 +16,7 @@ export class Api {
         }
     }
 
-    async  getDescription(id) {
+     getDescription = async (id) => {
       // console.log(`запрос описания...${id}`);
       try{
       const url = `${DESC_URL}${id}.json`;

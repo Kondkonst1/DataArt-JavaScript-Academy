@@ -1,5 +1,6 @@
 "use strict";
 export class Storage {
+  
   constructor(api, nameStorage) {
     this.nameStorage = nameStorage;
     this.api = api;
@@ -15,7 +16,7 @@ export class Storage {
     const desc = await this.api.getDescription(id);
     return desc;
   }
-  
+
   getSavedBooks = () => {
     return this.myBooksArray;
   };

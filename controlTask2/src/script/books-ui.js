@@ -12,13 +12,13 @@ export class BooksUI {
   bookListHolder;
   bookCountHolder;
   centerBlock;
-  addBtn;
+  addButton;
   controlBlock;
   libInfo;
-  sideBarCloseBut;
+  sideBarCloseButton;
   searchInput;
   searchButton;
-  upInfoButtom;
+  upInfoButton;
   currentQuery;
   currentBook;
   savedList;
@@ -31,7 +31,7 @@ export class BooksUI {
     this.storage = storage;
     this.template = template;
 
-    this.sideBarCloseBut = document.querySelector(".menu__close");
+    this.sideBarCloseButton = document.querySelector(".menu__close");
     this.controlBlock = document.querySelector(".block-nav-wrap");
     this.bookCountHolder = document.querySelector(".block-nav-wrap__nav");
     this.searchInput = document.querySelector(".block-search__input-search");
@@ -43,10 +43,10 @@ export class BooksUI {
     this.centerBlock = document.querySelector(".center-block");
     this.bookInfoHolder = document.querySelector(".center-block__desc");
     this.libInfo = document.querySelector(".right-block__lib-info");
-    this.addBtn = document.createElement("BUTTON");
-    this.addBtn.classList.add("center-block__button-add");
-    this.addBtn.innerHTML = "Add book to Read List";
-    this.upInfoButtom = document.querySelector(".right-block__button-up");
+    this.addButton = document.createElement("BUTTON");
+    this.addButton.classList.add("center-block__button-add");
+    this.addButton.innerHTML = "Add book to Read List";
+    this.upInfoButton = document.querySelector(".right-block__button-up");
     this.wrapper = document.querySelector(".wrapper");
 
     this.smallSpinner = document.createElement("div");
@@ -58,7 +58,7 @@ export class BooksUI {
       }
     });
 
-    this.addBtn.addEventListener("click", () => {
+    this.addButton.addEventListener("click", () => {
       this.storage.addBooks(this.currentBook);
       this.renderBookList();
     });
@@ -84,39 +84,46 @@ export class BooksUI {
       if (!selectedBook) {
         return;
       }
+
+      if(event.target != this)
+      this.checked = false; 
+
       if (this.selectedBook) {
         const newSelectedBook = this.searchResultHolder.querySelector(
           `#${this.selectedBook.id}`
         );
-        if (
-          newSelectedBook &&
-          newSelectedBook.classList.contains("select-book")
-        ) {
-          newSelectedBook.classList.remove("select-book");
+        if (newSelectedBook){
+          newSelectedBook.classList.toggle("select-book")
+         }
         }
-      }
+        
 
-      targetDiv.classList.add("select-book");
+        if(event.target != this){
+        this.checked = false; 
+        }
+      //targetDiv.classList.add("select-book");
       this.selectedBook = selectedBook;
+
+      console.log(targetDiv);
       this.setCurrentBook(this.selectedBook);
       this.showDescription();
       this.moveDescription();
-
+      
       // if (!this.storage.getBooksId().includes(this.selectedBook.id)) {
       // this.addBtn.disable = true;
       // this.addBooks.innerHTML = "Уже добавлена";
-      }
+      // }
 
     });
 
-    this.sideBarCloseBut.addEventListener("click", () => {
-      this.moveDescription();
+     this.sideBarCloseButton.addEventListener("click", () => {
+           this.moveDescription();
     });
-    this.upInfoButtom.addEventListener("click", (ev)=>{
+
+    this.upInfoButton.addEventListener("click", (ev)=>{
       ev.target.innerHTML="v";
       //this.rightBlock.style.transform = "translateY(-100%)";
-     
-    })
+    });
 
     this.controlBlock.addEventListener("click", (ev) => {
       if (ev.target.classList.contains("block-nav-wrap__next-btn")) {
@@ -131,9 +138,9 @@ export class BooksUI {
   moveDescription = () => {
     this.centerBlock.classList.toggle("transform-left");
     this.centerBlock.classList.toggle("transform-right");
-  }
+  };
 
-  async loadSearchResult(query, numPage = 1) {
+    loadSearchResult = async (query, numPage = 1) => {
     if (!query) {
       return;
     }
@@ -153,7 +160,7 @@ export class BooksUI {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   runLoader = () => {
     this.smallSpinner.innerHTML = `<div class="lds-dual-ring hidden"></div>`;
@@ -169,12 +176,12 @@ export class BooksUI {
     );
   };
 
-  async showDescription() {
+    showDescription = async () => {
     const description = await this.storage.getDescription(this.selectedBook.id);
     this.bookInfoHolder.innerHTML = this.template.getInfoAboutBook(
       this.selectedBook, description
     );
-    this.bookInfoHolder.appendChild(this.addBtn);
+    this.bookInfoHolder.appendChild(this.addButton);
   };
 
   // addToList = () => {
@@ -211,4 +218,5 @@ export class BooksUI {
     this.renderBookList();
     this.runLoader();
   };
+
 }

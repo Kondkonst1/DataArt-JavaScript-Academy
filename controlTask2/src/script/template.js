@@ -117,7 +117,7 @@ export class Template {
         const savedBookList = books.sort(item=>item.read ? 1 : -1).reduce((acc, item) => {
         return (acc+ 
             `
-            <div id="${item.id}" class="right-block__info-item">
+            <div ${item.read ? `class="right-block__info-item--read"`:``} id="${item.id}" class="right-block__info-item">
                 <div>Title: ${item.title}</div>
                 ${item.subtitle ? ` <div>Subtitle: ${item.subtitle}</div>`: ``}
                 ${item.author ? ` <div>Author: ${item.author}</div>`: ``}

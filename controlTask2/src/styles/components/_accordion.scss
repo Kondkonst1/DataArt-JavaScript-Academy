@@ -1,6 +1,6 @@
 .tab input, .tab-content { display: none; }
 .tab {
- border-bottom: solid 1px #bcbcbc;
+ 
  word-wrap: break-word;
  margin: 5px;
  border-radius: 3px;
@@ -16,9 +16,8 @@
  cursor: pointer; 
 }
 
-.tab-content {
- padding: 10px 20px; 
-}
+
+
 .tab :checked + .tab-title {
  background-color: #a3a3a330; 
 
