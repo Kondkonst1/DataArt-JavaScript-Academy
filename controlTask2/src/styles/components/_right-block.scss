@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     min-width: 240px;
+    height: calc(100% - 40px);
 
     @include transparent-block;
     &__header{
@@ -36,6 +37,12 @@
 .right-block__button-up {
     display: none;
 }
+// .right-block__up{
+// content: "v";
+// }
+// .right-block__down{
+// content: "^";
+// }
 
 @media (max-width: $breakpoint-s){
 .right-block{
@@ -51,5 +58,6 @@ overflow: hidden;
     display: block;
     height: 50px;
     background-color: #1c527b;
+    cursor: pointer;
 }
 }

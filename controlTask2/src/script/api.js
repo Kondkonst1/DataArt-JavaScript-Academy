@@ -26,12 +26,13 @@ constructor(){
       const url = `${DESC_URL}${id}.json`;
       const result = await fetch(url);
       const desc= await  result.json();
-        
       return desc;
     
       }
       catch(error){
-        console.log(error);
+        console.log(`Get description error: ${error}`);
+        return false;
+        
       }
   }
  

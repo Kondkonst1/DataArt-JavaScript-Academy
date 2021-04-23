@@ -48,6 +48,8 @@ export class Template {
         </div></div>`;
     }
     getInfoAboutBook = (selectedBook, description) => {
+    
+        try{
         return `
         <h2 class = "center-block__title">${selectedBook.title}</h2>
         <div class="center-block__image">
@@ -69,8 +71,11 @@ export class Template {
         ${selectedBook.publish_year 
         ?` <div>Publish year: ${selectedBook.publish_year.join(", ")}`
         :``}</div></div>
-      
         `;
+        }
+        catch(error){
+            console.log(error);
+        }
     }
     getInfoCount = (page) => {
         return `

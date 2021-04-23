@@ -18,9 +18,11 @@ export class BooksUI {
   sideBarCloseBut;
   searchInput;
   searchButton;
+  upInfoButtom;
   currentQuery;
   currentBook;
   savedList;
+  rightBlock;
   smallSpinner;
   wrapper;
 
@@ -33,6 +35,7 @@ export class BooksUI {
     this.controlBlock = document.querySelector(".block-nav-wrap");
     this.bookCountHolder = document.querySelector(".block-nav-wrap__nav");
     this.searchInput = document.querySelector(".block-search__input-search");
+    this.rightBlock = document.querySelector(".right-block");
     this.savedList = document.querySelector(".right-block__book-list");
     this.bookListHolder = document.querySelector(".right-block__book-list");
     this.searchButton = document.querySelector(".block-search__button-search");
@@ -43,6 +46,7 @@ export class BooksUI {
     this.addBtn = document.createElement("BUTTON");
     this.addBtn.classList.add("center-block__button-add");
     this.addBtn.innerHTML = "Add book to Read List";
+    this.upInfoButtom = document.querySelector(".right-block__button-up");
     this.wrapper = document.querySelector(".wrapper");
 
     this.smallSpinner = document.createElement("div");
@@ -98,9 +102,15 @@ export class BooksUI {
       this.showDescription();
       this.moveDescription();
     });
+
     this.sideBarCloseBut.addEventListener("click", () => {
       this.moveDescription();
     });
+    this.upInfoButtom.addEventListener("click", (ev)=>{
+      ev.target.innerHTML="v";
+      //this.rightBlock.style.transform = "translateY(-100%)";
+     
+    })
 
     this.controlBlock.addEventListener("click", (ev) => {
       if (ev.target.classList.contains("block-nav-wrap__next-btn")) {
