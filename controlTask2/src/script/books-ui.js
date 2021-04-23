@@ -26,9 +26,9 @@ export class BooksUI {
   smallSpinner;
   wrapper;
 
-  constructor(template, controller) {
+  constructor(template, storage) {
 
-    this.controller = controller;
+    this.storage = storage;
     this.template = template;
 
     this.sideBarCloseBut = document.querySelector(".menu__close");
@@ -59,7 +59,7 @@ export class BooksUI {
     });
 
     this.addBtn.addEventListener("click", () => {
-      controller.addBook(this.currentBook);
+      this.storage.addBooks(this.currentBook);
       this.renderBookList();
     });
 
@@ -70,9 +70,9 @@ export class BooksUI {
     this.bookListHolder.addEventListener("click", (event) => {
       const id = event.target.parentElement.parentElement.id;
       if (event.target.classList.contains("right-block__but-remove")) {
-        this.controller.removeBook(id);
+        this.storage.removeBook(id);
        } else if (event.target.classList.contains("right-block__but-read")) {
-        this.controller.markAsRead(id);
+        this.storage.markAsRead(id);
       } 
       this.renderBookList();
     });
@@ -101,6 +101,12 @@ export class BooksUI {
       this.setCurrentBook(this.selectedBook);
       this.showDescription();
       this.moveDescription();
+
+      // if (!this.storage.getBooksId().includes(this.selectedBook.id)) {
+      // this.addBtn.disable = true;
+      // this.addBooks.innerHTML = "Уже добавлена";
+      }
+
     });
 
     this.sideBarCloseBut.addEventListener("click", () => {
@@ -121,6 +127,7 @@ export class BooksUI {
       }
     });
   }
+
   moveDescription = () => {
     this.centerBlock.classList.toggle("transform-left");
     this.centerBlock.classList.toggle("transform-right");
@@ -132,7 +139,7 @@ export class BooksUI {
     }
     try {
       this.searchResultHolder.innerHTML = this.template.getLoader();
-      const page = await this.controller.getSearchResult(query, numPage);
+      const page = await this.storage.getSearchResult(query, numPage);
 
       this.currentPages = page;
       this.searchResultHolder.innerHTML = this.template.getSearchData(
@@ -163,12 +170,10 @@ export class BooksUI {
   };
 
   async showDescription() {
-
-    const description = await this.controller.getDescription(this.selectedBook.id);
+    const description = await this.storage.getDescription(this.selectedBook.id);
     this.bookInfoHolder.innerHTML = this.template.getInfoAboutBook(
       this.selectedBook, description
     );
-
     this.bookInfoHolder.appendChild(this.addBtn);
   };
 
@@ -195,10 +200,10 @@ export class BooksUI {
     this.savedList.innerHTML = "";
     this.savedList.insertAdjacentHTML(
       "beforeEnd",
-      this.template.showDataFromStorage(this.controller.getLocalStorageData())
+      this.template.showDataFromStorage(this.storage.loadBooks())
     );
     this.libInfo.innerHTML = this.template.showInfoLib(
-      this.controller.getInfoLib()
+      this.storage.getInfoLib()
     );
   };
 
