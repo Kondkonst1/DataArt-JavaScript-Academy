@@ -1,4 +1,5 @@
 "use strict";
+const BOOK_COUNT = 100;
 export class Template {
    
     // https://clck.ru/URSbL
@@ -86,7 +87,7 @@ export class Template {
         </div>
         <div>
         <button class="block-nav-wrap__prev-btn" ${page.start > 0 ? "" : "disabled"}> Prev results</button>
-        <button class="block-nav-wrap__next-btn" ${((page.numFound-page.start) < 100) ? "disabled" : ""}>Next results</button>
+        <button class="block-nav-wrap__next-btn" ${((page.numFound-page.start) < BOOK_COUNT) ? "disabled" : ""}>Next results</button>
          </div>
         `;
     }
