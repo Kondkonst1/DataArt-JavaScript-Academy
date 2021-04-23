@@ -19,35 +19,29 @@
         margin: 10px;
         border-radius: 24px;
         background: #fff;
-            
         &:hover {
             box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
             border-color: rgba(223, 225, 229, 0);
         }
-
         &:focus {
             outline: none;
         }
     }
-
     &__button-search {
        @include button;
     }
 }
 
-
-
 .block-results {
-    overflow-y: scroll;
+   
     flex-grow: 1;
-    border-radius: 15px;
+   
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #6e6e6e3d;
-   
+    @include transparent-block;
+    
 
-    color: honeydew;
     height: 100%;
     &__desc{
         width: 75%;
@@ -81,25 +75,21 @@
 .block-nav-wrap {
 
     display: flex;
+    justify-content: center;
 
     &__nav {
         height: 100%;
     }
-  
     &__next-btn,  &__prev-btn {
         @include button;
-       
-
     }
 }
 
 .book-info {
-
     &:hover {
         background-color: #ffffff1c;
     }
 }
-
 
 @media (max-width: $breakpoint-s) {
 

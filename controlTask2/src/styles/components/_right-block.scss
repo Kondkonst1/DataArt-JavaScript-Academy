@@ -3,17 +3,23 @@
     display: flex;
     flex-direction: column;
     min-width: 240px;
+
+    @include transparent-block;
     &__header{
+        padding: 15px;
         height: 100px;
     }
     &__book-list{
-        background-color: #a1a1a1;
+         background-color: #ffffff1c;
         flex-grow: 1;
         overflow-y: scroll;
         
         &--read{
             color: green;
         }
+    }
+    &__but-read, &__but-remove{
+        @include button;
     }
     
     &__control{

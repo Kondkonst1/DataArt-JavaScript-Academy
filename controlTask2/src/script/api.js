@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 const  BASE_URL="https://openlibrary.org/search.json?q=";
 const  DESC_URL = "https://openlibrary.org/works/";

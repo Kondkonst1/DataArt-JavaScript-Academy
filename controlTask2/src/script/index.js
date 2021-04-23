@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 import { Api } from "./api.js";
 import { BooksUI } from "./books-ui.js";
 import {Template} from "./template.js"; 

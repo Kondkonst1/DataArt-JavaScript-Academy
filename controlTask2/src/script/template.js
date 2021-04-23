@@ -1,8 +1,9 @@
-'use strict'
+"use strict";
 export class Template {
+   
     // https://clck.ru/URSbL
     getSearchData = (page) => {
-        page.forEach(item => {
+          page.forEach(item => {
             item.id = item.key.split("/").pop();
         });
           const bookSearchResults = page.reduce((acc, item) => {
@@ -55,14 +56,16 @@ export class Template {
         : `<img src="https://clck.ru/USy2T" height="200px">`}
         </div>
         ${description.description
-        ? `<div>${description.description}</div>`
+        ? `<div class="center-block__full-desc">${description.description}</div>`
         : ``}
         <div class="center-block__about">
         ${selectedBook.language
         ?`<div>Languages available: ${selectedBook.language.join(", ")}`:
         ``}</div>
-        <div>Full text available: ${selectedBook.has_fulltext}</div>
-        <div> first_publish_year ${selectedBook.first_publish_year}</div>
+        <div>Full text available:  ${selectedBook.has_fulltext?`Yes`:`No`}</div>
+       ${selectedBook.first_publish_year
+        ? `<div> First_publish_year: ${selectedBook.first_publish_year}</div>`
+        :``}
         ${selectedBook.publish_year 
         ?` <div>Publish year: ${selectedBook.publish_year.join(", ")}`
         :``}</div></div>

@@ -5,7 +5,11 @@
     justify-content: center;
     overflow: auto;
     min-width: $breakpoint-xs;
+    color: white;
 
+    &__about, &__full-desc{
+        text-align: left;
+    }
     &__image{
     margin-bottom: 20px;
     &>img {
@@ -13,18 +17,24 @@
         @include img-shadow;
        
     }
+    &__title{
+      font: bold;
+    }
 }
-
     &__desc {
         width: 400px;
         padding: 0 20px 0 20px;
+        text-align: center;
 
         span {
             color: gray;
             font-size: 2em;
             padding: 15px;
         }
-
+    }
+    &__button-add{
+        @include button;
+        width: 185px;
     }
 }
 #menu__toggle{
@@ -54,8 +64,6 @@ position: absolute;
         &__image{
             margin-left: auto;
             margin-right: auto;
-          
-          
         }
         &__desc{ 
             width: 100%;
@@ -63,7 +71,7 @@ position: absolute;
             padding: 0;
             display: flex;
             flex-direction: column;
-            align-items: stretch;
+            align-items: center;
         }    
         &__title{
             text-align: center;
@@ -72,6 +80,7 @@ position: absolute;
         &__about{
              text-align: center;
         }
+       
     }
     .menu__close{
         position: sticky;

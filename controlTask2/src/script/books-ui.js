@@ -1,13 +1,12 @@
 "use strict";
-import {
-  Controller
-} from "./controller.js";
+import {Controller} from "./controller.js";
 const ENTER_KEY = "Enter";
 const NEXT = 1;
 const PREV = -1;
 const PAGE_COUNT = 100;
 
 export class BooksUI {
+  currentPages = [];
   searchResultHolder;
   bookInfoHolder;
   bookListHolder;
@@ -19,7 +18,6 @@ export class BooksUI {
   sideBarCloseBut;
   searchInput;
   searchButton;
-  currentPage = [];
   currentQuery;
   currentBook;
   savedList;
@@ -27,6 +25,7 @@ export class BooksUI {
   wrapper;
 
   constructor(template, controller) {
+
     this.controller = controller;
     this.template = template;
 
@@ -42,9 +41,9 @@ export class BooksUI {
     this.bookInfoHolder = document.querySelector(".center-block__desc");
     this.libInfo = document.querySelector(".right-block__lib-info");
     this.addBtn = document.createElement("BUTTON");
+    this.addBtn.classList.add("center-block__button-add");
     this.addBtn.innerHTML = "Add book to Read List";
     this.wrapper = document.querySelector(".wrapper");
-
 
     this.smallSpinner = document.createElement("div");
     this.smallSpinner.classList.add("hidden");
@@ -68,17 +67,16 @@ export class BooksUI {
       const id = event.target.parentElement.parentElement.id;
       if (event.target.classList.contains("right-block__but-remove")) {
         this.controller.removeBook(id);
-        this.renderBookList();
-      } else if (event.target.classList.contains("right-block__but-read")) {
+       } else if (event.target.classList.contains("right-block__but-read")) {
         this.controller.markAsRead(id);
-        this.renderBookList();
-      }
+      } 
+      this.renderBookList();
     });
 
     this.searchResultHolder.addEventListener("click", (event) => {
       const targetDiv = event.target;
       const id = targetDiv.id;
-      const selectedBook = this.currentPage.docs.find((item) => item.id === id);
+      const selectedBook = this.currentPages.docs.find((item) => item.id === id);
       if (!selectedBook) {
         return;
       }
@@ -126,12 +124,12 @@ export class BooksUI {
       this.searchResultHolder.innerHTML = this.template.getLoader();
       const page = await this.controller.getSearchResult(query, numPage);
 
-      this.currentPage = page;
+      this.currentPages = page;
       this.searchResultHolder.innerHTML = this.template.getSearchData(
-        this.currentPage.docs
+        this.currentPages.docs
       );
       this.bookCountHolder.innerHTML = this.template.getInfoCount(
-        this.currentPage
+        this.currentPages
       );
       this.currentQuery = query;
       this.smallSpinner.classList.add("hidden");
@@ -150,7 +148,7 @@ export class BooksUI {
     this.smallSpinner.classList.remove("hidden");
     this.loadSearchResult(
       this.currentQuery,
-      this.currentPage.start / PAGE_COUNT + 1 + wherePointer
+      this.currentPages.start / PAGE_COUNT + 1 + wherePointer
     );
   };
 

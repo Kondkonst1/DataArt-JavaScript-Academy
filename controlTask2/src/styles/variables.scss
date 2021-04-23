@@ -41,3 +41,10 @@ $maxWidthContainer: 1440px;
         box-shadow: 0 41px 11px -25px rgba(0, 0, 0, 0.08);
     }
 }
+
+@mixin  transparent-block{
+    background-color: #6e6e6e3d;
+    color: rgb(255, 255, 255); 
+    overflow-y: scroll;
+    border-radius: 15px;
+}

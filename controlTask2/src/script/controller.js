@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 import {Template} from "./template.js"; 
 export class Controller {
   constructor(storage, api) {
