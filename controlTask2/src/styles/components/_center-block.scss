@@ -15,13 +15,12 @@
     &>img {
         max-width: 360px; 
         @include img-shadow;
-       
     }
-    &__title{
-      font: bold;
-      margin-bottom: 10px;
-    }
-}
+ }
+ &__title{
+    font: bold;
+    margin-bottom: 10px;
+  }
     &__desc {
         width: 400px;
         padding: 0 20px 0 20px;
@@ -76,7 +75,7 @@ position: absolute;
         }    
         &__title{
             text-align: center;
-            margin: 10px;
+            
         }
         &__about{
              text-align: center;

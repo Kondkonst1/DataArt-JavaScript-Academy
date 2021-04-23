@@ -4,11 +4,7 @@ const  BASE_URL="https://openlibrary.org/search.json?q=";
 const  DESC_URL = "https://openlibrary.org/works/";
 export class Api {
 
-constructor(){
-
-    }
-      async  search(q, pageNum) {
-        // console.log('запрос...');
+        async  search(q, pageNum) {
         try{
         const url = `${BASE_URL}${q}&page=${pageNum}`;
         const result = await fetch(url);
@@ -27,13 +23,10 @@ constructor(){
       const result = await fetch(url);
       const desc= await  result.json();
       return desc;
-    
       }
       catch(error){
         console.log(`Get description error: ${error}`);
         return false;
-        
       }
   }
- 
 }

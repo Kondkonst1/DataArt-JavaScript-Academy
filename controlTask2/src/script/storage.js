@@ -1,11 +1,21 @@
 "use strict";
 export class Storage {
-  constructor(nameStorage) {
+  constructor(api, nameStorage) {
     this.nameStorage = nameStorage;
+    this.api = api;
   }
   myBooksArray = [];
   libInfo = {};
 
+  async getSearchResult(querry, numPage) {
+    const result = await this.api.search(querry, numPage);
+    return result;
+  }
+  async getDescription(id){
+    const desc = await this.api.getDescription(id);
+    return desc;
+  }
+  
   getSavedBooks = () => {
     return this.myBooksArray;
   };

@@ -11,12 +11,14 @@
 .block-search {
     height: 50px;
     display: flex;
+    margin-bottom: 10px;
    
     &__input-search {
         padding: 0 15px;
         border: none;
         width: 290px;
         margin: 10px;
+        height: 35px;
         border-radius: 24px;
         background: #fff;
         &:hover {
