@@ -6,14 +6,15 @@ body {
 body {
   background: linear-gradient(135deg, #0c030e 0%, #5f96e4 100%);
 }
-
+.hidden{
+  display: none;
+}
 .wrapper {
   max-width: $maxWidthContainer;
   margin: 0 auto;
   padding: 0 50px;
 
 }
-
 .content {
   display: flex;
   height: 100vh;

@@ -11,7 +11,7 @@ export class Template {
 
             return (acc + `<div id="${item.id+item.edition_count}" class="book-info tab">
             <input type="checkbox" id="${item.id}" name="tab-group" class="input-book">
-            <label for="${item.id}" class="tab-title"> 
+            <label for="${item.id}" class="book-info__label"> 
             <div class="block-results__search-inner">
             <div class="block-results__image">
             ${item.cover_i 

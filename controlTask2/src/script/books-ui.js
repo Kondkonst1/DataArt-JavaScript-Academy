@@ -1,5 +1,5 @@
 "use strict";
-import {Controller} from "./controller.js";
+
 const ENTER_KEY = "Enter";
 const NEXT = 1;
 const PREV = -1;

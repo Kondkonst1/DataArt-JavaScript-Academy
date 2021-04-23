@@ -5,14 +5,12 @@
     min-width: 350px;
     justify-content: space-between;
     margin-right: 15px;
-
 }
 
 .block-search {
     height: 50px;
     display: flex;
     margin-bottom: 10px;
-   
     &__input-search {
         padding: 0 15px;
         border: none;
@@ -30,39 +28,32 @@
         }
     }
     &__button-search {
-       @include button;
+        @include button;
     }
 }
 
 .block-results {
-   
     flex-grow: 1;
-   
     display: flex;
     flex-direction: column;
     align-items: center;
     @include transparent-block;
-    
-
     height: 100%;
-    &__desc{
+    &__desc {
         width: 75%;
-        
         padding: 20px;
     }
-    &__search-inner{
+    &__search-inner {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        }
-
-        &__image {
-          
-           &>img{
+    }
+    &__image {
+        &>img {
             @include img-shadow;
-               height: 125px;
-           }
+            height: 125px;
         }
+    }
 }
 
 .block-loader {
@@ -70,9 +61,7 @@
     height: 80px;
 }
 
-
 .block-nav-wrap {
-
     display: flex;
     justify-content: center;
 
@@ -82,7 +71,9 @@
         text-align: center;
         margin: 20px;
     }
-    &__next-btn,  &__prev-btn {
+
+    &__next-btn,
+    &__prev-btn {
         @include button;
     }
 }
@@ -91,12 +82,31 @@
     &:hover {
         background-color: #ffffff1c;
     }
+
+    &__label {
+        padding: 10px;
+        display: block;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}
+
+.tab-title {
+    padding: 10px;
+    display: block;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tab :checked+.book-info__label {
+    background-color: #a3a3a330;
 }
 
 @media (max-width: $breakpoint-s) {
     .left-block {
         height: calc(100% - 100px);
     }
+
     .block-results {
         height: calc(100% - 85px);
     }
