@@ -41,7 +41,7 @@
         &--read {
             @extend .right-block__info-item;
             border: solid 1px green;
-            background-color: #315446;
+            background-color: #041f2cb0;
 
             &::after {
                 content: "✓";

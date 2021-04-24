@@ -51,10 +51,8 @@ export class BooksUI {
 
  
     const processChange = this.debounce(this.onInput, 1000);
-
     this.searchInput.addEventListener("keypress", processChange);
-
-
+    
     this.addButton.addEventListener("click", () => {
       this.addBookToList();
     });
@@ -117,7 +115,6 @@ export class BooksUI {
       );
       this.currentQuery = query;
       this.spinner.classList.add("hidden");
-
     } catch (error) {
       console.log(error);
     }

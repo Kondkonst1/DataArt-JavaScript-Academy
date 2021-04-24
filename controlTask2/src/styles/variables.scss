@@ -8,6 +8,7 @@ $primary: #34B2FF;
 $secondary: #074ECE;
 $lightGray: #f5f5f5;
 
+
 $breakpoint-xs: 480px;
 $breakpoint-s: 640px;
 $breakpoint-m: 1080px;
@@ -20,31 +21,60 @@ $maxWidthContainer: 1440px;
 @mixin img-shadow {
     box-shadow: 6px 8px 11px 0px rgb(0 0 0 / 79%);
 }
+
 @mixin button {
-    margin: 10px;
-    background-color: $primary;
-    border-radius: 28px;
-    color: #fff;
-    font-size: 1em;
-    border-style: hidden;
+
     cursor: pointer;
-    user-select: none;
-    transition: box-shadow 0.3s ease 0s;
-    width: 135px;
-    height: 35px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 5px 15px;
+    background-color: #112b53;
+    position: relative;
+    border: 2px solid #5d95ff;
+    color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+    transition: 0.4s;
+
+    &:disabled {
+        background-color: #4b648d;
+        cursor: default;
+        border: none;
+        &:after {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        border: 2px solid rgba(0, 0, 0, 0);
+        transition: .4s;
+    }
+
+    &:hover:after {
+        border-color: #5d95ff;
+        width: calc(100% - 10px);
+        height: calc(100% + 10px);
+    }
 
     &:focus {
         outline: 0
     }
-
-    &:hover {
-        box-shadow: 0 41px 11px -25px rgba(0, 0, 0, 0.08);
-    }
 }
 
-@mixin  transparent-block{
+@mixin transparent-block {
     background-color: #6e6e6e3d;
-    color: rgb(255, 255, 255); 
+    color: rgb(255, 255, 255);
     overflow-y: scroll;
     border-radius: 15px;
 }
