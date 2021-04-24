@@ -35,9 +35,9 @@ export class Template {
         return bookSearchResults;
     }
 
-    getLoader = () => {
-        return `<div class="block-loader">
-        <div class="lds-roller">
+    getSpinner = () => {
+        return `
+        <div class="block-result__loader--roller">
         <div></div>
         <div></div>
         <div></div>
@@ -46,7 +46,7 @@ export class Template {
         <div></div>
         <div></div>
         <div></div>
-        </div></div>`;
+        </div>`;
     }
     getInfoAboutBook = (selectedBook, description) => {
 

@@ -6,6 +6,7 @@ export class Api {
 
         search = async (q, pageNum) => {
         try{
+         
         const url = `${BASE_URL}${q}&page=${pageNum}`;
         const result = await fetch(url);
         const page = await  result.json();

@@ -9,6 +9,7 @@ export class Storage {
   libInfo = {};
 
   async getSearchResult(querry, numPage) {
+  
     const result = await this.api.search(querry, numPage);
     return result;
   }
