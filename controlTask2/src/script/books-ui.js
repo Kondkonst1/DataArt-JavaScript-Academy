@@ -177,17 +177,6 @@ export class BooksUI {
     }
   }
 
-  manageResults = (ev) => {
-    if (ev.target.classList.contains("block-nav-wrap__next-btn")) {
-      this.searchItemsHolder.innerHTML = "";
-      this.movePage(NEXT);
-    }
-    if (ev.target.classList.contains("block-nav-wrap__prev-btn")) {
-      this.searchItemsHolder.innerHTML = "";
-      this.movePage(PREV);
-    }
-  };
-
   manageMyList = (ev) => {
     const id = ev.target.parentElement.parentElement.id;
     if (ev.target.classList.contains("right-block__but-remove")) {
