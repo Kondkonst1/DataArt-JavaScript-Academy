@@ -40,6 +40,7 @@ export class BooksUI {
     this.searchAllResultHolder = document.querySelector(".block-results");
     this.searchItemsHolder = document.querySelector(".block-results__items");
     this.centerBlock = document.querySelector(".center-block");
+    this.centerBlock.classList.add("transform-left");
     this.bookInfoHolder = document.querySelector(".center-block__desc");
     this.libInfo = document.querySelector(".right-block__lib-info");
     this.addButton = document.createElement("BUTTON");
