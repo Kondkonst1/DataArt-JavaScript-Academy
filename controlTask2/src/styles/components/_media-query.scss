@@ -1,70 +1,25 @@
-.center-block {
-    display: flex;
-    flex-grow: 1;
-    padding: 15px;
-    margin: 15px;
-    justify-content: center;
-    overflow: auto;
-    min-width: 400px;
-    color: white;
-
-    &__about,
-    &__full-desc {
-        text-align: left;
-        &>div:not(:last-child) {
-            margin-bottom: 15px;
-        }
+@media (max-width: $breakpoint-m) {
+    .wrapper {
+      padding: 0;
     }
-
-    &__image {
-        margin-bottom: 20px;
-
-        &>img {
-            max-width: 360px;
-            @include img-shadow;
-        }
+  
+    .content {
+      justify-content: center;
     }
-
-    &__title {
-        font: bold;
-        margin-bottom: 10px;
+  }
+  
+  @media (max-width: $breakpoint-s) {
+    .content {
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
     }
-
-    &__desc {
-        width: 400px;
-        padding: 0 20px 0 20px;
-        align-items: center;
-
-        &>div:not(:last-child) {
-            margin-bottom: 15px;
-        }
-
-        span {
-            color: gray;
-            font-size: 2em;
-            padding: 15px;
-        }
+  
+    .wrapper {
+      max-width: $minWidth;
+      margin:0 auto;
     }
-
-    &__button-add {
-        @include button;
-        width: 185px;
-
-        &:disabled {
-            background-color: #657fa9;
-            cursor: default;
-        }
-    }
-}
-
-#menu__toggle {
-    display: none;
-}
-
-.menu__close {
-    display: block;
-    position: absolute;
-}
+  }
 
 @media (max-width: $breakpoint-m) {
     .center-block {
@@ -80,22 +35,18 @@
         color: white;
         z-index: 10;
         transition: transform ease-out 0.25s;
-
         &__image {
             margin-left: auto;
             margin-right: auto;
-
+        
         }
-
         &__full-desc {
             width: 100%;
             align-items: center;
         }
-
         &__title {
             text-align: center;
         }
-
         &__about {
             text-align: center;
         }
@@ -124,9 +75,9 @@
 @media (max-width: $breakpoint-xs) {
     .center-block {
         min-width: -webkit-fill-available;
-
-        &__image {
-            &>img {
+          &__image {
+     
+            &>img{
                 max-width: 240px;
             }
         }
@@ -136,12 +87,22 @@
 @media (max-width: $breakpoint-m) {
     .center-block {
         margin: 0;
-        left: 0
+        left:0
     }
 }
-
 @media (min-width: $breakpoint-m) {
     .center-block {
         transform: translateX(0);
     }
 }
+
+@media (max-width: $breakpoint-s) {
+    .left-block {
+        height: calc(100% - 100px);
+    }
+
+    .block-results {
+        height: calc(100% - 85px);
+    }
+}
+

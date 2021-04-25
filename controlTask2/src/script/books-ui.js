@@ -45,7 +45,7 @@ export class BooksUI {
     this.wrapper = document.querySelector(".wrapper");
     this.spinner = document.createElement("div");
     this.spinner.classList.add("block-result__loader");
-    const processChangeSearch = this.debounce(this.onInput, 1000);
+    const processChangeSearch = this.debounce(this.onInput, 1500);
     const processInfiniteScroll = this.debounce(this.loadMore, 500);
     this.searchInput.addEventListener("input", processChangeSearch);
     this.addButton.addEventListener("click", () => this.addBookToList());
@@ -77,17 +77,14 @@ export class BooksUI {
     }
     try {
       this.spinner.classList.remove("hidden");
+      this.bookCountHolder.innerHTML="";
       const page = await this.service.getSearchResult(query, numPage);
       this.service.addPageToStore(page.docs);
       this.service.setStartSearch(page.start);
       this.service.setNumFound(page.numFound);
 
-      this.searchItemsHolder.insertAdjacentHTML("beforeEnd", this.template.getSearchData(
-        page.docs
-      ));
-      this.bookCountHolder.innerHTML = this.template.getInfoCount(
-        page
-      );
+      this.searchItemsHolder.insertAdjacentHTML("beforeEnd", this.template.getSearchData(page.docs));
+      this.bookCountHolder.innerHTML = this.template.getInfoCount(page);
       this.currentQuery = query;
       this.spinner.classList.add("hidden");
     } catch (error) {
@@ -127,7 +124,6 @@ export class BooksUI {
 
   loadMore = () => {
     if (this.searchAllResultHolder.offsetHeight + this.searchAllResultHolder.scrollTop === this.searchAllResultHolder.scrollHeight) {
-     console.log(this.service.getNumFound()-this.service.getStartSearch());
       !((this.service.getNumFound()-this.service.getStartSearch()) < PAGE_COUNT)&&this.movePage(NEXT);
     }
   };
@@ -194,6 +190,7 @@ export class BooksUI {
 
   onInput = () => {
     this.searchItemsHolder.innerHTML = "";
+    this.bookCountHolder.innerHTML="";
     this.service.clearCurrentPages();
     this.searchInput.value && this.loadSearchResult(this.searchInput.value)
   };
