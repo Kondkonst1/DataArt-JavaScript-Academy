@@ -5,8 +5,6 @@ const NEXT = 1;
 const PREV = -1;
 const PAGE_COUNT = 100;
 export class BooksUI {
-  currentPages = [];
-  startPage;
   searchAllResultHolder;
   searchItemsHolder;
   bookInfoHolder;
@@ -20,15 +18,14 @@ export class BooksUI {
   searchInput;
   upInfoButton;
   currentQuery;
-  currentBook;
   savedList;
   rightBlock;
   spinner;
   wrapper;
 
-  constructor(template, storage) {
+  constructor(template, service) {
 
-    this.storage = storage;
+    this.service = service;
     this.template = template;
     this.sideBarCloseButton = document.querySelector(".menu__close");
     this.controlBlock = document.querySelector(".block-nav-wrap");
@@ -49,9 +46,8 @@ export class BooksUI {
     this.wrapper = document.querySelector(".wrapper");
     this.spinner = document.createElement("div");
     this.spinner.classList.add("block-result__loader");
-
     const processChangeSearch = this.debounce(this.onInput, 1000);
-    const processInfiniteScroll = this.debounce(this.loadMore, 500); 
+    const processInfiniteScroll = this.debounce(this.loadMore, 500);
     this.searchInput.addEventListener("input", processChangeSearch);
     this.addButton.addEventListener("click", () => this.addBookToList());
     this.bookListHolder.addEventListener("click", event => this.manageMyList(event));
@@ -82,9 +78,9 @@ export class BooksUI {
     }
     try {
       this.spinner.classList.remove("hidden");
-      const page = await this.storage.getSearchResult(query, numPage);
-      this.currentPages=this.currentPages.concat(page.docs);
-      this.start = page.start;
+      const page = await this.service.getSearchResult(query, numPage);
+      this.service.addPageToStore(page.docs);
+      this.service.setStartSearch(page.start);
       this.searchItemsHolder.insertAdjacentHTML("beforeEnd", this.template.getSearchData(
         page.docs
       ));
@@ -107,19 +103,19 @@ export class BooksUI {
   movePage = (wherePointer) => {
     this.loadSearchResult(
       this.currentQuery,
-      this.start / PAGE_COUNT + 1 + wherePointer
+      this.service.getStartSearch() / PAGE_COUNT + 1 + wherePointer
     );
   };
 
   showDescription = async (id) => {
-    const description = await this.storage.getDescription(this.selectedBook.id);
+    const description = await this.service.getDescription(this.selectedBook.id);
     this.bookInfoHolder.innerHTML = this.template.getInfoAboutBook(this.selectedBook, description);
     this.checkAdd(id);
     this.bookInfoHolder.appendChild(this.addButton);
   };
 
   checkAdd = (id) => {
-    if (this.storage.getBooksId().includes(id)) {
+    if (this.service.getBooksId().includes(id)) {
       this.addButton.disabled = true;
       this.addButton.innerHTML = "This Book is on your List";
     } else {
@@ -134,14 +130,7 @@ export class BooksUI {
     }
   };
 
-  // addToList = () => {
-  //   this.savedList.insertAdjacentHTML(
-  //     "beforeEnd",
-  //     this.template.addOneBook(this.currentBook)
-  //   );
-  // };
-
-  setCurrentBook = (book) => {
+  copyDataSelectBook = (book) => {
     const myBook = {
       title: book.title,
       lang: book.language,
@@ -150,10 +139,11 @@ export class BooksUI {
       read: false,
       id: book.id,
     };
-    this.currentBook = myBook;
+    this.service.setCurrentBook(myBook);
   };
+
   addBookToList = () => {
-    this.storage.addBooks(this.currentBook);
+    this.service.addBooks(this.service.getCurrentBook());
     this.renderBookList();
     this.addButton.disabled = true;
     this.addButton.innerHTML = "This Book is on your List";
@@ -163,32 +153,29 @@ export class BooksUI {
     this.savedList.innerHTML = "";
     this.savedList.insertAdjacentHTML(
       "beforeEnd",
-      this.template.showDataFromStorage(this.storage.loadBooks())
+      this.template.showDataFromStorage(this.service.loadBooks())
     );
     this.libInfo.innerHTML = this.template.showInfoLib(
-      this.storage.getInfoLib()
+      this.service.getInfoLib()
     );
   };
 
   showInfoCurrentBook = (ev) => {
-
     const targetBook = ev.target;
     const id = targetBook.id;
-    const selectedBook = this.currentPages.find((item) => item.id === id);
+    const selectedBook = this.service.getCurrentPages().find((item) => item.id === id);
     if (!selectedBook) {
       return;
-    }else{
-    this.selectedBook = selectedBook;
-    this.uncheck(this.selectedBook.id);
-    this.setCurrentBook(this.selectedBook);
-    this.showDescription(this.selectedBook.id);
-    this.moveDescription();
+    } else {
+      this.selectedBook = selectedBook;
+      this.uncheck(this.selectedBook.id);
+      this.copyDataSelectBook(this.selectedBook);
+      this.showDescription(this.selectedBook.id);
+      this.moveDescription();
     }
   }
 
   manageResults = (ev) => {
-
-
     if (ev.target.classList.contains("block-nav-wrap__next-btn")) {
       this.searchItemsHolder.innerHTML = "";
       this.movePage(NEXT);
@@ -197,15 +184,14 @@ export class BooksUI {
       this.searchItemsHolder.innerHTML = "";
       this.movePage(PREV);
     }
-
   };
 
   manageMyList = (ev) => {
     const id = ev.target.parentElement.parentElement.id;
     if (ev.target.classList.contains("right-block__but-remove")) {
-      this.storage.removeBook(id);
+      this.service.removeBook(id);
     } else if (ev.target.classList.contains("right-block__but-read")) {
-      this.storage.markAsRead(id);
+      this.service.markAsRead(id);
     }
     this.renderBookList();
   }
@@ -217,7 +203,7 @@ export class BooksUI {
 
   onInput = () => {
     this.searchItemsHolder.innerHTML = "";
-    this.currentPages = [];
+    this.service.clearCurrentPages();
     this.searchInput.value && this.loadSearchResult(this.searchInput.value)
   };
 

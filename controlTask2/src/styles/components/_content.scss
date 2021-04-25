@@ -2,6 +2,7 @@ html,
 body {
   overflow-x: hidden;
   overflow-y: hidden;
+  font-family: "Roboto";
 }
 body {
   background: linear-gradient(135deg, #0c030e 0%, #5f96e4 100%);
@@ -38,6 +39,8 @@ transform: translateX(-100%);
 }
 .transform-right{
   transform: translateX(0);
+  margin: 0;
+  left:0;
 }
 
 @media (max-width: $breakpoint-m) {

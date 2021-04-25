@@ -13,6 +13,8 @@
     margin-bottom: 10px;
     &__input-search {
         padding: 0 15px;
+        color: #5c5c5c;
+        font-size: 20px;
         border: none;
         width: 100%;
         margin: 10px;
@@ -43,6 +45,9 @@
     &__desc {
         width: 75%;
         padding: 20px;
+        &>div:not(:last-child){
+            margin-bottom: 10px;
+        }
     }
     &__search-inner {
         display: flex;
@@ -54,6 +59,9 @@
             @include img-shadow;
             height: 125px;
         }
+    }
+    &__subtitle{
+        color: #bcbcbc;
     }
 }
 
@@ -87,7 +95,6 @@
     &__label {
         padding: 10px;
         display: block;
-        font-weight: bold;
         cursor: pointer;
     }
 }

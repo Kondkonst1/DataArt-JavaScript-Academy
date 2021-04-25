@@ -20,10 +20,11 @@ export class Template {
                 
             </div>
             <div class="block-results__desc">
-            <div>${item.title} </div>
-            <div> ${item.author_name} </div>
-            <div>${item.language ? `${item.language}`: ``}</div>
-            <div> ${item.subtitle 
+            <div  class="block-results__title">${item.title} </div>
+            <div class="block-results__author-name">${item.author_name
+            ? `Author: ${item.author_name}`:``} </div>
+            <div class="block-results__language">${item.language ? `${item.language}`: ``}</div>
+            <div class="block-results__subtitle"> ${item.subtitle 
                 ? `Subtitle: ${item.subtitle}`
                 : ``}
                 </div>
@@ -122,9 +123,9 @@ export class Template {
             return (acc +
                 `
             <div ${item.read ? `class="right-block__info-item--read"`:``} id="${item.id}" class="right-block__info-item">
-                <div>Title: ${item.title}</div>
+                <div>${item.title}</div>
                 ${item.subtitle ? ` <div>Subtitle: ${item.subtitle}</div>`: ``}
-                ${item.author ? ` <div>Author: ${item.author}</div>`: ``}
+                ${item.author ? ` <div class="right-block__author">Author: ${item.author}</div>`: ``}
                 <div class="right-block__control">
                 ${item.read ? ``:`<button class="right-block__but-read">Mark as read</button>
                                   <button class="right-block__but-remove" >Remove</button>`}

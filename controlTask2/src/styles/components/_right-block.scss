@@ -37,7 +37,10 @@
         border-radius: 3px;
         padding: 5px;
         margin: 5px;
-
+        text-align: center;
+        &>div:not(:last-child){
+            margin-bottom: 10px;
+        }
         &--read {
             @extend .right-block__info-item;
             border: solid 1px green;
@@ -68,21 +71,19 @@
         text-align: center;
         height: 115px;
         width: 100%;
-        background-color: #2f426a;
         overflow: hidden;
     }
 
     .right-block__button-up {
         text-align: center;
         display: block;
-
-        background-color: #1c527b;
         cursor: pointer;
     }
 }
 
 .right-block__up {
     overflow-y: scroll;
+    backdrop-filter: blur( 11.0px );
     bottom: 0;
     position: absolute;
     display: flex;
