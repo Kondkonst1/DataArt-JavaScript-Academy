@@ -79,6 +79,7 @@ export class BooksUI {
       this.spinner.classList.remove("hidden");
       this.bookCountHolder.innerHTML="";
       const page = await this.service.getSearchResult(query, numPage);
+      //тут отправить весь page вместо 3 функций
       this.service.addPageToStore(page.docs);
       this.service.setStartSearch(page.start);
       this.service.setNumFound(page.numFound);
