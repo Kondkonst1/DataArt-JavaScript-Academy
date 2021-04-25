@@ -34,7 +34,7 @@ $maxWidthContainer: 1440px;
     border: 2px solid #5d95ff;
     color: #ffffff;
     font-family: "Montserrat", sans-serif;
-    transition: 0.4s;
+    transition: 0.2s;
 
     &:disabled {
         background-color: #4b648d;
@@ -58,7 +58,7 @@ $maxWidthContainer: 1440px;
         height: 100%;
         margin: auto;
         border: 2px solid rgba(0, 0, 0, 0);
-        transition: .4s;
+        transition: .2s;
     }
 
     &:hover:after {

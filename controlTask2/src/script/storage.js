@@ -1,6 +1,6 @@
 "use strict";
 export class Storage {
-  
+
   constructor(api, nameStorage) {
     this.nameStorage = nameStorage;
     this.api = api;
@@ -8,12 +8,11 @@ export class Storage {
   myBooksArray = [];
   libInfo = {};
 
-  async getSearchResult(querry, numPage) {
-  
-    const result = await this.api.search(querry, numPage);
+  async getSearchResult(query, numPage) {
+    const result = await this.api.search(query, numPage);
     return result;
   }
-  async getDescription(id){
+  async getDescription(id) {
     const desc = await this.api.getDescription(id);
     return desc;
   }
@@ -24,8 +23,10 @@ export class Storage {
 
   getBooksId = () => {
     const idArray = this.myBooksArray.map((item) => {
+     
       return item.id;
     });
+ 
     return idArray;
   };
 
@@ -66,9 +67,6 @@ export class Storage {
     if (!this.getBooksId().includes(book.id)) {
       this.myBooksArray = [...this.myBooksArray, book];
       localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray));
-    } else {
-        //errorMessageForm
-      alert(`${book.title} уже добавлена в список`);
-    }
+    } 
   };
 }

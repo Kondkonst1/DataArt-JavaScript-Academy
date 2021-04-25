@@ -6,8 +6,9 @@ const PREV = -1;
 const PAGE_COUNT = 100;
 export class BooksUI {
   currentPages = [];
-  searchResultHolder;
-  itemsHolder;
+  startPage;
+  searchAllResultHolder;
+  searchItemsHolder;
   bookInfoHolder;
   bookListHolder;
   bookCountHolder;
@@ -36,8 +37,8 @@ export class BooksUI {
     this.rightBlock = document.querySelector(".right-block");
     this.savedList = document.querySelector(".right-block__book-list");
     this.bookListHolder = document.querySelector(".right-block__book-list");
-    this.searchResultHolder = document.querySelector(".block-results");
-    this.itemsHolder = document.querySelector(".block-results__items");
+    this.searchAllResultHolder = document.querySelector(".block-results");
+    this.searchItemsHolder = document.querySelector(".block-results__items");
     this.centerBlock = document.querySelector(".center-block");
     this.bookInfoHolder = document.querySelector(".center-block__desc");
     this.libInfo = document.querySelector(".right-block__lib-info");
@@ -48,40 +49,16 @@ export class BooksUI {
     this.spinner = document.createElement("div");
     this.spinner.classList.add("block-result__loader");
 
-
- 
-    const processChange = this.debounce(this.onInput, 1000);
-    this.searchInput.addEventListener("keypress", processChange);
-    
-    this.addButton.addEventListener("click", () => {
-      this.addBookToList();
-    });
-
-    this.bookListHolder.addEventListener("click", (event) => {
-      this.manageMyList(event);
-    });
-
-    this.itemsHolder.addEventListener("click", (event) => {
-      this.showInfoCurrentBook(event);
-
-    });
-    this.searchResultHolder.addEventListener("scroll", () => {
-
-      this.loadMore();
-    });
-
-    this.sideBarCloseButton.addEventListener("click", () => {
-      this.moveDescription();
-    });
-
-    this.upInfoButton.addEventListener("click", () => {
-      this.rightBlock.classList.toggle("right-block__up");
-    });
-
-    this.controlBlock.addEventListener("click", (event) => {
-
-      this.manageResults(event);
-    });
+    const processChangeSearch = this.debounce(this.onInput, 1000);
+    const processInfiniteScroll = this.debounce(this.loadMore, 500); 
+    this.searchInput.addEventListener("input", processChangeSearch);
+    this.addButton.addEventListener("click", () => this.addBookToList());
+    this.bookListHolder.addEventListener("click", event => this.manageMyList(event));
+    this.searchItemsHolder.addEventListener("click", event => this.showInfoCurrentBook(event));
+    this.searchAllResultHolder.addEventListener("scroll", processInfiniteScroll);
+    this.sideBarCloseButton.addEventListener("click", () => this.moveDescription());
+    this.upInfoButton.addEventListener("click", () => this.rightBlock.classList.toggle("right-block__up"));
+    this.controlBlock.addEventListener("click", event => this.manageResults(event));
   }
 
   uncheck = (id) => {
@@ -99,19 +76,19 @@ export class BooksUI {
   };
 
   loadSearchResult = async (query, numPage = 1) => {
-    
     if (!query) {
       return;
     }
     try {
       this.spinner.classList.remove("hidden");
       const page = await this.storage.getSearchResult(query, numPage);
-      this.currentPages = page;
-      this.itemsHolder.insertAdjacentHTML("beforeEnd", this.template.getSearchData(
-        this.currentPages.docs
+      this.currentPages=this.currentPages.concat(page.docs);
+      this.start = page.start;
+      this.searchItemsHolder.insertAdjacentHTML("beforeEnd", this.template.getSearchData(
+        page.docs
       ));
       this.bookCountHolder.innerHTML = this.template.getInfoCount(
-        this.currentPages
+        page
       );
       this.currentQuery = query;
       this.spinner.classList.add("hidden");
@@ -123,13 +100,13 @@ export class BooksUI {
   runSpinner = () => {
     this.spinner.innerHTML = this.template.getSpinner();
     this.spinner.classList.add("hidden");
-    this.searchResultHolder.appendChild(this.spinner);
+    this.searchAllResultHolder.appendChild(this.spinner);
   };
 
   movePage = (wherePointer) => {
     this.loadSearchResult(
       this.currentQuery,
-      this.currentPages.start / PAGE_COUNT + 1 + wherePointer
+      this.start / PAGE_COUNT + 1 + wherePointer
     );
   };
 
@@ -151,7 +128,7 @@ export class BooksUI {
   }
 
   loadMore = () => {
-    if (this.searchResultHolder.offsetHeight + this.searchResultHolder.scrollTop === this.searchResultHolder.scrollHeight) {
+    if (this.searchAllResultHolder.offsetHeight + this.searchAllResultHolder.scrollTop === this.searchAllResultHolder.scrollHeight) {
       this.movePage(NEXT);
     }
   };
@@ -193,32 +170,33 @@ export class BooksUI {
   };
 
   showInfoCurrentBook = (ev) => {
-   
+
     const targetBook = ev.target;
     const id = targetBook.id;
-    const selectedBook = this.currentPages.docs.find((item) => item.id === id);
+    const selectedBook = this.currentPages.find((item) => item.id === id);
     if (!selectedBook) {
       return;
-    }
+    }else{
     this.selectedBook = selectedBook;
     this.uncheck(this.selectedBook.id);
     this.setCurrentBook(this.selectedBook);
     this.showDescription(this.selectedBook.id);
     this.moveDescription();
+    }
   }
 
   manageResults = (ev) => {
-   
-    
+
+
     if (ev.target.classList.contains("block-nav-wrap__next-btn")) {
-      this.itemsHolder.innerHTML = "";
+      this.searchItemsHolder.innerHTML = "";
       this.movePage(NEXT);
     }
     if (ev.target.classList.contains("block-nav-wrap__prev-btn")) {
-      this.itemsHolder.innerHTML = "";
+      this.searchItemsHolder.innerHTML = "";
       this.movePage(PREV);
     }
-   
+
   };
 
   manageMyList = (ev) => {
@@ -236,17 +214,19 @@ export class BooksUI {
     this.runSpinner();
   };
 
+  onInput = () => {
+    this.searchItemsHolder.innerHTML = "";
+    this.currentPages = [];
+    this.searchInput.value && this.loadSearchResult(this.searchInput.value)
+  };
 
- onInput = () =>{
-  this.itemsHolder.innerHTML = "";
-    this.loadSearchResult(this.searchInput.value)
-};
-
-  debounce =  (func, timeout = 3000) => {
+  debounce = (func, timeout = 3000) => {
     let timer;
     return (...args) => {
       clearTimeout(timer);
-      timer = setTimeout(() => { func.apply(this, args); }, timeout);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, timeout);
     };
   }
 }

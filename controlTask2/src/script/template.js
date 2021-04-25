@@ -97,7 +97,7 @@ export class Template {
 
     showInfoLib = (info) => {
         return `
-        <div>Всего: ${info.all} Прочитано: ${info.readed} </div>
+        <div>Books: ${info.all} Read: ${info.readed} </div>
         `;
     }
 
@@ -128,7 +128,6 @@ export class Template {
                 <div class="right-block__control">
                 ${item.read ? ``:`<button class="right-block__but-read">Mark as read</button>
                                   <button class="right-block__but-remove" >Remove</button>`}
-           
                 </div>
             </div>
             `)
