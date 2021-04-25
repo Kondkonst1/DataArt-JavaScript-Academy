@@ -28,4 +28,6 @@ export class Service {
     clearCurrentPages = () => this.searchStore.clearCurrentPages();
     getStartSearch = () => this.searchStore.getStartSearch();
     setStartSearch = (start) => this.searchStore.setStartSearch(start);
+    setNumFound = (num) => this.searchStore.setNumFound(num);
+    getNumFound = () => this.searchStore.getNumFound();
 }

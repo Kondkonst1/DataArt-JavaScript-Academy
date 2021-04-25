@@ -80,11 +80,6 @@
         text-align: center;
         margin: 20px;
     }
-
-    &__next-btn,
-    &__prev-btn {
-        @include button;
-    }
 }
 
 .book-info {

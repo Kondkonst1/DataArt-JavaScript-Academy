@@ -1,6 +1,5 @@
 "use strict";
 
-const ENTER_KEY = "Enter";
 const NEXT = 1;
 const PREV = -1;
 const PAGE_COUNT = 100;
@@ -81,6 +80,8 @@ export class BooksUI {
       const page = await this.service.getSearchResult(query, numPage);
       this.service.addPageToStore(page.docs);
       this.service.setStartSearch(page.start);
+      this.service.setNumFound(page.numFound);
+
       this.searchItemsHolder.insertAdjacentHTML("beforeEnd", this.template.getSearchData(
         page.docs
       ));
@@ -126,7 +127,8 @@ export class BooksUI {
 
   loadMore = () => {
     if (this.searchAllResultHolder.offsetHeight + this.searchAllResultHolder.scrollTop === this.searchAllResultHolder.scrollHeight) {
-      this.movePage(NEXT);
+     console.log(this.service.getNumFound()-this.service.getStartSearch());
+      !((this.service.getNumFound()-this.service.getStartSearch()) < PAGE_COUNT)&&this.movePage(NEXT);
     }
   };
 
@@ -207,13 +209,13 @@ export class BooksUI {
     this.searchInput.value && this.loadSearchResult(this.searchInput.value)
   };
 
-  debounce = (func, timeout = 3000) => {
+  debounce = (func, delay) => {
     let timer;
     return (...args) => {
       clearTimeout(timer);
       timer = setTimeout(() => {
         func.apply(this, args);
-      }, timeout);
+      }, delay);
     };
   }
 }

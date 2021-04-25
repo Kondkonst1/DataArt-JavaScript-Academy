@@ -87,12 +87,6 @@ export class Template {
         <span>Start:${page.start} </span>
         <span>Page size: ${page.docs.length} </span>
         </div>
-        <div>
-        <button class="block-nav-wrap__prev-btn" ${page.start > 0 
-            ? "" : "disabled"}> Prev results</button>
-        <button class="block-nav-wrap__next-btn" ${((page.numFound-page.start) < BOOK_COUNT)
-             ? "disabled" : ""}>Next results</button>
-         </div>
         `;
     }
 
@@ -116,7 +110,6 @@ export class Template {
         `
     }
 
-    //сделать деструтуризацию для полей объекта
     showDataFromStorage = (books) => {
         // const {} = books;
         const savedBookList = books.sort(item => item.read ? 1 : -1).reduce((acc, item) => {
