@@ -35,10 +35,6 @@ body {
   width: .65em;
 }
 
-/* 
-::-webkit-scrollbar-track {
-  background-color: rgba(217, 217, 217, 0.75);
-} */
 ::-webkit-scrollbar-thumb {
   background: rgba(170, 170, 170, 0.6);
   border-radius: 5px;
@@ -70,6 +66,7 @@ body {
         -ms-flex-pack: start;
             justify-content: start;
   }
+
   .wrapper {
     max-width: 480px;
     margin: 15px;
@@ -341,8 +338,6 @@ body {
 
 @media (max-width: 640px) {
   .right-block {
-    /* position: fixed;
-bottom: -310px; */
     background-color: darkgrey;
   }
 }
@@ -556,4 +551,3 @@ bottom: -310px; */
   display: none;
   opacity: 0;
 }
-/*# sourceMappingURL=main.css.map */

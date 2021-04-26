@@ -53,7 +53,7 @@ export class BooksUI {
   }
 
   uncheck = (id) => {
-    const uncheck = document.querySelectorAll('.book-info__input-book');
+    const uncheck = document.querySelectorAll(".book-info__input-book");
     uncheck.forEach((item) => {
       if (item.id !== id) {
         item.checked = false;
