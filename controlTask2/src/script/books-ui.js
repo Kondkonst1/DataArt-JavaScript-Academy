@@ -3,7 +3,6 @@
 const NEXT = 1;
 const PAGE_COUNT = 100;
 export class BooksUI {
-  isLoading;
   searchAllResultHolder;
   searchItemsHolder;
   bookInfoHolder;
@@ -80,7 +79,7 @@ export class BooksUI {
       this.bookCountHolder.innerHTML = this.template.getInfoCount(page);
       this.service.setCurrentQuery(query);
       this.spinner.classList.add("hidden");
-      this.isLoading = false;
+      this.service.setLoadStatus(false);
       
     } catch (error) {
       console.log(error);
@@ -118,7 +117,7 @@ export class BooksUI {
   }
 
   loadMore = () => {
-    if ( (!this.isLoading) && this.searchAllResultHolder.clientHeight + this.searchAllResultHolder.scrollTop + 20  > this.searchAllResultHolder.scrollHeight) {
+    if ( (!this.service.getloadStatus()) && this.searchAllResultHolder.clientHeight + this.searchAllResultHolder.scrollTop + 20  > this.searchAllResultHolder.scrollHeight) {
       !(this.service.getLastSearchCount() < PAGE_COUNT)&&this.movePage(NEXT);
     }
   };
@@ -184,7 +183,7 @@ export class BooksUI {
   };
 
   onInput = () => {
-    this.isLoading = true;
+    this.service.setLoadStatus(true);
     this.searchItemsHolder.innerHTML = "";
     this.bookCountHolder.innerHTML="";
     this.service.clearCurrentPages();
