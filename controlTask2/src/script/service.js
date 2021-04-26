@@ -20,14 +20,19 @@ export class Service {
     loadBooks = () => this.myListStore.loadBooks();
     getInfoLib = () => this.myListStore.getInfoLib();
     getBooksId = () => this.myListStore.getBooksId();
-    addBooks = (book) => this.myListStore.addBooks(book);
+    addBooks = () => this.myListStore.addBooks(this.getCurrentBook());
     markAsRead = (id) => this.myListStore.markAsRead(id);
     removeBook = (id) => this.myListStore.removeBook(id);
-    addPageToStore = (page) => this.searchStore.addPageToStore(page);
+    getLastSearchCount = () => {
+        return this.getNumFound()-this.getStartSearch();
+    }
+    addPageInfoToStore = (page) => {
+        this.searchStore.addPageToStore(page.docs);
+        this.searchStore.setStartSearch(page.start);
+        this.searchStore.setNumFound(page.numFound);
+    }
     getCurrentPages = () => this.searchStore.getCurrentPages();
     clearCurrentPages = () => this.searchStore.clearCurrentPages();
     getStartSearch = () => this.searchStore.getStartSearch();
-    setStartSearch = (start) => this.searchStore.setStartSearch(start);
-    setNumFound = (num) => this.searchStore.setNumFound(num);
     getNumFound = () => this.searchStore.getNumFound();
 }

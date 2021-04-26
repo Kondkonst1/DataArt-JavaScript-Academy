@@ -11,7 +11,6 @@ export class BooksUI {
   bookCountHolder;
   centerBlock;
   addButton;
-  controlBlock;
   libInfo;
   sideBarCloseButton;
   searchInput;
@@ -27,7 +26,6 @@ export class BooksUI {
     this.service = service;
     this.template = template;
     this.sideBarCloseButton = document.querySelector(".menu__close");
-    this.controlBlock = document.querySelector(".block-nav-wrap");
     this.bookCountHolder = document.querySelector(".block-nav-wrap__nav");
     this.searchInput = document.querySelector(".block-search__input-search");
     this.rightBlock = document.querySelector(".right-block");
@@ -54,8 +52,7 @@ export class BooksUI {
     this.searchAllResultHolder.addEventListener("scroll", processInfiniteScroll);
     this.sideBarCloseButton.addEventListener("click", () => this.moveDescription());
     this.upInfoButton.addEventListener("click", () => this.rightBlock.classList.toggle("right-block__up"));
-    this.controlBlock.addEventListener("click", event => this.manageResults(event));
-  }
+   }
 
   uncheck = (id) => {
     const uncheck = document.querySelectorAll('.input-book');
@@ -80,9 +77,8 @@ export class BooksUI {
       this.bookCountHolder.innerHTML="";
       const page = await this.service.getSearchResult(query, numPage);
       //тут отправить весь page вместо 3 функций
-      this.service.addPageToStore(page.docs);
-      this.service.setStartSearch(page.start);
-      this.service.setNumFound(page.numFound);
+      this.service.addPageInfoToStore(page);
+  
 
       this.searchItemsHolder.insertAdjacentHTML("beforeEnd", this.template.getSearchData(page.docs));
       this.bookCountHolder.innerHTML = this.template.getInfoCount(page);
@@ -125,7 +121,7 @@ export class BooksUI {
 
   loadMore = () => {
     if (this.searchAllResultHolder.offsetHeight + this.searchAllResultHolder.scrollTop === this.searchAllResultHolder.scrollHeight) {
-      !((this.service.getNumFound()-this.service.getStartSearch()) < PAGE_COUNT)&&this.movePage(NEXT);
+      !(this.service.getLastSearchCount() < PAGE_COUNT)&&this.movePage(NEXT);
     }
   };
 
@@ -142,7 +138,7 @@ export class BooksUI {
   };
 
   addBookToList = () => {
-    this.service.addBooks(this.service.getCurrentBook());
+    this.service.addBooks();
     this.renderBookList();
     this.addButton.disabled = true;
     this.addButton.innerHTML = "This Book is on your List";
