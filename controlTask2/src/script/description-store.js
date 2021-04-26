@@ -1,5 +1,4 @@
 "use strict"
-
 export class DescriptionStore {
     currentBook;
     setCurrectBook = (book) => {

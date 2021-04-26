@@ -1,5 +1,4 @@
 "use strict"
-
 export class SearchStore {
     currentPages = [];
     start;
@@ -14,5 +13,4 @@ export class SearchStore {
     setStartSearch = (start) => this.start=start;
     setNumFound = (num) => this.numFound = num; 
     getNumFound = () => this.numFound;
-
 }

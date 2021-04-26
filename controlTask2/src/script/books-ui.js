@@ -23,7 +23,7 @@ export class BooksUI {
 
     this.service = service;
     this.template = template;
-    this.sideBarCloseButton = document.querySelector(".menu__close");
+    this.sideBarCloseButton = document.querySelector(".center-block__menu-close");
     this.bookCountHolder = document.querySelector(".block-nav-wrap__nav");
     this.searchInput = document.querySelector(".block-search__input-search");
     this.rightBlock = document.querySelector(".right-block");
@@ -41,7 +41,7 @@ export class BooksUI {
     this.wrapper = document.querySelector(".wrapper");
     this.spinner = document.createElement("div");
     this.spinner.classList.add("block-result__loader");
-    const processChangeSearch = this.debounce(this.onInput, 1000);
+    const processChangeSearch = this.debounce(this.onInput, 1500);
     const processInfiniteScroll = this.debounce(this.loadMore, 1200);
     this.searchInput.addEventListener("input", processChangeSearch);
     this.addButton.addEventListener("click", () => this.addBookToList());
@@ -50,9 +50,7 @@ export class BooksUI {
     this.searchAllResultHolder.addEventListener("scroll", processInfiniteScroll);
     this.sideBarCloseButton.addEventListener("click", () => this.moveDescription());
     this.upInfoButton.addEventListener("click", () => this.rightBlock.classList.toggle("right-block__up"));
-   }
- 
-   markItemAsContain = (id) =>{}
+  }
 
   uncheck = (id) => {
     const uncheck = document.querySelectorAll('.book-info__input-book');
@@ -81,7 +79,6 @@ export class BooksUI {
       this.bookCountHolder.innerHTML = this.template.getInfoCount(page);
       this.service.setCurrentQuery(query);
       this.spinner.classList.add("hidden");
-    
     } catch (error) {
       console.log(error);
     }
@@ -118,11 +115,11 @@ export class BooksUI {
   }
 
   loadMore = () => {
-    if (this.searchAllResultHolder.clientHeight < this.searchAllResultHolder.scrollHeight){
-    if (this.searchAllResultHolder.clientHeight + this.searchAllResultHolder.scrollTop + 20  > this.searchAllResultHolder.scrollHeight) {
-      !(this.service.getLastSearchCount() < PAGE_COUNT)&&this.movePage(NEXT);
+    if (this.searchAllResultHolder.clientHeight < this.searchAllResultHolder.scrollHeight) {
+      if (this.searchAllResultHolder.clientHeight + this.searchAllResultHolder.scrollTop + 20 > this.searchAllResultHolder.scrollHeight) {
+        !(this.service.getLastSearchCount() < PAGE_COUNT) && this.movePage(NEXT);
+      }
     }
-  }
   };
 
   copyDataSelectBook = (book) => {
@@ -182,7 +179,7 @@ export class BooksUI {
 
   onInput = () => {
     this.searchItemsHolder.innerHTML = "";
-    this.bookCountHolder.innerHTML="";
+    this.bookCountHolder.innerHTML = "";
     this.service.clearCurrentPages();
     this.searchInput.value && this.loadSearchResult(this.searchInput.value)
   };

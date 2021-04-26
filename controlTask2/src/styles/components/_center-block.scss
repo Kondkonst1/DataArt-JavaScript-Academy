@@ -6,11 +6,12 @@
     justify-content: center;
     overflow: auto;
     min-width: 400px;
-    color: white;
+    color: $white;
 
     &__about,
     &__full-desc {
         text-align: left;
+
         &>div:not(:last-child) {
             margin-bottom: 15px;
         }
@@ -36,34 +37,37 @@
         align-items: center;
 
         &>div:not(:last-child) {
-            margin-bottom: 15px;
+            margin-bottom: 30px;
         }
 
         span {
-            color: gray;
+            color: $transparBlack;
             font-size: 2em;
             padding: 15px;
+            text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
         }
+    }
+
+    &__menu-toggle {
+        display: block;
+        position: absolute;
     }
 
     &__button-add {
         @include button;
-        width: 185px;
+        width: 80%;
+        margin-bottom: 20px;
 
         &:disabled {
-            background-color: #657fa9;
+            background-color: $blueGray;
             cursor: default;
+            box-shadow: none;
         }
     }
 }
 
-#menu__toggle {
+#center-block__menu-toggle {
     display: none;
-}
-
-.menu__close {
-    display: block;
-    position: absolute;
 }
 
 @media (max-width: $breakpoint-m) {
@@ -77,14 +81,13 @@
         padding: 45px;
         box-sizing: border-box;
         background: rgba(0, 0, 0, 0.9);
-        color: white;
+        color: $white;
         z-index: 10;
         transition: transform ease-out 0.25s;
 
         &__image {
             margin-left: auto;
             margin-right: auto;
-
         }
 
         &__full-desc {
@@ -105,19 +108,19 @@
             width: 100%;
             overflow: hidden;
         }
-    }
 
-    .menu__close {
-        position: sticky;
-        top: 0;
-        cursor: pointer;
-        text-align: center;
-    }
+        &__menu-close {
+            position: sticky;
+            top: 0;
+            cursor: pointer;
+            text-align: center;
+        }
 
-    .menu__close:after {
-        content: '\2715';
-        text-decoration: none;
-        font-size: 3em;
+        &__menu-close:after {
+            content: '\2715';
+            text-decoration: none;
+            font-size: 3em;
+        }
     }
 }
 

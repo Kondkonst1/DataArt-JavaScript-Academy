@@ -9,7 +9,7 @@ export class Template {
         });
         const bookSearchResults = page.reduce((acc, item) => {
 
-            return (acc + `<div id="${item.id+item.edition_count}" class="book-info__one-book">
+            return (acc + `<div id="${item.id+item.edition_count}" class="book-info">
             <input type="checkbox" id="${item.id}" name="tab-group" class="book-info__input-book">
             <label for="${item.id}" class="book-info__label"> 
             <div class="block-results__search-inner">
@@ -29,7 +29,6 @@ export class Template {
                 : ``}
                 </div>
                 </div>
-                <div class="block-results__favorites"></div>
                 </div>
                 </label>
                 </div>`);
@@ -70,8 +69,8 @@ export class Template {
         ?`<div>Languages available: ${selectedBook.language.join(", ")}`:
         ``}</div>
         <div>Full text available:  ${selectedBook.has_fulltext?`Yes`:`No`}</div>
-       ${selectedBook.first_publish_year
-        ? `<div> First_publish_year: ${selectedBook.first_publish_year}</div>`
+        ${selectedBook.first_publish_year
+        ? `<div> First publish year: ${selectedBook.first_publish_year}</div>`
         :``}
         ${selectedBook.publish_year 
         ?` <div>Publish year: ${selectedBook.publish_year.join(", ")}`
@@ -92,7 +91,10 @@ export class Template {
     }
 
     showInfoLib = (info) => {
-        const {all, readed} = info;
+        const {
+            all,
+            readed
+        } = info;
         return `
         <div>Books: ${all} Read: ${readed} </div>
         `;
@@ -101,12 +103,14 @@ export class Template {
     addOneBook = (book) => {
         return `
         <div id="${book.id}">
-            <div>Title: ${book.title}</div>
+            < class = "right-block__title">Title: ${book.title}
+            ${book.lang ?` (${book.lang.join(", ")})`: ``}
+            </div>
             ${book.subtitle ? `<div> Subtitle: ${book.subtitle} </div>` : ``}
             <div> Author: ${book.author}</div>
             <div class="right-block__control">
-            <button class="right-block__but-read">Mark as read</button>
-            <button class="right-block__but-remove" >Remove</button>
+            <button class="right-block__but-read">  Mark as read </button>
+            <button class="right-block__but-remove"> Remove  </button>
             </div>
         </div>
         `
@@ -118,12 +122,15 @@ export class Template {
             return (acc +
                 `
             <div ${item.read ? `class="right-block__info-item--read"`:``} id="${item.id}" class="right-block__info-item">
-                <div>${item.title}</div>
+                <div class = "right-block__title">${item.title}
+                ${item.lang ?` (${item.lang.join(", ")})`: ``}
+                 </div>
+                
                 ${item.subtitle ? ` <div>Subtitle: ${item.subtitle}</div>`: ``}
                 ${item.author ? ` <div class="right-block__author">Author: ${item.author}</div>`: ``}
                 <div class="right-block__control">
                 ${item.read ? ``:`<button class="right-block__but-read">Mark as read</button>
-                                  <button class="right-block__but-remove" >Remove</button>`}
+                                  <button class="right-block__but-remove">Remove </button>`}
                 </div>
             </div>
             `)

@@ -1,5 +1,4 @@
 "use strict"
-
 export class MyListStore {
     constructor(nameStorage) {
         this.nameStorage = nameStorage;
@@ -23,12 +22,14 @@ export class MyListStore {
             return this.myBooksArray;
         } else return [];
     };
+
     markAsRead = (id) => {
         this.myBooksArray.forEach((item) => {
             id === item.id ? (item.read = true) : "";
         });
         localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray));
     };
+
     removeBook = (id) => {
         this.myBooksArray = this.myBooksArray.filter((item) => {
             return item.id !== id;

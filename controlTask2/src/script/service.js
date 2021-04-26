@@ -24,7 +24,7 @@ export class Service {
     markAsRead = (id) => this.myListStore.markAsRead(id);
     removeBook = (id) => this.myListStore.removeBook(id);
     getLastSearchCount = () => {
-        return this.getNumFound()-this.getStartSearch();
+        return this.getNumFound() - this.getStartSearch();
     }
     addPageInfoToStore = (page) => {
         this.searchStore.addPageToStore(page.docs);
@@ -37,6 +37,4 @@ export class Service {
     getNumFound = () => this.searchStore.getNumFound();
     setCurrentQuery = (query) => this.searchStore.setQurrentQuery(query);
     getCurrentQuery = () => this.searchStore.getCurrentQuery();
-
-   
 }

@@ -3,28 +3,29 @@
     display: flex;
     flex-direction: column;
     min-width: 255px;
-    height: calc(100% - 30px);
+    height: calc(100% - 68px);
     @include transparent-block;
 
     &__header {
-        padding: 15px;
+        padding: 7px;
         height: 100px;
+        text-align: center;
     }
 
     &__book-list {
-        background-color: #ffffff1c;
+        background-color: $hoverGray;
         flex-grow: 1;
         width: 100%;
         overflow-y: scroll;
-
-        &--read {
-            color: green;
-        }
     }
 
     &__but-read,
     &__but-remove {
         @include button;
+    }
+
+    &__title{
+        font-size: 1.3em;
     }
 
     &__control {
@@ -33,18 +34,21 @@
     }
 
     &__info-item {
-        border: solid 1px #2b4271;
+        border: solid 1px $fiolet;
         border-radius: 3px;
         padding: 5px;
         margin: 5px;
         text-align: center;
-        &>div:not(:last-child){
+        font-size: 0.8em;
+       
+        &>div:not(:last-child) {
             margin-bottom: 10px;
         }
+
         &--read {
             @extend .right-block__info-item;
-            border: solid 1px green;
-            background-color: #041f2cb0;
+            border: solid 1px $green;
+            background-color: $greenRead;
 
             &::after {
                 content: "✓";
@@ -69,7 +73,7 @@
 @media (max-width: $breakpoint-s) {
     .right-block {
         text-align: center;
-        height: 115px;
+        height: 120px;
         width: 100%;
         overflow: hidden;
     }
@@ -83,7 +87,7 @@
 
 .right-block__up {
     overflow-y: scroll;
-    backdrop-filter: blur( 11.0px );
+    backdrop-filter: blur(11.0px);
     bottom: 0;
     position: absolute;
     display: flex;
