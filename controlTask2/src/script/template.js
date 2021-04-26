@@ -29,6 +29,7 @@ export class Template {
                 : ``}
                 </div>
                 </div>
+                <div class="block-results__favorites"></div>
                 </div>
                 </label>
                 </div>`);

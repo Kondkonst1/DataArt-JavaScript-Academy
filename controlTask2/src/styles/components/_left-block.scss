@@ -49,14 +49,19 @@
             margin-bottom: 10px;
         }
        
+    }&__favorites{
+        font-size: 1.5em;
+        display: none;
+         &::after{
+            content: '♥';
+            color: #77a2ff;
+        }
     }
     &__search-inner {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        &::after{
-            content: '&ndash';
-        }
+        align-items: stretch;
+       
     }
     &__image {
         &>img {
