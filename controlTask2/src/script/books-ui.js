@@ -51,6 +51,8 @@ export class BooksUI {
     this.sideBarCloseButton.addEventListener("click", () => this.moveDescription());
     this.upInfoButton.addEventListener("click", () => this.rightBlock.classList.toggle("right-block__up"));
    }
+ 
+   markItemAsContain = (id) =>{}
 
   uncheck = (id) => {
     const uncheck = document.querySelectorAll('.book-info__input-book');
@@ -74,13 +76,12 @@ export class BooksUI {
       this.spinner.classList.remove("hidden");
       const page = await this.service.getSearchResult(query, numPage);
       this.service.addPageInfoToStore(page);
+      this.service
       this.searchItemsHolder.insertAdjacentHTML("beforeEnd", this.template.getSearchData(page.docs));
-
       this.bookCountHolder.innerHTML = this.template.getInfoCount(page);
       this.service.setCurrentQuery(query);
       this.spinner.classList.add("hidden");
-      this.service.setLoadStatus(false);
-      
+    
     } catch (error) {
       console.log(error);
     }
@@ -117,9 +118,11 @@ export class BooksUI {
   }
 
   loadMore = () => {
-    if ( (!this.service.getLoadStatus()) && this.searchAllResultHolder.clientHeight + this.searchAllResultHolder.scrollTop + 20  > this.searchAllResultHolder.scrollHeight) {
+    if (this.searchAllResultHolder.clientHeight < this.searchAllResultHolder.scrollHeight){
+    if (this.searchAllResultHolder.clientHeight + this.searchAllResultHolder.scrollTop + 20  > this.searchAllResultHolder.scrollHeight) {
       !(this.service.getLastSearchCount() < PAGE_COUNT)&&this.movePage(NEXT);
     }
+  }
   };
 
   copyDataSelectBook = (book) => {
@@ -178,7 +181,6 @@ export class BooksUI {
   }
 
   onInput = () => {
-    this.service.setLoadStatus(true);
     this.searchItemsHolder.innerHTML = "";
     this.bookCountHolder.innerHTML="";
     this.service.clearCurrentPages();

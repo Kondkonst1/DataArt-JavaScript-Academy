@@ -51,9 +51,9 @@
        
     }&__favorites{
         font-size: 1.5em;
-        display: none;
+        
          &::after{
-            content: '♥';
+            content: '☆';
             color: #77a2ff;
         }
     }

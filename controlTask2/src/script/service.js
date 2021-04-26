@@ -37,7 +37,6 @@ export class Service {
     getNumFound = () => this.searchStore.getNumFound();
     setCurrentQuery = (query) => this.searchStore.setQurrentQuery(query);
     getCurrentQuery = () => this.searchStore.getCurrentQuery();
-    setLoadStatus = (status) => this.searchStore.setLoadingStatus(status);
-    getLoadStatus = () => this.searchStore.getLoadingStatus();
+
    
 }
