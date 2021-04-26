@@ -57,7 +57,7 @@
     &__button-add {
         @include button;
         width: 80%;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
 
         &:disabled {
             background-color: $blueGray;
