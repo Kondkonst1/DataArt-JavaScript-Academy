@@ -35,4 +35,7 @@ export class Service {
     clearCurrentPages = () => this.searchStore.clearCurrentPages();
     getStartSearch = () => this.searchStore.getStartSearch();
     getNumFound = () => this.searchStore.getNumFound();
+    setCurrentQuery = (query) => this.searchStore.setQurrentQuery(query);
+    getCurrentQuery = () => this.searchStore.getCurrentQuery();
+   
 }

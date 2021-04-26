@@ -4,6 +4,9 @@ export class SearchStore {
     currentPages = [];
     start;
     numFound;
+    currentQuery;
+    setQurrentQuery = (query)=>this.currentQuery = query;
+    getCurrentQuery = () => this.currentQuery;
     clearCurrentPages = () => this.currentPages = [];
     addPageToStore = (page) => this.currentPages = this.currentPages.concat(page);
     getCurrentPages = () => this.currentPages;

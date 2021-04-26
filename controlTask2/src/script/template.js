@@ -9,8 +9,8 @@ export class Template {
         });
         const bookSearchResults = page.reduce((acc, item) => {
 
-            return (acc + `<div id="${item.id+item.edition_count}" class="book-info tab">
-            <input type="checkbox" id="${item.id}" name="tab-group" class="input-book">
+            return (acc + `<div id="${item.id+item.edition_count}" class="book-info__one-book">
+            <input type="checkbox" id="${item.id}" name="tab-group" class="book-info__input-book">
             <label for="${item.id}" class="book-info__label"> 
             <div class="block-results__search-inner">
             <div class="block-results__image">

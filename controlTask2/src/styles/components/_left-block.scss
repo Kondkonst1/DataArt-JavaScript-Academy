@@ -48,11 +48,15 @@
         &>div:not(:last-child){
             margin-bottom: 10px;
         }
+       
     }
     &__search-inner {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        &::after{
+            content: '&ndash';
+        }
     }
     &__image {
         &>img {
@@ -83,8 +87,12 @@
 }
 
 .book-info {
-    &:hover {
-        background-color: #ffffff1c;
+   
+    &__input-book{
+        display: none;
+        &:checked+.book-info__label {
+        background-color: #a3a3a330;
+        }
     }
 
     &__label {
@@ -92,9 +100,7 @@
         display: block;
         cursor: pointer;
     }
-}
-
-.tab{
+    &__one-book{
     border-bottom: solid 1px #bcbcbc;
     word-wrap: break-word;
     margin: 5px;
@@ -106,7 +112,14 @@
     -ms-user-select: none;
     user-select: none;
     width: 100%;
+     &:hover {
+        background-color: #ffffff1c;
+    }
+    
 }
+
+}
+
 
 .tab-title {
     padding: 10px;
@@ -115,9 +128,7 @@
     cursor: pointer;
 }
 
-.tab :checked+.book-info__label {
-    background-color: #a3a3a330;
-}
+
 
 @media (max-width: $breakpoint-s) {
     .left-block {
