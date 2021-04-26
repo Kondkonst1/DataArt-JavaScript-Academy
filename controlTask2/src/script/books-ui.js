@@ -1,9 +1,9 @@
 "use strict";
 
 const NEXT = 1;
-const PREV = -1;
 const PAGE_COUNT = 100;
 export class BooksUI {
+  isLoading;
   searchAllResultHolder;
   searchItemsHolder;
   bookInfoHolder;
@@ -15,7 +15,6 @@ export class BooksUI {
   sideBarCloseButton;
   searchInput;
   upInfoButton;
-  currentQuery;
   savedList;
   rightBlock;
   spinner;
@@ -43,8 +42,8 @@ export class BooksUI {
     this.wrapper = document.querySelector(".wrapper");
     this.spinner = document.createElement("div");
     this.spinner.classList.add("block-result__loader");
-    const processChangeSearch = this.debounce(this.onInput, 1500);
-    const processInfiniteScroll = this.debounce(this.loadMore, 500);
+    const processChangeSearch = this.debounce(this.onInput, 1000);
+    const processInfiniteScroll = this.debounce(this.loadMore, 1200);
     this.searchInput.addEventListener("input", processChangeSearch);
     this.addButton.addEventListener("click", () => this.addBookToList());
     this.bookListHolder.addEventListener("click", event => this.manageMyList(event));
@@ -55,7 +54,7 @@ export class BooksUI {
    }
 
   uncheck = (id) => {
-    const uncheck = document.querySelectorAll('.input-book');
+    const uncheck = document.querySelectorAll('.book-info__input-book');
     uncheck.forEach((item) => {
       if (item.id !== id) {
         item.checked = false;
@@ -74,16 +73,15 @@ export class BooksUI {
     }
     try {
       this.spinner.classList.remove("hidden");
-      this.bookCountHolder.innerHTML="";
       const page = await this.service.getSearchResult(query, numPage);
-      //тут отправить весь page вместо 3 функций
       this.service.addPageInfoToStore(page);
-  
-
       this.searchItemsHolder.insertAdjacentHTML("beforeEnd", this.template.getSearchData(page.docs));
+      this.bookCountHolder.innerHTML="";
       this.bookCountHolder.innerHTML = this.template.getInfoCount(page);
-      this.currentQuery = query;
+      this.service.setCurrentQuery(query);
       this.spinner.classList.add("hidden");
+      this.isLoading = false;
+      
     } catch (error) {
       console.log(error);
     }
@@ -97,7 +95,7 @@ export class BooksUI {
 
   movePage = (wherePointer) => {
     this.loadSearchResult(
-      this.currentQuery,
+      this.service.getCurrentQuery(),
       this.service.getStartSearch() / PAGE_COUNT + 1 + wherePointer
     );
   };
@@ -120,7 +118,7 @@ export class BooksUI {
   }
 
   loadMore = () => {
-    if (this.searchAllResultHolder.offsetHeight + this.searchAllResultHolder.scrollTop === this.searchAllResultHolder.scrollHeight) {
+    if ( (!this.isLoading) && this.searchAllResultHolder.clientHeight + this.searchAllResultHolder.scrollTop + 20  > this.searchAllResultHolder.scrollHeight) {
       !(this.service.getLastSearchCount() < PAGE_COUNT)&&this.movePage(NEXT);
     }
   };
@@ -186,6 +184,7 @@ export class BooksUI {
   };
 
   onInput = () => {
+    this.isLoading = true;
     this.searchItemsHolder.innerHTML = "";
     this.bookCountHolder.innerHTML="";
     this.service.clearCurrentPages();
