@@ -1,16 +1,16 @@
 "use strict"
 export class SearchStore {
-    currentPages = [];
-    start;
-    numFound;
-    currentQuery;
-    setQurrentQuery = (query)=>this.currentQuery = query;
-    getCurrentQuery = () => this.currentQuery;
-    clearCurrentPages = () => this.currentPages = [];
-    addPageToStore = (page) => this.currentPages = this.currentPages.concat(page);
-    getCurrentPages = () => this.currentPages;
-    getStartSearch = () => this.start;
-    setStartSearch = (start) => this.start=start;
-    setNumFound = (num) => this.numFound = num; 
-    getNumFound = () => this.numFound;
+    _currentPages = [];
+    _start;
+    _numFound;
+    _currentQuery;
+    setQurrentQuery = (query)=>this._currentQuery = query;
+    getCurrentQuery = () => this._currentQuery;
+    clearCurrentPages = () => this._currentPages = [];
+    addPageToStore = (page) => this._currentPages = this._currentPages.concat(page);
+    getCurrentPages = () => this._currentPages;
+    getStartSearch = () => this._start;
+    setStartSearch = (start) => this._start=start;
+    setNumFound = (num) => this._numFound = num; 
+    getNumFound = () => this._numFound;
 }

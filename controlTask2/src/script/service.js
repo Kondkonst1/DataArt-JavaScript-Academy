@@ -2,39 +2,39 @@
 export class Service {
 
     constructor(api, myListStore, searchStore, descStore) {
-        this.api = api;
-        this.searchStore = searchStore;
-        this.descStore = descStore;
-        this.myListStore = myListStore;
+        this._api = api;
+        this._searchStore = searchStore;
+        this._descStore = descStore;
+        this._myListStore = myListStore;
     }
     async getSearchResult(query, numPage) {
-        const result = await this.api.search(query, numPage);
+        const result = await this._api.search(query, numPage);
         return result;
     }
     async getDescription(id) {
-        const desc = await this.api.getDescription(id);
+        const desc = await this._api.getDescription(id);
         return desc;
     }
-    setCurrentBook = (book) => this.descStore.setCurrectBook(book);
-    getCurrentBook = () => this.descStore.getCurrentBook();
-    loadBooks = () => this.myListStore.loadBooks();
-    getInfoLib = () => this.myListStore.getInfoLib();
-    getBooksId = () => this.myListStore.getBooksId();
-    addBooks = () => this.myListStore.addBooks(this.getCurrentBook());
-    markAsRead = (id) => this.myListStore.markAsRead(id);
-    removeBook = (id) => this.myListStore.removeBook(id);
+    setCurrentBook = (book) => this._descStore.setCurrectBook(book);
+    getCurrentBook = () => this._descStore.getCurrentBook();
+    loadBooks = () => this._myListStore.loadBooks();
+    getInfoLib = () => this._myListStore.getInfoLib();
+    getBooksId = () => this._myListStore.getBooksId();
+    addBooks = () => this._myListStore.addBooks(this.getCurrentBook());
+    markAsRead = (id) => this._myListStore.markAsRead(id);
+    removeBook = (id) => this._myListStore.removeBook(id);
     getLastSearchCount = () => {
         return this.getNumFound() - this.getStartSearch();
     }
     addPageInfoToStore = (page) => {
-        this.searchStore.addPageToStore(page.docs);
-        this.searchStore.setStartSearch(page.start);
-        this.searchStore.setNumFound(page.numFound);
+        this._searchStore.addPageToStore(page.docs);
+        this._searchStore.setStartSearch(page.start);
+        this._searchStore.setNumFound(page.numFound);
     }
-    getCurrentPages = () => this.searchStore.getCurrentPages();
-    clearCurrentPages = () => this.searchStore.clearCurrentPages();
-    getStartSearch = () => this.searchStore.getStartSearch();
-    getNumFound = () => this.searchStore.getNumFound();
-    setCurrentQuery = (query) => this.searchStore.setQurrentQuery(query);
-    getCurrentQuery = () => this.searchStore.getCurrentQuery();
+    getCurrentPages = () => this._searchStore.getCurrentPages();
+    clearCurrentPages = () => this._searchStore.clearCurrentPages();
+    getStartSearch = () => this._searchStore.getStartSearch();
+    getNumFound = () => this._searchStore.getNumFound();
+    setCurrentQuery = (query) => this._searchStore.setQurrentQuery(query);
+    getCurrentQuery = () => this._searchStore.getCurrentQuery();
 }

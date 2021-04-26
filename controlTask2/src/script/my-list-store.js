@@ -1,7 +1,7 @@
 "use strict"
 export class MyListStore {
     constructor(nameStorage) {
-        this.nameStorage = nameStorage;
+        this._nameStorage = nameStorage;
     }
     myBooksArray = [];
     libInfo = {};
@@ -17,8 +17,8 @@ export class MyListStore {
     };
 
     loadBooks = () => {
-        if (localStorage.getItem(this.nameStorage)) {
-            this.myBooksArray = JSON.parse(localStorage.getItem(this.nameStorage));
+        if (localStorage.getItem(this._nameStorage)) {
+            this.myBooksArray = JSON.parse(localStorage.getItem(this._nameStorage));
             return this.myBooksArray;
         } else return [];
     };
@@ -27,14 +27,14 @@ export class MyListStore {
         this.myBooksArray.forEach((item) => {
             id === item.id ? (item.read = true) : "";
         });
-        localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray));
+        localStorage.setItem(this._nameStorage, JSON.stringify(this.myBooksArray));
     };
 
     removeBook = (id) => {
         this.myBooksArray = this.myBooksArray.filter((item) => {
             return item.id !== id;
         });
-        localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray));
+        localStorage.setItem(this._nameStorage, JSON.stringify(this.myBooksArray));
     };
 
     getInfoLib = () => {
@@ -46,7 +46,7 @@ export class MyListStore {
     addBooks = (book) => {
         if (!this.getBooksId().includes(book.id)) {
             this.myBooksArray = [...this.myBooksArray, book];
-            localStorage.setItem(this.nameStorage, JSON.stringify(this.myBooksArray));
+            localStorage.setItem(this._nameStorage, JSON.stringify(this.myBooksArray));
         }
     };
 }

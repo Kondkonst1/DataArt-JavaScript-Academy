@@ -3,53 +3,53 @@
 const NEXT = 1;
 const PAGE_COUNT = 100;
 export class BooksUI {
-  searchAllResultHolder;
-  searchItemsHolder;
-  bookInfoHolder;
-  bookListHolder;
-  bookCountHolder;
-  centerBlock;
-  addButton;
-  libInfo;
-  sideBarCloseButton;
-  searchInput;
-  upInfoButton;
-  savedList;
-  rightBlock;
-  spinner;
-  wrapper;
+  _searchAllResultHolder;
+  _searchItemsHolder;
+  _bookInfoHolder;
+  _bookListHolder;
+  _bookCountHolder;
+  _centerBlock;
+  _addButton;
+  _libInfo;
+  _sideBarCloseButton;
+  _searchInput;
+  _upInfoButton;
+  _savedList;
+  _rightBlock;
+  _spinner;
+  _wrapper;
 
   constructor(template, service) {
 
-    this.service = service;
-    this.template = template;
-    this.sideBarCloseButton = document.querySelector(".center-block__menu-close");
-    this.bookCountHolder = document.querySelector(".block-nav-wrap__nav");
-    this.searchInput = document.querySelector(".block-search__input-search");
-    this.rightBlock = document.querySelector(".right-block");
-    this.savedList = document.querySelector(".right-block__book-list");
-    this.bookListHolder = document.querySelector(".right-block__book-list");
-    this.searchAllResultHolder = document.querySelector(".block-results");
-    this.searchItemsHolder = document.querySelector(".block-results__items");
-    this.centerBlock = document.querySelector(".center-block");
-    this.centerBlock.classList.add("transform-left");
-    this.bookInfoHolder = document.querySelector(".center-block__desc");
-    this.libInfo = document.querySelector(".right-block__lib-info");
-    this.addButton = document.createElement("BUTTON");
-    this.addButton.classList.add("center-block__button-add");
-    this.upInfoButton = document.querySelector(".right-block__button-up");
-    this.wrapper = document.querySelector(".wrapper");
-    this.spinner = document.createElement("div");
-    this.spinner.classList.add("block-result__loader");
+    this._service = service;
+    this._template = template;
+    this._sideBarCloseButton = document.querySelector(".center-block__menu-close");
+    this._bookCountHolder = document.querySelector(".block-nav-wrap__nav");
+    this._searchInput = document.querySelector(".block-search__input-search");
+    this._rightBlock = document.querySelector(".right-block");
+    this._savedList = document.querySelector(".right-block__book-list");
+    this._bookListHolder = document.querySelector(".right-block__book-list");
+    this._searchAllResultHolder = document.querySelector(".block-results");
+    this._searchItemsHolder = document.querySelector(".block-results__items");
+    this._centerBlock = document.querySelector(".center-block");
+    this._centerBlock.classList.add("transform-left");
+    this._bookInfoHolder = document.querySelector(".center-block__desc");
+    this._libInfo = document.querySelector(".right-block__lib-info");
+    this._addButton = document.createElement("BUTTON");
+    this._addButton.classList.add("center-block__button-add");
+    this._upInfoButton = document.querySelector(".right-block__button-up");
+    this._wrapper = document.querySelector(".wrapper");
+    this._spinner = document.createElement("div");
+    this._spinner.classList.add("block-result__loader");
     const processChangeSearch = this.debounce(this.onInput, 1500);
     const processInfiniteScroll = this.debounce(this.loadMore, 1200);
-    this.searchInput.addEventListener("input", processChangeSearch);
-    this.addButton.addEventListener("click", () => this.addBookToList());
-    this.bookListHolder.addEventListener("click", event => this.manageMyList(event));
-    this.searchItemsHolder.addEventListener("click", event => this.showInfoCurrentBook(event));
-    this.searchAllResultHolder.addEventListener("scroll", processInfiniteScroll);
-    this.sideBarCloseButton.addEventListener("click", () => this.moveDescription());
-    this.upInfoButton.addEventListener("click", () => this.rightBlock.classList.toggle("right-block__up"));
+    this._searchInput.addEventListener("input", processChangeSearch);
+    this._addButton.addEventListener("click", () => this.addBookToList());
+    this._bookListHolder.addEventListener("click", event => this.manageMyList(event));
+    this._searchItemsHolder.addEventListener("click", event => this.showInfoCurrentBook(event));
+    this._searchAllResultHolder.addEventListener("scroll", processInfiniteScroll);
+    this._sideBarCloseButton.addEventListener("click", () => this.moveDescription());
+    this._upInfoButton.addEventListener("click", () => this._rightBlock.classList.toggle("right-block__up"));
   }
 
   uncheck = (id) => {
@@ -62,8 +62,8 @@ export class BooksUI {
   };
 
   moveDescription = () => {
-    this.centerBlock.classList.toggle("transform-left");
-    this.centerBlock.classList.toggle("transform-right");
+    this._centerBlock.classList.toggle("transform-left");
+    this._centerBlock.classList.toggle("transform-right");
   };
 
   loadSearchResult = async (query, numPage = 1) => {
@@ -71,53 +71,53 @@ export class BooksUI {
       return;
     }
     try {
-      this.spinner.classList.remove("hidden");
-      const page = await this.service.getSearchResult(query, numPage);
-      this.service.addPageInfoToStore(page);
-      this.service
-      this.searchItemsHolder.insertAdjacentHTML("beforeEnd", this.template.getSearchData(page.docs));
-      this.bookCountHolder.innerHTML = this.template.getInfoCount(page);
-      this.service.setCurrentQuery(query);
-      this.spinner.classList.add("hidden");
+      this._spinner.classList.remove("hidden");
+      const page = await this._service.getSearchResult(query, numPage);
+      this._service.addPageInfoToStore(page);
+      this._service
+      this._searchItemsHolder.insertAdjacentHTML("beforeEnd", this._template.getSearchData(page.docs));
+      this._bookCountHolder.innerHTML = this._template.getInfoCount(page);
+      this._service.setCurrentQuery(query);
+      this._spinner.classList.add("hidden");
     } catch (error) {
       console.log(error);
     }
   };
 
   runSpinner = () => {
-    this.spinner.innerHTML = this.template.getSpinner();
-    this.spinner.classList.add("hidden");
-    this.searchAllResultHolder.appendChild(this.spinner);
+    this._spinner.innerHTML = this._template.getSpinner();
+    this._spinner.classList.add("hidden");
+    this._searchAllResultHolder.appendChild(this._spinner);
   };
 
   movePage = (wherePointer) => {
     this.loadSearchResult(
-      this.service.getCurrentQuery(),
-      this.service.getStartSearch() / PAGE_COUNT + 1 + wherePointer
+      this._service.getCurrentQuery(),
+      this._service.getStartSearch() / PAGE_COUNT + 1 + wherePointer
     );
   };
 
   showDescription = async (id) => {
-    const description = await this.service.getDescription(this.selectedBook.id);
-    this.bookInfoHolder.innerHTML = this.template.getInfoAboutBook(this.selectedBook, description);
+    const description = await this._service.getDescription(this.selectedBook.id);
+    this._bookInfoHolder.innerHTML = this._template.getInfoAboutBook(this.selectedBook, description);
     this.checkAdd(id);
-    this.bookInfoHolder.appendChild(this.addButton);
+    this._bookInfoHolder.appendChild(this._addButton);
   };
 
   checkAdd = (id) => {
-    if (this.service.getBooksId().includes(id)) {
-      this.addButton.disabled = true;
-      this.addButton.innerHTML = "This Book is on your List";
+    if (this._service.getBooksId().includes(id)) {
+      this._addButton.disabled = true;
+      this._addButton.innerHTML = "This Book is on your List";
     } else {
-      this.addButton.disabled = false;
-      this.addButton.innerHTML = "Add book to Read List";
+      this._addButton.disabled = false;
+      this._addButton.innerHTML = "Add book to Read List";
     }
   }
 
   loadMore = () => {
-    if (this.searchAllResultHolder.clientHeight < this.searchAllResultHolder.scrollHeight) {
-      if (this.searchAllResultHolder.clientHeight + this.searchAllResultHolder.scrollTop + 20 > this.searchAllResultHolder.scrollHeight) {
-        !(this.service.getLastSearchCount() < PAGE_COUNT) && this.movePage(NEXT);
+    if (this._searchAllResultHolder.clientHeight < this._searchAllResultHolder.scrollHeight) {
+      if (this._searchAllResultHolder.clientHeight + this._searchAllResultHolder.scrollTop + 20 > this._searchAllResultHolder.scrollHeight) {
+        !(this._service.getLastSearchCount() < PAGE_COUNT) && this.movePage(NEXT);
       }
     }
   };
@@ -131,31 +131,31 @@ export class BooksUI {
       read: false,
       id: book.id,
     };
-    this.service.setCurrentBook(myBook);
+    this._service.setCurrentBook(myBook);
   };
 
   addBookToList = () => {
-    this.service.addBooks();
+    this._service.addBooks();
     this.renderBookList();
-    this.addButton.disabled = true;
-    this.addButton.innerHTML = "This Book is on your List";
+    this._addButton.disabled = true;
+    this._addButton.innerHTML = "This Book is on your List";
   }
 
   renderBookList = () => {
-    this.savedList.innerHTML = "";
-    this.savedList.insertAdjacentHTML(
+    this._savedList.innerHTML = "";
+    this._savedList.insertAdjacentHTML(
       "beforeEnd",
-      this.template.showDataFromStorage(this.service.loadBooks())
+      this._template.showDataFromStorage(this._service.loadBooks())
     );
-    this.libInfo.innerHTML = this.template.showInfoLib(
-      this.service.getInfoLib()
+    this._libInfo.innerHTML = this._template.showInfoLib(
+      this._service.getInfoLib()
     );
   };
 
   showInfoCurrentBook = (ev) => {
     const targetBook = ev.target;
     const id = targetBook.id;
-    const selectedBook = this.service.getCurrentPages().find((item) => item.id === id);
+    const selectedBook = this._service.getCurrentPages().find((item) => item.id === id);
     if (!selectedBook) {
       return;
     } else {
@@ -170,18 +170,18 @@ export class BooksUI {
   manageMyList = (ev) => {
     const id = ev.target.parentElement.parentElement.id;
     if (ev.target.classList.contains("right-block__but-remove")) {
-      this.service.removeBook(id);
+      this._service.removeBook(id);
     } else if (ev.target.classList.contains("right-block__but-read")) {
-      this.service.markAsRead(id);
+      this._service.markAsRead(id);
     }
     this.renderBookList();
   }
 
   onInput = () => {
-    this.searchItemsHolder.innerHTML = "";
-    this.bookCountHolder.innerHTML = "";
-    this.service.clearCurrentPages();
-    this.searchInput.value && this.loadSearchResult(this.searchInput.value)
+    this._searchItemsHolder.innerHTML = "";
+    this._bookCountHolder.innerHTML = "";
+    this._service.clearCurrentPages();
+    this._searchInput.value && this.loadSearchResult(this._searchInput.value)
   };
 
   debounce = (func, delay) => {
