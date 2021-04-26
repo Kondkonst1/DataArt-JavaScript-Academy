@@ -4,6 +4,7 @@ export class SearchStore {
     _start;
     _numFound;
     _currentQuery;
+    _isLoading=false;
     setQurrentQuery = (query)=>this._currentQuery = query;
     getCurrentQuery = () => this._currentQuery;
     clearCurrentPages = () => this._currentPages = [];
@@ -13,4 +14,6 @@ export class SearchStore {
     setStartSearch = (start) => this._start=start;
     setNumFound = (num) => this._numFound = num; 
     getNumFound = () => this._numFound;
+    setLoadingStatus = (status) => this._isLoading=status;
+    getLoadingStatus = () => this._isLoading; 
 }

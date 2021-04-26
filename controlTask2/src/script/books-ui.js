@@ -3,6 +3,7 @@
 const NEXT = 1;
 const PAGE_COUNT = 100;
 export class BooksUI {
+
   _searchAllResultHolder;
   _searchItemsHolder;
   _bookInfoHolder;
@@ -23,6 +24,7 @@ export class BooksUI {
 
     this._service = service;
     this._template = template;
+    this._service.setLoadingStatus(false);
     this._sideBarCloseButton = document.querySelector(".center-block__menu-close");
     this._bookCountHolder = document.querySelector(".block-nav-wrap__nav");
     this._searchInput = document.querySelector(".block-search__input-search");
@@ -42,7 +44,7 @@ export class BooksUI {
     this._spinner = document.createElement("div");
     this._spinner.classList.add("block-result__loader");
     const processChangeSearch = this.debounce(this.onInput, 1500);
-    const processInfiniteScroll = this.debounce(this.loadMore, 1200);
+    const processInfiniteScroll = this.debounce(this.loadMore, 1400);
     this._searchInput.addEventListener("input", processChangeSearch);
     this._addButton.addEventListener("click", () => this.addBookToList());
     this._bookListHolder.addEventListener("click", event => this.manageMyList(event));
@@ -71,14 +73,15 @@ export class BooksUI {
       return;
     }
     try {
+      this._service.setLoadingStatus(true);
       this._spinner.classList.remove("hidden");
       const page = await this._service.getSearchResult(query, numPage);
       this._service.addPageInfoToStore(page);
-      this._service
       this._searchItemsHolder.insertAdjacentHTML("beforeEnd", this._template.getSearchData(page.docs));
       this._bookCountHolder.innerHTML = this._template.getInfoCount(page);
       this._service.setCurrentQuery(query);
       this._spinner.classList.add("hidden");
+      this._service.setLoadingStatus(false);
     } catch (error) {
       console.log(error);
     }
@@ -115,9 +118,12 @@ export class BooksUI {
   }
 
   loadMore = () => {
-    if (this._searchAllResultHolder.clientHeight < this._searchAllResultHolder.scrollHeight) {
-      if (this._searchAllResultHolder.clientHeight + this._searchAllResultHolder.scrollTop + 20 > this._searchAllResultHolder.scrollHeight) {
-        !(this._service.getLastSearchCount() < PAGE_COUNT) && this.movePage(NEXT);
+    console.log(this._service.getLoadingStatus());
+    if (!this._service.getLoadingStatus()) {
+      if (this._searchAllResultHolder.clientHeight < this._searchAllResultHolder.scrollHeight) {
+        if (this._searchAllResultHolder.clientHeight + this._searchAllResultHolder.scrollTop + 20 > this._searchAllResultHolder.scrollHeight) {
+          !(this._service.getLastSearchCount() < PAGE_COUNT) && this.movePage(NEXT);
+        }
       }
     }
   };
